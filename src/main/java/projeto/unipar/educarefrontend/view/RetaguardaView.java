@@ -1,9 +1,9 @@
 package projeto.unipar.educarefrontend.view;
 
-import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.model.Usuario;
 import projeto.unipar.educarefrontend.util.Log;
@@ -14,6 +14,9 @@ public class RetaguardaView extends javax.swing.JFrame {
 
     private final Log log = new Log();
     private final SetIcon setIcon = new SetIcon();
+    
+    private boolean isCadastrarUsuarioOpen;
+    private CadastrarUsuarioView cadastrarUsuarioInstancia;
 
     public RetaguardaView() {
         initComponents();
@@ -31,12 +34,16 @@ public class RetaguardaView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jlBemVindo = new javax.swing.JLabel();
         jmbItens = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jmiTrocarUser = new javax.swing.JMenuItem();
+        jmArquivo = new javax.swing.JMenu();
+        jmiTrocarUsuario = new javax.swing.JMenuItem();
         jmiReiniciar = new javax.swing.JMenuItem();
         jmiSair = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jmFerramentas = new javax.swing.JMenu();
+        jmUsuario = new javax.swing.JMenu();
+        jmiCadastrarUsuario = new javax.swing.JMenuItem();
+        jmiReativarUsuario = new javax.swing.JMenuItem();
+        jmiVisualizarUsuario = new javax.swing.JMenuItem();
+        jmEstoque = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EDUCARE");
@@ -69,17 +76,17 @@ public class RetaguardaView extends javax.swing.JFrame {
         jmbItens.setBorderPainted(false);
         jmbItens.setOpaque(true);
 
-        jMenu1.setBackground(new java.awt.Color(85, 6, 124));
-        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu1.setText("Arquivo");
-        jMenu1.setOpaque(true);
+        jmArquivo.setBackground(new java.awt.Color(85, 6, 124));
+        jmArquivo.setForeground(new java.awt.Color(255, 255, 255));
+        jmArquivo.setText("Arquivo");
+        jmArquivo.setOpaque(true);
 
-        jmiTrocarUser.setBackground(new java.awt.Color(85, 6, 124));
-        jmiTrocarUser.setForeground(new java.awt.Color(255, 255, 255));
-        jmiTrocarUser.setText("Trocar de Usuário");
-        jmiTrocarUser.setBorder(new RoundedBorder(15));
-        jmiTrocarUser.setOpaque(true);
-        jMenu1.add(jmiTrocarUser);
+        jmiTrocarUsuario.setBackground(new java.awt.Color(85, 6, 124));
+        jmiTrocarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jmiTrocarUsuario.setText("Trocar de Usuário");
+        jmiTrocarUsuario.setBorder(new RoundedBorder(15));
+        jmiTrocarUsuario.setOpaque(true);
+        jmArquivo.add(jmiTrocarUsuario);
 
         jmiReiniciar.setBackground(new java.awt.Color(85, 6, 124));
         jmiReiniciar.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,7 +98,7 @@ public class RetaguardaView extends javax.swing.JFrame {
                 jmiReiniciarActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiReiniciar);
+        jmArquivo.add(jmiReiniciar);
 
         jmiSair.setBackground(new java.awt.Color(85, 6, 124));
         jmiSair.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,21 +110,52 @@ public class RetaguardaView extends javax.swing.JFrame {
                 jmiSairActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiSair);
+        jmArquivo.add(jmiSair);
 
-        jmbItens.add(jMenu1);
+        jmbItens.add(jmArquivo);
 
-        jMenu2.setBackground(new java.awt.Color(85, 6, 124));
-        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu2.setText("Ferramentas");
-        jMenu2.setOpaque(true);
-        jmbItens.add(jMenu2);
+        jmFerramentas.setBackground(new java.awt.Color(85, 6, 124));
+        jmFerramentas.setForeground(new java.awt.Color(255, 255, 255));
+        jmFerramentas.setText("Ferramentas");
+        jmFerramentas.setOpaque(true);
 
-        jMenu3.setBackground(new java.awt.Color(85, 6, 124));
-        jMenu3.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu3.setText("Estoque");
-        jMenu3.setOpaque(true);
-        jmbItens.add(jMenu3);
+        jmUsuario.setBackground(new java.awt.Color(85, 6, 124));
+        jmUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jmUsuario.setText("Usuário");
+        jmUsuario.setOpaque(true);
+
+        jmiCadastrarUsuario.setBackground(new java.awt.Color(85, 6, 124));
+        jmiCadastrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jmiCadastrarUsuario.setText("Cadastrar");
+        jmiCadastrarUsuario.setOpaque(true);
+        jmiCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastrarUsuarioActionPerformed(evt);
+            }
+        });
+        jmUsuario.add(jmiCadastrarUsuario);
+
+        jmiReativarUsuario.setBackground(new java.awt.Color(85, 6, 124));
+        jmiReativarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jmiReativarUsuario.setText("Reativar");
+        jmiReativarUsuario.setOpaque(true);
+        jmUsuario.add(jmiReativarUsuario);
+
+        jmiVisualizarUsuario.setBackground(new java.awt.Color(85, 6, 124));
+        jmiVisualizarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jmiVisualizarUsuario.setText("Visualizar");
+        jmiVisualizarUsuario.setOpaque(true);
+        jmUsuario.add(jmiVisualizarUsuario);
+
+        jmFerramentas.add(jmUsuario);
+
+        jmbItens.add(jmFerramentas);
+
+        jmEstoque.setBackground(new java.awt.Color(85, 6, 124));
+        jmEstoque.setForeground(new java.awt.Color(255, 255, 255));
+        jmEstoque.setText("Estoque");
+        jmEstoque.setOpaque(true);
+        jmbItens.add(jmEstoque);
 
         setJMenuBar(jmbItens);
 
@@ -150,6 +188,33 @@ public class RetaguardaView extends javax.swing.JFrame {
             reiniciar(); // Chama o método para reiniciar
         }
     }//GEN-LAST:event_jmiReiniciarActionPerformed
+
+    private void jmiCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastrarUsuarioActionPerformed
+        // TODO add your handling code here:
+        if(isCadastrarUsuarioOpen){
+            cadastrarUsuarioInstancia.toFront();
+            cadastrarUsuarioInstancia.repaint();
+        }else{
+            isCadastrarUsuarioOpen = true;
+            cadastrarUsuarioInstancia = new CadastrarUsuarioView(this);
+            cadastrarUsuarioInstancia.setVisible(true);
+            log.escreverLogInfoAvulso("INFORMATIVO", "Tela de cadastrar usuário aberta");
+            cadastrarUsuarioInstancia.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    isCadastrarUsuarioOpen = false;
+                    cadastrarUsuarioInstancia = null;
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    isCadastrarUsuarioOpen = false;
+                    cadastrarUsuarioInstancia = null;
+                }
+            });
+        }
+        
+    }//GEN-LAST:event_jmiCadastrarUsuarioActionPerformed
 
     public void userSession(Usuario usuario) {
 
@@ -194,19 +259,25 @@ public class RetaguardaView extends javax.swing.JFrame {
             log.escreverLogErroOperacaoException(ex, errorMessage);
         }
     }
+    
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlBemVindo;
+    private javax.swing.JMenu jmArquivo;
+    private javax.swing.JMenu jmEstoque;
+    private javax.swing.JMenu jmFerramentas;
+    private javax.swing.JMenu jmUsuario;
     private javax.swing.JMenuBar jmbItens;
+    private javax.swing.JMenuItem jmiCadastrarUsuario;
+    private javax.swing.JMenuItem jmiReativarUsuario;
     private javax.swing.JMenuItem jmiReiniciar;
     private javax.swing.JMenuItem jmiSair;
-    private javax.swing.JMenuItem jmiTrocarUser;
+    private javax.swing.JMenuItem jmiTrocarUsuario;
+    private javax.swing.JMenuItem jmiVisualizarUsuario;
     // End of variables declaration//GEN-END:variables
 
 }

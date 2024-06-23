@@ -63,10 +63,20 @@ public class LoginView extends javax.swing.JFrame {
         jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfEmail.setToolTipText("INFORME O SEU E-MAIL DE LOGIN");
         jtfEmail.setBorder(new RoundedBorder(15));
+        jtfEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfEmailKeyPressed(evt);
+            }
+        });
 
         jpfSenha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jpfSenha.setToolTipText("INFORME SUA SENHA");
         jpfSenha.setBorder(new RoundedBorder(15));
+        jpfSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jpfSenhaKeyPressed(evt);
+            }
+        });
 
         btAcessarSistema.setBackground(new java.awt.Color(85, 6, 124));
         btAcessarSistema.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -184,6 +194,32 @@ public class LoginView extends javax.swing.JFrame {
 
     private void btAcessarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessarSistemaActionPerformed
         // TODO add your handling code here:
+        logar();
+    }//GEN-LAST:event_btAcessarSistemaActionPerformed
+
+    private void jtfEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEmailKeyPressed
+        // TODO add your handling code here:
+        jtfEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    logar();
+                }
+            }
+        });
+    }//GEN-LAST:event_jtfEmailKeyPressed
+
+    private void jpfSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfSenhaKeyPressed
+        // TODO add your handling code here:
+        jpfSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    logar();
+                }
+            }
+        });
+    }//GEN-LAST:event_jpfSenhaKeyPressed
+
+    public void logar() {
         UsuarioRequest usuarioRequest = new UsuarioRequest();
         usuarioRequest.setEmail(jtfEmail.getText());
         usuarioRequest.setSenha(new String(jpfSenha.getPassword()));
@@ -199,7 +235,7 @@ public class LoginView extends javax.swing.JFrame {
             // Login falhou, mostra mensagem de erro
             JOptionPane.showMessageDialog(this, "Email ou Senha Inválidos", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btAcessarSistemaActionPerformed
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
