@@ -39,10 +39,30 @@ public class RetaguardaView extends javax.swing.JFrame {
         jmiReiniciar = new javax.swing.JMenuItem();
         jmiSair = new javax.swing.JMenuItem();
         jmFerramentas = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jmUsuario = new javax.swing.JMenu();
         jmiCadastrarUsuario = new javax.swing.JMenuItem();
-        jmiReativarUsuario = new javax.swing.JMenuItem();
         jmiVisualizarUsuario = new javax.swing.JMenuItem();
+        jmiReativarUsuario = new javax.swing.JMenuItem();
         jmEstoque = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,6 +139,131 @@ public class RetaguardaView extends javax.swing.JFrame {
         jmFerramentas.setText("Ferramentas");
         jmFerramentas.setOpaque(true);
 
+        jMenu1.setBackground(new java.awt.Color(85, 6, 124));
+        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu1.setText("Criança");
+        jMenu1.setOpaque(true);
+
+        jMenuItem1.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem1.setText("Cadastrar");
+        jMenuItem1.setOpaque(true);
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem2.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem2.setText("Visualizar");
+        jMenuItem2.setOpaque(true);
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem3.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem3.setText("Reativar");
+        jMenuItem3.setOpaque(true);
+        jMenu1.add(jMenuItem3);
+
+        jmFerramentas.add(jMenu1);
+
+        jMenu2.setBackground(new java.awt.Color(85, 6, 124));
+        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu2.setText("Mãe");
+        jMenu2.setOpaque(true);
+
+        jMenuItem4.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem4.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem4.setText("Cadastrar");
+        jMenuItem4.setOpaque(true);
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem5.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem5.setText("Visualizar");
+        jMenuItem5.setOpaque(true);
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem6.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem6.setText("Reativar");
+        jMenuItem6.setOpaque(true);
+        jMenu2.add(jMenuItem6);
+
+        jmFerramentas.add(jMenu2);
+
+        jMenu3.setBackground(new java.awt.Color(85, 6, 124));
+        jMenu3.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu3.setText("Pai");
+        jMenu3.setOpaque(true);
+
+        jMenuItem7.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem7.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem7.setText("Cadastrar");
+        jMenuItem7.setOpaque(true);
+        jMenu3.add(jMenuItem7);
+
+        jMenuItem8.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem8.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem8.setText("Visualizar");
+        jMenuItem8.setOpaque(true);
+        jMenu3.add(jMenuItem8);
+
+        jMenuItem9.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem9.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem9.setText("Reativar");
+        jMenuItem9.setOpaque(true);
+        jMenu3.add(jMenuItem9);
+
+        jmFerramentas.add(jMenu3);
+
+        jMenu4.setBackground(new java.awt.Color(85, 6, 124));
+        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu4.setText("Responsável");
+        jMenu4.setOpaque(true);
+
+        jMenuItem10.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem10.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem10.setText("Cadastrar");
+        jMenuItem10.setOpaque(true);
+        jMenu4.add(jMenuItem10);
+
+        jMenuItem11.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem11.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem11.setText("Visualizar");
+        jMenuItem11.setOpaque(true);
+        jMenu4.add(jMenuItem11);
+
+        jMenuItem12.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem12.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem12.setText("Reativar");
+        jMenuItem12.setOpaque(true);
+        jMenu4.add(jMenuItem12);
+
+        jmFerramentas.add(jMenu4);
+
+        jMenu5.setBackground(new java.awt.Color(85, 6, 124));
+        jMenu5.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu5.setText("Produto");
+        jMenu5.setOpaque(true);
+
+        jMenuItem13.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem13.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem13.setText("Cadastrar");
+        jMenuItem13.setOpaque(true);
+        jMenu5.add(jMenuItem13);
+
+        jMenuItem14.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem14.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem14.setText("Visualizar");
+        jMenuItem14.setOpaque(true);
+        jMenu5.add(jMenuItem14);
+
+        jMenuItem15.setBackground(new java.awt.Color(85, 6, 124));
+        jMenuItem15.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem15.setText("Reativar");
+        jMenuItem15.setOpaque(true);
+        jMenu5.add(jMenuItem15);
+
+        jmFerramentas.add(jMenu5);
+
         jmUsuario.setBackground(new java.awt.Color(85, 6, 124));
         jmUsuario.setForeground(new java.awt.Color(255, 255, 255));
         jmUsuario.setText("Usuário");
@@ -135,17 +280,17 @@ public class RetaguardaView extends javax.swing.JFrame {
         });
         jmUsuario.add(jmiCadastrarUsuario);
 
-        jmiReativarUsuario.setBackground(new java.awt.Color(85, 6, 124));
-        jmiReativarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jmiReativarUsuario.setText("Reativar");
-        jmiReativarUsuario.setOpaque(true);
-        jmUsuario.add(jmiReativarUsuario);
-
         jmiVisualizarUsuario.setBackground(new java.awt.Color(85, 6, 124));
         jmiVisualizarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         jmiVisualizarUsuario.setText("Visualizar");
         jmiVisualizarUsuario.setOpaque(true);
         jmUsuario.add(jmiVisualizarUsuario);
+
+        jmiReativarUsuario.setBackground(new java.awt.Color(85, 6, 124));
+        jmiReativarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jmiReativarUsuario.setText("Reativar");
+        jmiReativarUsuario.setOpaque(true);
+        jmUsuario.add(jmiReativarUsuario);
 
         jmFerramentas.add(jmUsuario);
 
@@ -265,6 +410,26 @@ public class RetaguardaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlBemVindo;
     private javax.swing.JMenu jmArquivo;
