@@ -14,10 +14,10 @@ public class RetaguardaView extends javax.swing.JFrame {
 
     private final Log log = new Log();
     private final SetIcon setIcon = new SetIcon();
-    
+
     private boolean isCadastrarUsuarioOpen;
     private CadastrarUsuarioView cadastrarUsuarioInstancia;
-    
+
     private boolean isTrocarUsuarioOpen;
     private TrocarUsuarioView trocarUsuarioInstancia;
 
@@ -394,26 +394,50 @@ public class RetaguardaView extends javax.swing.JFrame {
 
     private void jmiSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairActionPerformed
         // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja sair?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        Object[] options = {"Sim", "Não"};
+
+        int option = JOptionPane.showOptionDialog(
+                this,
+                "Tem certeza que deseja sair?",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
         if (option == JOptionPane.YES_OPTION) {
-            dispose(); // Fecha a janela
+            dispose();
         }
     }//GEN-LAST:event_jmiSairActionPerformed
 
     private void jmiReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReiniciarActionPerformed
         // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja reiniciar?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        Object[] options = {"Sim", "Não"};
+
+        int option = JOptionPane.showOptionDialog(
+                this,
+                "Tem certeza que deseja reiniciar?",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
         if (option == JOptionPane.YES_OPTION) {
-            reiniciar(); // Chama o método para reiniciar
+            reiniciar();
         }
     }//GEN-LAST:event_jmiReiniciarActionPerformed
 
     private void jmiCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastrarUsuarioActionPerformed
         // TODO add your handling code here:
-        if(isCadastrarUsuarioOpen){
+        if (isCadastrarUsuarioOpen) {
             cadastrarUsuarioInstancia.toFront();
             cadastrarUsuarioInstancia.repaint();
-        }else{
+        } else {
             isCadastrarUsuarioOpen = true;
             cadastrarUsuarioInstancia = new CadastrarUsuarioView(this);
             cadastrarUsuarioInstancia.setVisible(true);
@@ -432,20 +456,20 @@ public class RetaguardaView extends javax.swing.JFrame {
                 }
             });
         }
-        
+
     }//GEN-LAST:event_jmiCadastrarUsuarioActionPerformed
 
     private void jmiTrocarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTrocarUsuarioActionPerformed
         // TODO add your handling code here:
-        if(isTrocarUsuarioOpen){
+        if (isTrocarUsuarioOpen) {
             trocarUsuarioInstancia.toFront();
             trocarUsuarioInstancia.repaint();
-        }else{
+        } else {
             isTrocarUsuarioOpen = true;
             trocarUsuarioInstancia = new TrocarUsuarioView(this);
             trocarUsuarioInstancia.setVisible(true);
             log.escreverLogInfoAvulso("INFORMATIVO", "Tela de troca de usuário aberta");
-            trocarUsuarioInstancia.addWindowListener(new WindowAdapter(){
+            trocarUsuarioInstancia.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     isTrocarUsuarioOpen = false;
@@ -458,7 +482,7 @@ public class RetaguardaView extends javax.swing.JFrame {
                     trocarUsuarioInstancia = null;
                 }
             });
-            
+
         }
     }//GEN-LAST:event_jmiTrocarUsuarioActionPerformed
 
@@ -479,7 +503,7 @@ public class RetaguardaView extends javax.swing.JFrame {
     private void reiniciar() {
         try {
             String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-            String currentDir = new File(".").getCanonicalPath();  // Obtém o diretório atual de onde o JAR está sendo executado
+            String currentDir = new File(".").getCanonicalPath();
             String jarFilePath = currentDir + File.separator + "EduCareFrontEnd-1.0-SNAPSHOT.jar";
             File jarFile = new File(jarFilePath);
 
@@ -489,24 +513,19 @@ public class RetaguardaView extends javax.swing.JFrame {
                 return;
             }
 
-            // Cria um processo para reiniciar a aplicação
             ProcessBuilder builder = new ProcessBuilder(javaBin, "-jar", jarFilePath);
             builder.start();
-            dispose(); // Fecha a janela atual
+            dispose();
         } catch (IOException ex) {
-            // Loga o erro
             String errorMessage = "Erro ao reiniciar a aplicação: " + ex.getMessage();
             JOptionPane.showMessageDialog(this, errorMessage, "Erro", JOptionPane.ERROR_MESSAGE);
             log.escreverLogErroOperacaoException(ex, errorMessage);
         } catch (Exception ex) {
-            // Outras exceções não previstas
             String errorMessage = "Erro desconhecido ao reiniciar a aplicação: " + ex.getMessage();
             JOptionPane.showMessageDialog(this, errorMessage, "Erro", JOptionPane.ERROR_MESSAGE);
             log.escreverLogErroOperacaoException(ex, errorMessage);
         }
     }
-    
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

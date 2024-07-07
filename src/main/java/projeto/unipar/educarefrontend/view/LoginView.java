@@ -7,6 +7,7 @@ import projeto.unipar.educarefrontend.service.UsuarioService;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.RoundedBorder;
+import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
 
 public class LoginView extends javax.swing.JFrame {
 
@@ -21,6 +22,7 @@ public class LoginView extends javax.swing.JFrame {
         log.escreverLogInfoAvulso("INFORMATIVO", "INICIANDO APLICAÇÃO");
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setIcon.setIconJFrame(this);
+        WindowsCloseHandler.addCloseHandler(this, log);
 
     }
 
@@ -222,9 +224,8 @@ public class LoginView extends javax.swing.JFrame {
             RetaguardaView retaguardaView = new RetaguardaView();
             retaguardaView.setVisible(true);
             retaguardaView.userSession(usuario);
-            this.dispose(); // Fecha a tela de login
+            this.dispose();
         } else {
-            // Login falhou, mostra mensagem de erro
             JOptionPane.showMessageDialog(this, "Email ou Senha Inválidos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -260,7 +261,10 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    
+            
+            
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAcessarSistema;
     private javax.swing.JButton btVisualizarSenha;
