@@ -14,12 +14,15 @@ public class WindowsCloseHandler {
             public void windowClosing(WindowEvent e) {
                 
                 Object[] options = {"Sim", "Não"};
-                int option = JOptionPane.showConfirmDialog(
+                int option = JOptionPane.showOptionDialog(
                         frameSendoFechado,
                         "Você tem certeza que deseja fechar o sistema?",
                         "Confirmar saída",
                         JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]
                 );
                 if (option == JOptionPane.YES_OPTION) {
                     frameSendoFechado.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -28,25 +31,7 @@ public class WindowsCloseHandler {
                 } else {
                     frameSendoFechado.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 }
-
-                
-
-//                int option = JOptionPane.showOptionDialog(
-//                        frameSendoFechado,
-//                        "Tem certeza que deseja fechar o sistema?",
-//                        "Confirmação de saída",
-//                        JOptionPane.YES_NO_OPTION,
-//                        JOptionPane.QUESTION_MESSAGE,
-//                        null,
-//                        options,
-//                        options[0]
-//                );
-//
-//                if (option == JOptionPane.YES_OPTION) {
-//                    dispose();
-//                }
             }
         });
     }
-
 }

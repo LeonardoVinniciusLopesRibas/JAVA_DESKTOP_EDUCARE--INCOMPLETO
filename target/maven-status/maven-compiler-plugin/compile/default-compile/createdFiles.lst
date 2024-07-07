@@ -12,8 +12,10 @@ projeto\unipar\educarefrontend\dto\UsuarioRequestCadastro.class
 projeto\unipar\educarefrontend\util\Log.class
 projeto\unipar\educarefrontend\view\RetaguardaView$2.class
 projeto\unipar\educarefrontend\view\LoginView$5.class
+projeto\unipar\educarefrontend\view\TrocarUsuarioView$2.class
 projeto\unipar\educarefrontend\view\RetaguardaView.class
 projeto\unipar\educarefrontend\view\RetaguardaView$5.class
+projeto\unipar\educarefrontend\view\TrocarUsuarioView$1.class
 projeto\unipar\educarefrontend\view\LoginView$4.class
 projeto\unipar\educarefrontend\view\CadastrarUsuarioView$3.class
 projeto\unipar\educarefrontend\view\RetaguardaView$1.class
