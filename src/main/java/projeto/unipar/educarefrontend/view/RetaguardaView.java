@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.model.Usuario;
 import projeto.unipar.educarefrontend.util.Log;
+import projeto.unipar.educarefrontend.util.ReiniciarSystem;
 import projeto.unipar.educarefrontend.util.RoundedBorder;
 import projeto.unipar.educarefrontend.util.SetIcon;
 
@@ -20,6 +21,9 @@ public class RetaguardaView extends javax.swing.JFrame {
 
     private boolean isTrocarUsuarioOpen;
     private TrocarUsuarioView trocarUsuarioInstancia;
+    
+    private boolean isCadastrarPaiOpen;
+    private CadastrarPaiView cadastrarPaiInstancia;
 
     public RetaguardaView() {
         initComponents();
@@ -54,9 +58,9 @@ public class RetaguardaView extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        jmiCadastrarPai = new javax.swing.JMenuItem();
+        jmiVisualizarPai = new javax.swing.JMenuItem();
+        jmiReativarPai = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -236,29 +240,34 @@ public class RetaguardaView extends javax.swing.JFrame {
         jMenu3.setText("Pai");
         jMenu3.setOpaque(true);
 
-        jMenuItem7.setBackground(new java.awt.Color(85, 6, 124));
-        jMenuItem7.setForeground(new java.awt.Color(255, 255, 255));
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/jmiCadastrar.png"))); // NOI18N
-        jMenuItem7.setText("Cadastrar");
-        jMenuItem7.setBorder(new RoundedBorder(15));
-        jMenuItem7.setOpaque(true);
-        jMenu3.add(jMenuItem7);
+        jmiCadastrarPai.setBackground(new java.awt.Color(85, 6, 124));
+        jmiCadastrarPai.setForeground(new java.awt.Color(255, 255, 255));
+        jmiCadastrarPai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/jmiCadastrar.png"))); // NOI18N
+        jmiCadastrarPai.setText("Cadastrar");
+        jmiCadastrarPai.setBorder(new RoundedBorder(15));
+        jmiCadastrarPai.setOpaque(true);
+        jmiCadastrarPai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastrarPaiActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmiCadastrarPai);
 
-        jMenuItem8.setBackground(new java.awt.Color(85, 6, 124));
-        jMenuItem8.setForeground(new java.awt.Color(255, 255, 255));
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/jmiVisualizar.png"))); // NOI18N
-        jMenuItem8.setText("Visualizar");
-        jMenuItem8.setBorder(new RoundedBorder(15));
-        jMenuItem8.setOpaque(true);
-        jMenu3.add(jMenuItem8);
+        jmiVisualizarPai.setBackground(new java.awt.Color(85, 6, 124));
+        jmiVisualizarPai.setForeground(new java.awt.Color(255, 255, 255));
+        jmiVisualizarPai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/jmiVisualizar.png"))); // NOI18N
+        jmiVisualizarPai.setText("Visualizar");
+        jmiVisualizarPai.setBorder(new RoundedBorder(15));
+        jmiVisualizarPai.setOpaque(true);
+        jMenu3.add(jmiVisualizarPai);
 
-        jMenuItem9.setBackground(new java.awt.Color(85, 6, 124));
-        jMenuItem9.setForeground(new java.awt.Color(255, 255, 255));
-        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/jmiReativar.png"))); // NOI18N
-        jMenuItem9.setText("Reativar");
-        jMenuItem9.setBorder(new RoundedBorder(15));
-        jMenuItem9.setOpaque(true);
-        jMenu3.add(jMenuItem9);
+        jmiReativarPai.setBackground(new java.awt.Color(85, 6, 124));
+        jmiReativarPai.setForeground(new java.awt.Color(255, 255, 255));
+        jmiReativarPai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/jmiReativar.png"))); // NOI18N
+        jmiReativarPai.setText("Reativar");
+        jmiReativarPai.setBorder(new RoundedBorder(15));
+        jmiReativarPai.setOpaque(true);
+        jMenu3.add(jmiReativarPai);
 
         jmFerramentas.add(jMenu3);
 
@@ -409,6 +418,12 @@ public class RetaguardaView extends javax.swing.JFrame {
 
         if (option == JOptionPane.YES_OPTION) {
             dispose();
+            if(cadastrarUsuarioInstancia != null){
+                cadastrarUsuarioInstancia.dispose();
+            }
+            if(cadastrarPaiInstancia != null){
+                cadastrarPaiInstancia.dispose();
+            }
         }
     }//GEN-LAST:event_jmiSairActionPerformed
 
@@ -428,7 +443,13 @@ public class RetaguardaView extends javax.swing.JFrame {
         );
 
         if (option == JOptionPane.YES_OPTION) {
-            reiniciar();
+            ReiniciarSystem.reiniciar(this, log);
+            if(cadastrarUsuarioInstancia != null){
+                cadastrarUsuarioInstancia.dispose();
+            }
+            if(cadastrarPaiInstancia != null){
+                cadastrarPaiInstancia.dispose();
+            }
         }
     }//GEN-LAST:event_jmiReiniciarActionPerformed
 
@@ -466,7 +487,7 @@ public class RetaguardaView extends javax.swing.JFrame {
             trocarUsuarioInstancia.repaint();
         } else {
             isTrocarUsuarioOpen = true;
-            trocarUsuarioInstancia = new TrocarUsuarioView(this);
+            trocarUsuarioInstancia = new TrocarUsuarioView(this, cadastrarUsuarioInstancia, cadastrarPaiInstancia);
             trocarUsuarioInstancia.setVisible(true);
             log.escreverLogInfoAvulso("INFORMATIVO", "Tela de troca de usuário aberta");
             trocarUsuarioInstancia.addWindowListener(new WindowAdapter() {
@@ -486,6 +507,34 @@ public class RetaguardaView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiTrocarUsuarioActionPerformed
 
+    private void jmiCadastrarPaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastrarPaiActionPerformed
+        // TODO add your handling code here:
+        if(isCadastrarPaiOpen){
+            cadastrarPaiInstancia.toFront();
+            cadastrarPaiInstancia.repaint();
+        }else{
+            isCadastrarPaiOpen = true;
+            cadastrarPaiInstancia = new CadastrarPaiView(this);
+            cadastrarPaiInstancia.setVisible(true);
+            log.escreverLogInfoAvulso("INFORMATIVO", "Tela de cadastro de pai aberta");
+            cadastrarPaiInstancia.addWindowListener(new WindowAdapter(){
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    isCadastrarPaiOpen = false;
+                    cadastrarPaiInstancia = null;
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    isCadastrarPaiOpen = false;
+                    cadastrarPaiInstancia = null;
+                }
+            });
+        }
+        
+        
+    }//GEN-LAST:event_jmiCadastrarPaiActionPerformed
+
     public void userSession(Usuario usuario) {
 
         Long id = usuario.getId();
@@ -500,32 +549,7 @@ public class RetaguardaView extends javax.swing.JFrame {
         jlBemVindo.setText("Bom Trabalho: " + nome);
     }
 
-    private void reiniciar() {
-        try {
-            String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-            String currentDir = new File(".").getCanonicalPath();
-            String jarFilePath = currentDir + File.separator + "EduCareFrontEnd-1.0-SNAPSHOT.jar";
-            File jarFile = new File(jarFilePath);
-
-            if (!jarFile.exists() || !jarFile.isFile()) {
-                JOptionPane.showMessageDialog(this, "Não foi possível reiniciar a aplicação.", "Erro", JOptionPane.ERROR_MESSAGE);
-                log.escreverLogErroAvulso("Reiniciar", "Arquivo JAR especificado não encontrado ou inválido: " + jarFilePath);
-                return;
-            }
-
-            ProcessBuilder builder = new ProcessBuilder(javaBin, "-jar", jarFilePath);
-            builder.start();
-            dispose();
-        } catch (IOException ex) {
-            String errorMessage = "Erro ao reiniciar a aplicação: " + ex.getMessage();
-            JOptionPane.showMessageDialog(this, errorMessage, "Erro", JOptionPane.ERROR_MESSAGE);
-            log.escreverLogErroOperacaoException(ex, errorMessage);
-        } catch (Exception ex) {
-            String errorMessage = "Erro desconhecido ao reiniciar a aplicação: " + ex.getMessage();
-            JOptionPane.showMessageDialog(this, errorMessage, "Erro", JOptionPane.ERROR_MESSAGE);
-            log.escreverLogErroOperacaoException(ex, errorMessage);
-        }
-    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -550,9 +574,6 @@ public class RetaguardaView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlBemVindo;
     private javax.swing.JMenu jmArquivo;
@@ -560,11 +581,14 @@ public class RetaguardaView extends javax.swing.JFrame {
     private javax.swing.JMenu jmFerramentas;
     private javax.swing.JMenu jmUsuario;
     private javax.swing.JMenuBar jmbItens;
+    private javax.swing.JMenuItem jmiCadastrarPai;
     private javax.swing.JMenuItem jmiCadastrarUsuario;
+    private javax.swing.JMenuItem jmiReativarPai;
     private javax.swing.JMenuItem jmiReativarUsuario;
     private javax.swing.JMenuItem jmiReiniciar;
     private javax.swing.JMenuItem jmiSair;
     private javax.swing.JMenuItem jmiTrocarUsuario;
+    private javax.swing.JMenuItem jmiVisualizarPai;
     private javax.swing.JMenuItem jmiVisualizarUsuario;
     // End of variables declaration//GEN-END:variables
 

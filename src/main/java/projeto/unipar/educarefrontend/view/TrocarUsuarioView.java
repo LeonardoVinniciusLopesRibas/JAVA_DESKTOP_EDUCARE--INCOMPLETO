@@ -1,18 +1,37 @@
 package projeto.unipar.educarefrontend.view;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import projeto.unipar.educarefrontend.dto.UsuarioRequest;
+import projeto.unipar.educarefrontend.model.Usuario;
+import projeto.unipar.educarefrontend.service.UsuarioService;
+import projeto.unipar.educarefrontend.util.Log;
+import projeto.unipar.educarefrontend.util.ReiniciarSystem;
 import projeto.unipar.educarefrontend.util.RoundedBorder;
+import projeto.unipar.educarefrontend.util.SetIcon;
 
 public class TrocarUsuarioView extends javax.swing.JFrame {
-
-    private boolean isPasswordVisible = false;
     
-    public TrocarUsuarioView(JFrame pai) {
+    private boolean isPasswordVisible = false;
+    private final Log log = new Log();
+    private final SetIcon setIcon = new SetIcon();
+    private UsuarioService usuarioService = new UsuarioService(log);
+    private Usuario usuario = new Usuario();
+    private static JFrame pai;
+    private static CadastrarUsuarioView cadastrarUsuarioView;
+    private static CadastrarPaiView cadastrarPaiView;
+    
+    public TrocarUsuarioView(JFrame pai, CadastrarUsuarioView cadastrarUsuarioView, CadastrarPaiView cadastrarPaiView) {
         initComponents();
+        this.cadastrarUsuarioView = cadastrarUsuarioView;
+        this.pai = pai;
+        this.cadastrarPaiView = cadastrarPaiView;
+        setIcon.setIconJFrame(this);
+        log.escreverLogInfoAvulso("INFORMATIVO", "ABRINDO TELA DE TROCA DE USUÁRIO");
         setLocationRelativeTo(pai);
         
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -24,7 +43,7 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
         jpfSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         btAcessarSistema = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jtfEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -49,7 +68,11 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
 
         jpfSenha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jpfSenha.setBorder(new RoundedBorder(15));
-        jpfSenha.setMinimumSize(new java.awt.Dimension(64, 31));
+        jpfSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jpfSenhaKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -65,9 +88,13 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField1.setBorder(new RoundedBorder(15));
-        jTextField1.setMinimumSize(new java.awt.Dimension(64, 31));
+        jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jtfEmail.setBorder(new RoundedBorder(15));
+        jtfEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfEmailKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -85,9 +112,9 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
                                 .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btVisualizarSenha))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jtfEmail)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
+                        .addGap(144, 144, 144)
                         .addComponent(btAcessarSistema)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -99,16 +126,16 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
+                .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btVisualizarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(63, 63, 63)
+                    .addComponent(jpfSenha))
+                .addGap(48, 48, 48)
                 .addComponent(btAcessarSistema)
-                .addGap(31, 31, 31))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,10 +166,64 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
 
     private void btAcessarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessarSistemaActionPerformed
         // TODO add your handling code here:
-        //logar();
+        trocarUsuario();
     }//GEN-LAST:event_btAcessarSistemaActionPerformed
 
-   
+    private void jtfEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEmailKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            trocarUsuario();
+        }
+    }//GEN-LAST:event_jtfEmailKeyPressed
+
+    private void jpfSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfSenhaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            trocarUsuario();
+        }
+    }//GEN-LAST:event_jpfSenhaKeyPressed
+    
+    private void trocarUsuario() {
+        UsuarioRequest usuarioRequest = new UsuarioRequest();
+        usuarioRequest.setEmail(jtfEmail.getText());
+        usuarioRequest.setSenha(new String(jpfSenha.getPassword()));
+        
+        Object[] options = {"Sim", "Não"};
+        
+        int option = JOptionPane.showOptionDialog(
+                this,
+                "Todas suas telas serão fechadas. Deseja mesmo trocar de usuário?",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+        
+        if (option == JOptionPane.YES_OPTION) {
+            usuario = usuarioService.logar(usuarioRequest);
+            
+            if (usuario != null) {
+                //ReiniciarSystem.reiniciar(this, log);
+                this.dispose();
+                pai.dispose();
+                cadastrarUsuarioView.dispose();
+                cadastrarPaiView.dispose();
+                if (LoginView.class != null) {
+                    RetaguardaView retaguardaView = new RetaguardaView();
+                    retaguardaView.setVisible(true);
+                    retaguardaView.userSession(usuario);
+                    
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Email ou Senha Inválidos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }
+        
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAcessarSistema;
     private javax.swing.JButton btVisualizarSenha;
@@ -150,7 +231,8 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPasswordField jpfSenha;
+    private javax.swing.JTextField jtfEmail;
     // End of variables declaration//GEN-END:variables
+
 }

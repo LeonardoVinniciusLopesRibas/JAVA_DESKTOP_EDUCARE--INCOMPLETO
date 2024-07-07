@@ -296,7 +296,7 @@
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+                <MenuItem class="javax.swing.JMenuItem" name="jmiCadastrarPai">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7c" green="6" red="55" type="rgb"/>
@@ -313,8 +313,11 @@
                     </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCadastrarPaiActionPerformed"/>
+                  </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+                <MenuItem class="javax.swing.JMenuItem" name="jmiVisualizarPai">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7c" green="6" red="55" type="rgb"/>
@@ -332,7 +335,7 @@
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+                <MenuItem class="javax.swing.JMenuItem" name="jmiReativarPai">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7c" green="6" red="55" type="rgb"/>
