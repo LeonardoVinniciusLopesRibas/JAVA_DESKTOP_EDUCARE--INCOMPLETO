@@ -9,12 +9,12 @@ public class SetIcon {
     Log log = new Log();
     
     public void setIconJFrame(JFrame parent) {
-        URL iconUrl = getClass().getResource("/META-INF/EduCareLogo.png");
+        URL iconUrl = getClass().getResource("/META-INF/EduCareLogo32px.png");
         if (iconUrl != null) {
             ImageIcon icon = new ImageIcon(iconUrl);
             parent.setIconImage(icon.getImage());
         } else {
-            log.escreverLogErroAvulso("ERRO", "ÍCONE ESTÁ NULO - Caminho: /META-INF/EduCareLogo.png");
+            log.escreverLogErroAvulso("ERRO", "ÍCONE ESTÁ NULO - Caminho: /META-INF/EduCareLogo32px.png");
         }
     }
     

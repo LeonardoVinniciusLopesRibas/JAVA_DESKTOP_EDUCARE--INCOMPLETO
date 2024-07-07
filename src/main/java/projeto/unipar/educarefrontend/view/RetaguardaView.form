@@ -2,6 +2,24 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Container class="javax.swing.JMenuBar" name="jMenuBar1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenu6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit"/>
+          </Properties>
+        </Menu>
+      </SubComponents>
+    </Container>
     <Menu class="javax.swing.JMenuBar" name="jmbItens">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -16,8 +34,14 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7c" green="6" red="55" type="rgb"/>
             </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new RoundedBorder(15)" type="code"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/META-INF/jmArquivo32px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Arquivo"/>
             <Property name="opaque" type="boolean" value="true"/>
@@ -31,12 +55,18 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmiTrocarUsuario.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Trocar de Usu&#xe1;rio"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new RoundedBorder(15)" type="code"/>
                 </Property>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiTrocarUsuarioActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiReiniciar">
               <Properties>
@@ -45,6 +75,9 @@
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmiReiniciar.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reiniciar"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -64,6 +97,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmiSair.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new RoundedBorder(15)" type="code"/>
@@ -81,8 +117,14 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7c" green="6" red="55" type="rgb"/>
             </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new RoundedBorder(15)" type="code"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/META-INF/jmFerramenta32px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ferramentas"/>
             <Property name="opaque" type="boolean" value="true"/>
@@ -93,8 +135,14 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="7c" green="6" red="55" type="rgb"/>
                 </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new RoundedBorder(15)" type="code"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmCrianca.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Crian&#xe7;a"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -108,7 +156,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiCadastrar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -120,7 +174,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiVisualizar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Visualizar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -132,7 +192,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiReativar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Reativar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -143,8 +209,14 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="7c" green="6" red="55" type="rgb"/>
                 </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new RoundedBorder(15)" type="code"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmMae.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe3;e"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -158,7 +230,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiCadastrar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -170,7 +248,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiVisualizar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Visualizar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -182,7 +266,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiReativar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Reativar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -193,8 +283,14 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="7c" green="6" red="55" type="rgb"/>
                 </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new RoundedBorder(15)" type="code"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmPai.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pai"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -208,7 +304,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiCadastrar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -220,7 +322,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiVisualizar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Visualizar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -232,7 +340,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiReativar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Reativar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -243,8 +357,14 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="7c" green="6" red="55" type="rgb"/>
                 </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new RoundedBorder(15)" type="code"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmResponsavel.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Respons&#xe1;vel"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -258,7 +378,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiCadastrar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -270,7 +396,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiVisualizar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Visualizar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -282,7 +414,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiReativar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Reativar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -293,8 +431,14 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="7c" green="6" red="55" type="rgb"/>
                 </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new RoundedBorder(15)" type="code"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmProduto.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Produto"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -308,7 +452,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiCadastrar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -320,7 +470,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiVisualizar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Visualizar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -332,7 +488,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiReativar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Reativar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -343,8 +505,14 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="7c" green="6" red="55" type="rgb"/>
                 </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new RoundedBorder(15)" type="code"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/META-INF/jmUsuario.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -358,7 +526,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiCadastrar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
@@ -373,7 +547,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiVisualizar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Visualizar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -385,7 +565,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/META-INF/jmiReativar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Reativar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new RoundedBorder(15)" type="code"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
@@ -398,8 +584,14 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7c" green="6" red="55" type="rgb"/>
             </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new RoundedBorder(15)" type="code"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/META-INF/jmEstoque.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Estoque"/>
             <Property name="opaque" type="boolean" value="true"/>
@@ -462,7 +654,7 @@
                   <Component id="jlBemVindo" min="-2" pref="68" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="283" max="-2" attributes="0"/>
-                  <EmptySpace pref="577" max="32767" attributes="0"/>
+                  <EmptySpace pref="561" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

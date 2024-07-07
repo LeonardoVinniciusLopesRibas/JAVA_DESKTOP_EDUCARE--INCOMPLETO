@@ -199,24 +199,16 @@ public class LoginView extends javax.swing.JFrame {
 
     private void jtfEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEmailKeyPressed
         // TODO add your handling code here:
-        jtfEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    logar();
-                }
-            }
-        });
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            logar();
+        }
     }//GEN-LAST:event_jtfEmailKeyPressed
 
     private void jpfSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfSenhaKeyPressed
         // TODO add your handling code here:
-        jpfSenha.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    logar();
-                }
-            }
-        });
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            logar();
+        }
     }//GEN-LAST:event_jpfSenhaKeyPressed
 
     public void logar() {
