@@ -20,38 +20,52 @@ import javax.swing.text.PlainDocument;
  */
 public class CpfFormatter extends DocumentFilter {
 
+    private Log log;
+
+    public CpfFormatter(Log log) {
+        this.log = log;
+    }
+
     public JTextField createFormattedTextFieldCpf() {
 
         JFormattedTextField formattedTextField = new JFormattedTextField();
         formattedTextField.setColumns(14);
         formattedTextField.setDocument(new PlainDocument() {
             @Override
-            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-                if (str == null) {
-                    return;
+            public void insertString(int offs, String str, AttributeSet a) {
+                try {
+                    if (str == null) {
+                        return;
+                    }
+
+                    String original = getText(0, getLength());
+                    StringBuilder buffer = new StringBuilder(original);
+                    buffer.insert(offs, str);
+
+                    String onlyDigits = buffer.toString().replaceAll("[^\\d]", "");
+                    String mask = "###.###.###-##";
+
+                    super.remove(0, getLength());
+                    super.insertString(0, applyMask(mask, onlyDigits), a);
+                } catch (BadLocationException e) {
+                    log.escreverLogErroOperacaoException(e, e.getMessage());
                 }
-
-                String original = getText(0, getLength());
-                StringBuilder buffer = new StringBuilder(original);
-                buffer.insert(offs, str);
-
-                String onlyDigits = buffer.toString().replaceAll("[^\\d]", "");
-                String mask = "###.###.###-##";
-
-                super.remove(0, getLength());
-                super.insertString(0, applyMask(mask, onlyDigits), a);
             }
 
             @Override
-            public void remove(int offs, int len) throws BadLocationException {
-                super.remove(offs, len);
+            public void remove(int offs, int len) {
+                try {
+                    super.remove(offs, len);
 
-                String original = getText(0, getLength());
-                String onlyDigits = original.replaceAll("[^\\d]", "");
-                String mask = "###.###.###-##";
+                    String original = getText(0, getLength());
+                    String onlyDigits = original.replaceAll("[^\\d]", "");
+                    String mask = "###.###.###-##";
 
-                super.remove(0, getLength());
-                super.insertString(0, applyMask(mask, onlyDigits), null);
+                    super.remove(0, getLength());
+                    super.insertString(0, applyMask(mask, onlyDigits), null);
+                } catch (BadLocationException e) {
+                    log.escreverLogErroOperacaoException(e, e.getMessage());
+                }
             }
 
             private String applyMask(String mask, String digits) {

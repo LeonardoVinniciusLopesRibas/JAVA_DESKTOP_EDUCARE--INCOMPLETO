@@ -176,7 +176,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new CpfFormatter().createFormattedTextFieldCpf()"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new CpfFormatter(log).createFormattedTextFieldCpf()"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jcbPaiMae">
@@ -223,7 +223,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new TelefoneFormatter().createFormatterTelefone()"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new TelefoneFormatter(log).createFormatterTelefone()"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">

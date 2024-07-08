@@ -267,7 +267,7 @@ public class LoginView extends javax.swing.JFrame {
     public static void main(String args[]) {
         
         if (isAppRunning()) {
-            JOptionPane.showMessageDialog(null, "A aplicação já está rodando.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O sistema já está em execução.", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1); // Sai se a aplicação já estiver rodando
         }
         

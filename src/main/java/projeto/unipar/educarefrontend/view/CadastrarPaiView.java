@@ -34,12 +34,12 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtfEmail = new javax.swing.JTextField();
-        jtfCpfPai = new CpfFormatter().createFormattedTextFieldCpf();
+        jtfCpfPai = new CpfFormatter(log).createFormattedTextFieldCpf();
         jcbPaiMae = new javax.swing.JCheckBox();
         jbLupa = new javax.swing.JButton();
         jlSelecioneAMae = new javax.swing.JLabel();
         jtfMaeSelecionada = new javax.swing.JTextField();
-        jtfTelefonePai = new TelefoneFormatter().createFormatterTelefone();
+        jtfTelefonePai = new TelefoneFormatter(log).createFormatterTelefone();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
