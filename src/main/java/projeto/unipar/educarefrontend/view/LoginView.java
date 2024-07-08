@@ -1,5 +1,10 @@
 package projeto.unipar.educarefrontend.view;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.model.Usuario;
@@ -16,6 +21,10 @@ public class LoginView extends javax.swing.JFrame {
     private boolean isPasswordVisible = false;
     private UsuarioService usuarioService = new UsuarioService(log);
     private Usuario usuario = new Usuario();
+    
+    private static FileLock lock;
+    private static FileChannel channel;
+    private static final String LOCK_FILE = "app.lock";
 
     public LoginView() {
         initComponents();
@@ -229,8 +238,39 @@ public class LoginView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Email ou Senha Inválidos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    private static boolean isAppRunning() {
+        try {
+            File lockFile = new File(LOCK_FILE);
+            channel = new RandomAccessFile(lockFile, "rw").getChannel();
+            lock = channel.tryLock();
+            if (lock == null) {
+                channel.close();
+                return true;
+            }
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    lock.release();
+                    channel.close();
+                    lockFile.delete();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }));
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return true; 
+        }
+    }
 
     public static void main(String args[]) {
+        
+        if (isAppRunning()) {
+            JOptionPane.showMessageDialog(null, "A aplicação já está rodando.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1); // Sai se a aplicação já estiver rodando
+        }
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
