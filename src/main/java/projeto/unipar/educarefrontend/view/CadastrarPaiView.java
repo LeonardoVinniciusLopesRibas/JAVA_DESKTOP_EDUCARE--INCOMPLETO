@@ -41,6 +41,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jtfMaeSelecionada = new javax.swing.JTextField();
         jtfTelefonePai = new TelefoneFormatter(log).createFormatterTelefone();
         jLabel4 = new javax.swing.JLabel();
+        jcbWhastapp = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,6 +88,14 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Telefone");
 
+        jcbWhastapp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcbWhastapp.setText("WhatsApp");
+        jcbWhastapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbWhastappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -103,8 +112,11 @@ public class CadastrarPaiView extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jtfTelefonePai, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jtfTelefonePai, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcbWhastapp, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 35, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -134,21 +146,22 @@ public class CadastrarPaiView extends javax.swing.JFrame {
                             .addComponent(jtfCpfPai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbPaiMae, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbWhastapp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfTelefonePai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jlSelecioneAMae)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfMaeSelecionada)
-                            .addComponent(jbLupa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                        .addGap(858, 858, 858))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addGap(5, 5, 5)
-                        .addComponent(jtfTelefonePai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jbLupa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))))
+                .addGap(858, 858, 858))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,6 +183,10 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         validaCamposMostrarMae();
     }//GEN-LAST:event_jcbPaiMaeActionPerformed
 
+    private void jcbWhastappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbWhastappActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbWhastappActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -178,6 +195,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbLupa;
     private javax.swing.JCheckBox jcbPaiMae;
+    private javax.swing.JCheckBox jcbWhastapp;
     private javax.swing.JLabel jlSelecioneAMae;
     private javax.swing.JTextField jtfCpfPai;
     private javax.swing.JTextField jtfEmail;
@@ -195,6 +213,5 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jlSelecioneAMae.setVisible(selected);
         jbLupa.setVisible(selected);
         jtfMaeSelecionada.setVisible(selected);
-        
     }
 }
