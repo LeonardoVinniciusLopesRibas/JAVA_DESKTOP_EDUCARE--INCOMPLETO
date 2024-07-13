@@ -546,7 +546,7 @@ public class RetaguardaView extends javax.swing.JFrame {
     }
 
     private void escreverBemVindo(String nome) {
-        jlBemVindo.setText("Bom Trabalho: " + nome);
+        jlBemVindo.setText("Bem vindo " + nome);
     }
 
     

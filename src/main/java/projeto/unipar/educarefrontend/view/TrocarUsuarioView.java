@@ -11,7 +11,7 @@ import projeto.unipar.educarefrontend.util.RoundedBorder;
 import projeto.unipar.educarefrontend.util.SetIcon;
 
 public class TrocarUsuarioView extends javax.swing.JFrame {
-    
+
     private boolean isPasswordVisible = false;
     private final Log log = new Log();
     private final SetIcon setIcon = new SetIcon();
@@ -20,7 +20,7 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
     private static JFrame pai;
     private static CadastrarUsuarioView cadastrarUsuarioView;
     private static CadastrarPaiView cadastrarPaiView;
-    
+
     public TrocarUsuarioView(JFrame pai, CadastrarUsuarioView cadastrarUsuarioView, CadastrarPaiView cadastrarPaiView) {
         initComponents();
         this.cadastrarUsuarioView = cadastrarUsuarioView;
@@ -29,9 +29,9 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
         setIcon.setIconJFrame(this);
         log.escreverLogInfoAvulso("INFORMATIVO", "ABRINDO TELA DE TROCA DE USUÁRIO");
         setLocationRelativeTo(pai);
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -172,14 +172,14 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
             trocarUsuario();
         }
     }//GEN-LAST:event_jpfSenhaKeyPressed
-    
+
     private void trocarUsuario() {
         UsuarioRequest usuarioRequest = new UsuarioRequest();
         usuarioRequest.setEmail(jtfEmail.getText());
         usuarioRequest.setSenha(new String(jpfSenha.getPassword()));
-        
+
         Object[] options = {"Sim", "Não"};
-        
+
         int option = JOptionPane.showOptionDialog(
                 this,
                 "Todas suas telas serão fechadas. Deseja mesmo trocar de usuário?",
@@ -190,28 +190,35 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
                 options,
                 options[0]
         );
-        
+
         if (option == JOptionPane.YES_OPTION) {
             usuario = usuarioService.logar(usuarioRequest);
-            
+
             if (usuario != null) {
                 //ReiniciarSystem.reiniciar(this, log);
                 this.dispose();
-                pai.dispose();
-                cadastrarUsuarioView.dispose();
-                cadastrarPaiView.dispose();
+                if (pai != null) {
+                    pai.dispose();
+                }
+                if (cadastrarUsuarioView != null) {
+                    cadastrarUsuarioView.dispose();
+
+                }
+                if (cadastrarPaiView != null) {
+                    cadastrarPaiView.dispose();
+                }
                 if (LoginView.class != null) {
                     RetaguardaView retaguardaView = new RetaguardaView();
                     retaguardaView.setVisible(true);
                     retaguardaView.userSession(usuario);
-                    
+
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Email ou Senha Inválidos", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
+
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
