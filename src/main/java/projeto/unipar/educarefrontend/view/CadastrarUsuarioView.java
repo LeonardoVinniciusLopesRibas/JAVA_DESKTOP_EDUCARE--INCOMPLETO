@@ -44,7 +44,7 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRAR USUÁRIO");
 
-        jPanel1.setBackground(new java.awt.Color(229, 218, 235));
+        jPanel1.setBackground(new java.awt.Color(204, 160, 238));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 100));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
@@ -129,8 +129,8 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addComponent(jbFecharRetornar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(jbFecharRetornar)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel1)
                 .addGap(39, 39, 39)
                 .addComponent(jLabel2)

@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.model.Usuario;
 import projeto.unipar.educarefrontend.service.UsuarioService;
+import projeto.unipar.educarefrontend.util.IsAppRunning;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.RoundedBorder;
@@ -22,9 +23,7 @@ public class LoginView extends javax.swing.JFrame {
     private UsuarioService usuarioService = new UsuarioService(log);
     private Usuario usuario = new Usuario();
     
-    private static FileLock lock;
-    private static FileChannel channel;
-    private static final String LOCK_FILE = "app.lock";
+    
 
     public LoginView() {
         initComponents();
@@ -239,36 +238,20 @@ public class LoginView extends javax.swing.JFrame {
         }
     }
     
-    private static boolean isAppRunning() {
-        try {
-            File lockFile = new File(LOCK_FILE);
-            channel = new RandomAccessFile(lockFile, "rw").getChannel();
-            lock = channel.tryLock();
-            if (lock == null) {
-                channel.close();
-                return true;
-            }
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                try {
-                    lock.release();
-                    channel.close();
-                    lockFile.delete();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }));
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return true; 
-        }
-    }
+    
 
     public static void main(String args[]) {
+        Splash splash = new Splash();
+        splash.setVisible(true);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         
-        if (isAppRunning()) {
+        if (IsAppRunning.isAppRunning()) {
             JOptionPane.showMessageDialog(null, "O sistema já está em execução.", "Error", JOptionPane.ERROR_MESSAGE);
-            System.exit(1); // Sai se a aplicação já estiver rodando
+            System.exit(1);
         }
         
         /* Set the Nimbus look and feel */
@@ -297,6 +280,7 @@ public class LoginView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                splash.disposeSplash();
                 new LoginView().setVisible(true);
             }
         });
