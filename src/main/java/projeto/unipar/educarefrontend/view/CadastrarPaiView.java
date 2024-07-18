@@ -18,8 +18,6 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     public CadastrarPaiView(JFrame pai) {
         initComponents();
         this.pai = pai;
-        setSize(1366, 768); // Define o tamanho fixo
-        setResizable(false);
         setLocationRelativeTo(pai);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setIcon.setIconJFrame(this);
