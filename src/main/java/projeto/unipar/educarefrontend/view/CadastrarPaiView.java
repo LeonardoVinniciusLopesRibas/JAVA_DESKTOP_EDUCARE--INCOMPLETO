@@ -1,11 +1,16 @@
 package projeto.unipar.educarefrontend.view;
 
 import com.google.zxing.WriterException;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import projeto.unipar.educarefrontend.dto.CepResponse;
 import projeto.unipar.educarefrontend.service.CepService;
 import projeto.unipar.educarefrontend.util.BorderBlack;
@@ -62,7 +67,6 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jTextField1 = new NumeroFormatter(log).createFormatterNumero();
         jTextField2 = new javax.swing.JTextField();
         jbBuscarCep = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -93,7 +97,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nome");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(60, 90, 140, 20);
+        jLabel2.setBounds(60, 100, 140, 20);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -103,7 +107,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
         jtfNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jtfNome);
-        jtfNome.setBounds(200, 90, 410, 40);
+        jtfNome.setBounds(200, 100, 410, 40);
 
         jtfCpfPai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jtfCpfPai);
@@ -117,7 +121,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jcbPaiMae);
-        jcbPaiMae.setBounds(620, 90, 340, 30);
+        jcbPaiMae.setBounds(620, 100, 340, 30);
 
         jbLupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIcon.png"))); // NOI18N
         jbLupa.setToolTipText("Selecione a Mãe");
@@ -132,13 +136,13 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
         jtfTelefonePai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jtfTelefonePai);
-        jtfTelefonePai.setBounds(200, 330, 411, 40);
+        jtfTelefonePai.setBounds(200, 300, 411, 40);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Telefone");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(60, 210, 140, 20);
+        jLabel4.setBounds(60, 200, 140, 20);
 
         jcbWhastapp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbWhastapp.setText("WhatsApp");
@@ -148,27 +152,27 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jcbWhastapp);
-        jcbWhastapp.setBounds(620, 270, 160, 30);
+        jcbWhastapp.setBounds(620, 250, 160, 30);
 
         jtfNomeContatoReserva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jtfNomeContatoReserva);
-        jtfNomeContatoReserva.setBounds(200, 270, 411, 40);
+        jtfNomeContatoReserva.setBounds(200, 250, 411, 40);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Contato Reserva");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(60, 270, 140, 20);
+        jLabel5.setBounds(60, 250, 140, 20);
 
         jtfTelefoneContatoReserva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jtfTelefoneContatoReserva);
-        jtfTelefoneContatoReserva.setBounds(200, 210, 410, 40);
+        jtfTelefoneContatoReserva.setBounds(200, 200, 410, 40);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Telefone Reserva");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(60, 330, 140, 20);
+        jLabel6.setBounds(60, 300, 140, 20);
 
         jcbPodeBuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbPodeBuscar.setText("Pode buscar");
@@ -178,7 +182,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jcbPodeBuscar);
-        jcbPodeBuscar.setBounds(620, 210, 160, 30);
+        jcbPodeBuscar.setBounds(620, 200, 160, 30);
 
         jcbWhastappReserva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbWhastappReserva.setText("Pode buscar");
@@ -188,7 +192,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jcbWhastappReserva);
-        jcbWhastappReserva.setBounds(620, 330, 98, 30);
+        jcbWhastappReserva.setBounds(620, 300, 98, 30);
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jTextField1);
@@ -204,12 +208,6 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jbBuscarCep.setText("Salvar Cadastro");
         jPanel1.add(jbBuscarCep);
         jbBuscarCep.setBounds(60, 700, 140, 40);
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Endereço");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(1140, 70, 62, 20);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -263,6 +261,11 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         btDownload.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btDownload.setForeground(new java.awt.Color(255, 255, 255));
         btDownload.setText("Download");
+        btDownload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDownloadActionPerformed(evt);
+            }
+        });
         jPanel1.add(btDownload);
         btDownload.setBounds(60, 640, 140, 40);
 
@@ -366,17 +369,55 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             return;
         }
 
-        // Gere o QR Code
+
         BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
 
-        // Salve a imagem do QR Code (opcional)
-        QRCodeGenerator.saveQRCodeImage(qrCodeImage, "qrcode.png");
-
-        // Exiba a imagem do QR Code no JLabel
         ImageIcon icon = new ImageIcon(qrCodeImage);
         jlQrCode.setIcon(icon);
 
     }//GEN-LAST:event_btGerarQrCodeActionPerformed
+
+    private void btDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDownloadActionPerformed
+        // TODO add your handling code here:
+        if (jlQrCode.getIcon() == null) {
+        JOptionPane.showMessageDialog(null, "Nenhum QR code para salvar", "Erro", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    // Abrir o JFileChooser para selecionar o local de salvamento
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Salvar QR code");
+    fileChooser.setFileFilter(new FileNameExtensionFilter("Imagem PNG", "png"));
+
+    int userSelection = fileChooser.showSaveDialog(null);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File fileToSave = fileChooser.getSelectedFile();
+        // Adicionar a extensão .png se não estiver presente
+        if (!fileToSave.getAbsolutePath().endsWith(".png")) {
+            fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
+        }
+
+        // Salvar a imagem
+        try {
+            ImageIcon icon = (ImageIcon) jlQrCode.getIcon();
+            BufferedImage qrCodeImage = new BufferedImage(
+                icon.getIconWidth(),
+                icon.getIconHeight(),
+                BufferedImage.TYPE_INT_ARGB
+            );
+            Graphics2D g2d = qrCodeImage.createGraphics();
+            icon.paintIcon(null, g2d, 0, 0);
+            g2d.dispose();
+
+            ImageIO.write(qrCodeImage, "png", fileToSave);
+            JOptionPane.showMessageDialog(null, "QR code salvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar QR code: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+    }
+    }//GEN-LAST:event_btDownloadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDownload;
@@ -392,7 +433,6 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
