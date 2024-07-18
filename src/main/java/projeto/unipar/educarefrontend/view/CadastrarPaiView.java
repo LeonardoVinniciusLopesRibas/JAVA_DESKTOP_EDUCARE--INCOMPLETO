@@ -2,6 +2,7 @@ package projeto.unipar.educarefrontend.view;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import projeto.unipar.educarefrontend.dto.CepResponse;
 import projeto.unipar.educarefrontend.service.CepService;
 import projeto.unipar.educarefrontend.util.BorderBlack;
 import projeto.unipar.educarefrontend.util.CepFormatter;
@@ -308,9 +309,19 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private void jbBuscarCep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarCep1ActionPerformed
         // TODO add your handling code here:
         String cepComMascara = jFTFCep.getText();
-        String cepSemMascara = cepComMascara.replaceAll("[^\\d]", ""); // Remove a máscara
+        String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
         CepService cepService = new CepService();
-        cepService.buscarCep(cepSemMascara);
+        CepResponse cepResponse = cepService.buscarCep(cepSemMascara);
+
+        if (cepResponse != null) {
+            jTextField3.setText(cepResponse.getBairro());
+            jTextField4.setText(cepResponse.getLogradouro());
+            jTextField5.setText(cepResponse.getComplemento());
+            jTextField1.setText(cepResponse.getNumero());
+            jTextField2.setText(cepResponse.getCidade());
+        } else {
+            JOptionPane.showMessageDialog(null, "CEP não encontrado.");
+        }
     }//GEN-LAST:event_jbBuscarCep1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
