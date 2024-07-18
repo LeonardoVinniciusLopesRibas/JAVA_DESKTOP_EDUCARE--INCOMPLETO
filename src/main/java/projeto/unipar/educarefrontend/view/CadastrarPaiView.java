@@ -26,12 +26,12 @@ import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.util.ValidaCpf;
 
 public class CadastrarPaiView extends javax.swing.JFrame {
-
+    
     private final SetIcon setIcon = new SetIcon();
     private final Log log = new Log();
     private final JFrame pai;
     private ValidaCpf validaCpf = new ValidaCpf();
-
+    
     public CadastrarPaiView(JFrame pai) {
         initComponents();
         this.pai = pai;
@@ -41,7 +41,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         log.escreverLogInfoAvulso("INFO", "Tela de Cadastro de Pai Aberta");
         validaCamposMostrarMae();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -339,7 +339,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
         CepService cepService = new CepService();
         CepResponse cepResponse = cepService.buscarCep(cepSemMascara);
-
+        
         if (cepResponse != null) {
             jTextField3.setText(cepResponse.getBairro());
             jTextField4.setText(cepResponse.getLogradouro());
@@ -358,20 +358,19 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             return;
         }
         String cpfPai = jtfCpfPai.getText().replaceAll("[^\\d]", "");
-
+        
         if (cpfPai.length() != 11) {
             JOptionPane.showMessageDialog(null, "CPF deve conter 11 dígitos", "Cpf Inválido", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-
+        
         if (!validaCpf.isValidCPF(cpfPai)) {
             JOptionPane.showMessageDialog(null, "CPF inválido", "Cpf Inválido", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-
-
+        
         BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
-
+        
         ImageIcon icon = new ImageIcon(qrCodeImage);
         jlQrCode.setIcon(icon);
 
@@ -380,43 +379,41 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private void btDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDownloadActionPerformed
         // TODO add your handling code here:
         if (jlQrCode.getIcon() == null) {
-        JOptionPane.showMessageDialog(null, "Nenhum QR code para salvar", "Erro", JOptionPane.INFORMATION_MESSAGE);
-        return;
-    }
-
-    // Abrir o JFileChooser para selecionar o local de salvamento
+            JOptionPane.showMessageDialog(null, "Nenhum QR code para salvar", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
         JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setDialogTitle("Salvar QR code");
-    fileChooser.setFileFilter(new FileNameExtensionFilter("Imagem PNG", "png"));
-
-    int userSelection = fileChooser.showSaveDialog(null);
-
-    if (userSelection == JFileChooser.APPROVE_OPTION) {
-        File fileToSave = fileChooser.getSelectedFile();
-        // Adicionar a extensão .png se não estiver presente
-        if (!fileToSave.getAbsolutePath().endsWith(".png")) {
-            fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
+        fileChooser.setDialogTitle("Salvar QR code");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Imagem PNG", "png"));
+        
+        fileChooser.setSelectedFile(new File("qrCode-EduCare-" + jtfCpfPai.getText() + ".png"));
+        int userSelection = fileChooser.showSaveDialog(null);
+        
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            if (!fileToSave.getAbsolutePath().endsWith(".png")) {
+                fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
+            }
+            
+            try {
+                ImageIcon icon = (ImageIcon) jlQrCode.getIcon();
+                BufferedImage qrCodeImage = new BufferedImage(
+                        icon.getIconWidth(),
+                        icon.getIconHeight(),
+                        BufferedImage.TYPE_INT_ARGB
+                );
+                Graphics2D g2d = qrCodeImage.createGraphics();
+                icon.paintIcon(null, g2d, 0, 0);
+                g2d.dispose();
+                
+                ImageIO.write(qrCodeImage, "png", fileToSave);
+                JOptionPane.showMessageDialog(null, "QR code salvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao salvar QR code: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                log.escreverLogErroOperacaoException(e, e.getMessage());
+            }
         }
-
-        // Salvar a imagem
-        try {
-            ImageIcon icon = (ImageIcon) jlQrCode.getIcon();
-            BufferedImage qrCodeImage = new BufferedImage(
-                icon.getIconWidth(),
-                icon.getIconHeight(),
-                BufferedImage.TYPE_INT_ARGB
-            );
-            Graphics2D g2d = qrCodeImage.createGraphics();
-            icon.paintIcon(null, g2d, 0, 0);
-            g2d.dispose();
-
-            ImageIO.write(qrCodeImage, "png", fileToSave);
-            JOptionPane.showMessageDialog(null, "QR code salvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar QR code: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-    }
     }//GEN-LAST:event_btDownloadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
