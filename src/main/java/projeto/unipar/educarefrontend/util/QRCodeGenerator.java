@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class QRCodeGenerator {
@@ -18,10 +19,8 @@ public class QRCodeGenerator {
             QRCodeWriter barcodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 200, 200);
             System.out.println(bitMatrix);
-            System.out.println(barcodeWriter);
-            System.out.println(barcodeText);
             return MatrixToImageWriter.toBufferedImage(bitMatrix);
-
+            
         } catch (WriterException e) {
             log.escreverLogErroOperacaoException(e, e.getMessage());
         }

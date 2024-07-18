@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import projeto.unipar.educarefrontend.dto.CepResponse;
+import projeto.unipar.educarefrontend.model.Pai;
 import projeto.unipar.educarefrontend.service.CepService;
 import projeto.unipar.educarefrontend.util.CepFormatter;
 
@@ -54,7 +55,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jcbPaiMae = new javax.swing.JCheckBox();
         jbLupa = new javax.swing.JButton();
         jtfMaeSelecionada = new javax.swing.JTextField();
-        jtfTelefonePai = new TelefoneFormatter(log).createFormatterTelefone();
+        jtfTelefoneReserva = new TelefoneFormatter(log).createFormatterTelefone();
         jLabel4 = new javax.swing.JLabel();
         jcbWhastapp = new javax.swing.JCheckBox();
         jtfNomeContatoReserva = new javax.swing.JTextField();
@@ -63,23 +64,23 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jcbPodeBuscar = new javax.swing.JCheckBox();
         jcbWhastappReserva = new javax.swing.JCheckBox();
-        jTextField1 = new NumeroFormatter(log).createFormatterNumero();
-        jTextField2 = new javax.swing.JTextField();
-        jbBuscarCep = new javax.swing.JButton();
+        jtfNumero = new NumeroFormatter(log).createFormatterNumero();
+        jtfBairro = new javax.swing.JTextField();
+        jbCadastrarPai = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jtfLogradouro = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jtfComplemento = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jtfCidade = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         btDownload = new javax.swing.JButton();
         btGerarQrCode = new javax.swing.JButton();
         jlQrCode = new javax.swing.JLabel();
         jbBuscarCep1 = new javax.swing.JButton();
-        jFTFCep = new CepFormatter(log).createFormatterCep();
+        jftfCep = new CepFormatter(log).createFormatterCep();
         jbLimparQrCode = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -134,9 +135,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jtfMaeSelecionada);
         jtfMaeSelecionada.setBounds(690, 150, 270, 40);
 
-        jtfTelefonePai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jtfTelefonePai);
-        jtfTelefonePai.setBounds(200, 300, 411, 40);
+        jtfTelefoneReserva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfTelefoneReserva);
+        jtfTelefoneReserva.setBounds(200, 300, 411, 40);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -194,20 +195,25 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jcbWhastappReserva);
         jcbWhastappReserva.setBounds(620, 300, 98, 30);
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(1080, 200, 260, 40);
+        jtfNumero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfNumero);
+        jtfNumero.setBounds(1080, 200, 260, 40);
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(1080, 250, 260, 40);
+        jtfBairro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfBairro);
+        jtfBairro.setBounds(1080, 250, 260, 40);
 
-        jbBuscarCep.setBackground(new java.awt.Color(51, 153, 0));
-        jbBuscarCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jbBuscarCep.setForeground(new java.awt.Color(255, 255, 255));
-        jbBuscarCep.setText("Salvar Cadastro");
-        jPanel1.add(jbBuscarCep);
-        jbBuscarCep.setBounds(60, 700, 140, 40);
+        jbCadastrarPai.setBackground(new java.awt.Color(51, 153, 0));
+        jbCadastrarPai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbCadastrarPai.setForeground(new java.awt.Color(255, 255, 255));
+        jbCadastrarPai.setText("Salvar Cadastro");
+        jbCadastrarPai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastrarPaiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbCadastrarPai);
+        jbCadastrarPai.setBounds(60, 700, 140, 40);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -227,9 +233,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jLabel10);
         jLabel10.setBounds(980, 250, 100, 20);
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(1080, 150, 260, 40);
+        jtfLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfLogradouro);
+        jtfLogradouro.setBounds(1080, 150, 260, 40);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
@@ -237,9 +243,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jLabel11);
         jLabel11.setBounds(980, 150, 100, 20);
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(1080, 300, 260, 40);
+        jtfComplemento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfComplemento);
+        jtfComplemento.setBounds(1080, 300, 260, 40);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
@@ -247,9 +253,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jLabel12);
         jLabel12.setBounds(980, 300, 100, 20);
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(1080, 350, 260, 40);
+        jtfCidade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfCidade);
+        jtfCidade.setBounds(1080, 350, 260, 40);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
@@ -295,9 +301,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jbBuscarCep1);
         jbBuscarCep1.setBounds(1240, 100, 100, 40);
 
-        jFTFCep.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jFTFCep);
-        jFTFCep.setBounds(1080, 100, 150, 40);
+        jftfCep.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jftfCep);
+        jftfCep.setBounds(1080, 100, 150, 40);
 
         jbLimparQrCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/iconVassoura.png"))); // NOI18N
         jbLimparQrCode.addActionListener(new java.awt.event.ActionListener() {
@@ -344,17 +350,17 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
     private void jbBuscarCep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarCep1ActionPerformed
         // TODO add your handling code here:
-        String cepComMascara = jFTFCep.getText();
+        String cepComMascara = jftfCep.getText();
         String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
         CepService cepService = new CepService();
         CepResponse cepResponse = cepService.buscarCep(cepSemMascara);
         
         if (cepResponse != null) {
-            jTextField3.setText(cepResponse.getBairro());
-            jTextField4.setText(cepResponse.getLogradouro());
-            jTextField5.setText(cepResponse.getComplemento());
-            jTextField1.setText(cepResponse.getNumero());
-            jTextField2.setText(cepResponse.getCidade());
+            jtfLogradouro.setText(cepResponse.getBairro());
+            jtfComplemento.setText(cepResponse.getLogradouro());
+            jtfCidade.setText(cepResponse.getComplemento());
+            jtfNumero.setText(cepResponse.getNumero());
+            jtfBairro.setText(cepResponse.getCidade());
         } else {
             JOptionPane.showMessageDialog(null, "CEP não encontrado.");
         }
@@ -435,6 +441,14 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbLimparQrCodeActionPerformed
 
+    private void jbCadastrarPaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarPaiActionPerformed
+        // TODO add your handling code here:
+        Pai pai = new Pai();
+        pai.set
+        
+        
+    }//GEN-LAST:event_jbCadastrarPaiActionPerformed
+
     private void validaCamposMostrarMae() {
         boolean selected = jcbPaiMae.isSelected();
         //jlSelecioneAMae.setEnabled(selected);
@@ -448,7 +462,6 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDownload;
     private javax.swing.JButton btGerarQrCode;
-    private javax.swing.JFormattedTextField jFTFCep;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -462,26 +475,27 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JButton jbBuscarCep;
     private javax.swing.JButton jbBuscarCep1;
+    private javax.swing.JButton jbCadastrarPai;
     private javax.swing.JButton jbLimparQrCode;
     private javax.swing.JButton jbLupa;
     private javax.swing.JCheckBox jcbPaiMae;
     private javax.swing.JCheckBox jcbPodeBuscar;
     private javax.swing.JCheckBox jcbWhastapp;
     private javax.swing.JCheckBox jcbWhastappReserva;
+    private javax.swing.JFormattedTextField jftfCep;
     private javax.swing.JLabel jlQrCode;
+    private javax.swing.JTextField jtfBairro;
+    private javax.swing.JTextField jtfCidade;
+    private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfCpfPai;
+    private javax.swing.JTextField jtfLogradouro;
     private javax.swing.JTextField jtfMaeSelecionada;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNomeContatoReserva;
+    private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfTelefoneContatoReserva;
-    private javax.swing.JTextField jtfTelefonePai;
+    private javax.swing.JTextField jtfTelefoneReserva;
     // End of variables declaration//GEN-END:variables
 
     
