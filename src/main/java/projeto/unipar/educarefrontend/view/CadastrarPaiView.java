@@ -63,6 +63,10 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        btDownload = new javax.swing.JButton();
+        btGerarQrCode = new javax.swing.JButton();
+        jlQrCode = new javax.swing.JLabel();
+        jbBuscarCep1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,7 +89,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("N°");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(1120, 350, 15, 20);
+        jLabel3.setBounds(1230, 350, 15, 20);
 
         jtfNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfNome.setBorder(new RoundedBorder(15));
@@ -95,7 +99,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jtfCpfPai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfCpfPai.setBorder(new RoundedBorder(15));
         jPanel1.add(jtfCpfPai);
-        jtfCpfPai.setBounds(540, 100, 304, 60);
+        jtfCpfPai.setBounds(560, 100, 304, 60);
 
         jcbPaiMae.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jcbPaiMae.setText("Pai e Mãe moram no mesmo endereço?");
@@ -105,21 +109,21 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jcbPaiMae);
-        jcbPaiMae.setBounds(880, 110, 340, 31);
+        jcbPaiMae.setBounds(990, 110, 340, 31);
 
         jbLupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIcon.png"))); // NOI18N
         jPanel1.add(jbLupa);
-        jbLupa.setBounds(880, 170, 60, 60);
+        jbLupa.setBounds(990, 170, 60, 60);
 
         jlSelecioneAMae.setText("Selecione a Mãe");
         jPanel1.add(jlSelecioneAMae);
-        jlSelecioneAMae.setBounds(880, 150, 351, 16);
+        jlSelecioneAMae.setBounds(990, 150, 351, 16);
 
         jtfMaeSelecionada.setEditable(false);
         jtfMaeSelecionada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfMaeSelecionada.setBorder(new RoundedBorder(15));
         jPanel1.add(jtfMaeSelecionada);
-        jtfMaeSelecionada.setBounds(950, 170, 270, 60);
+        jtfMaeSelecionada.setBounds(1060, 170, 270, 60);
 
         jtfTelefonePai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfTelefonePai.setBorder(new RoundedBorder(15));
@@ -132,7 +136,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(60, 170, 51, 20);
 
-        jcbWhastapp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcbWhastapp.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jcbWhastapp.setText("WhatsApp");
         jcbWhastapp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +144,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jcbWhastapp);
-        jcbWhastapp.setBounds(490, 200, 145, 40);
+        jcbWhastapp.setBounds(490, 200, 160, 40);
 
         jtfNomeContatoReserva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfNomeContatoReserva.setBorder(new RoundedBorder(15));
@@ -164,7 +168,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jLabel6);
         jLabel6.setBounds(60, 350, 102, 20);
 
-        jcbPodeBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcbPodeBuscar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jcbPodeBuscar.setText("Pode buscar");
         jcbPodeBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,9 +176,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jcbPodeBuscar);
-        jcbPodeBuscar.setBounds(490, 290, 145, 40);
+        jcbPodeBuscar.setBounds(490, 290, 160, 40);
 
-        jcbWhastappReserva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcbWhastappReserva.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jcbWhastappReserva.setText("Pode buscar");
         jcbWhastappReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,75 +186,106 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jcbWhastappReserva);
-        jcbWhastappReserva.setBounds(490, 380, 145, 40);
+        jcbWhastappReserva.setBounds(490, 380, 153, 40);
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(1120, 370, 100, 60);
+        jTextField1.setBounds(1230, 370, 100, 60);
         jPanel1.add(jTextField2);
-        jTextField2.setBounds(880, 460, 340, 60);
+        jTextField2.setBounds(990, 460, 340, 60);
         jPanel1.add(jtfCep);
-        jtfCep.setBounds(880, 280, 220, 60);
+        jtfCep.setBounds(990, 280, 220, 60);
 
-        jbBuscarCep.setText("Buscar Cep");
+        jbBuscarCep.setBackground(new java.awt.Color(51, 153, 0));
+        jbBuscarCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbBuscarCep.setForeground(new java.awt.Color(255, 255, 255));
+        jbBuscarCep.setText("Salvar Cadastro");
         jPanel1.add(jbBuscarCep);
-        jbBuscarCep.setBounds(1120, 280, 100, 40);
+        jbBuscarCep.setBounds(60, 700, 140, 60);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Endereço");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(1020, 240, 62, 20);
+        jLabel7.setBounds(1130, 240, 62, 20);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Cpf");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(540, 80, 21, 20);
+        jLabel8.setBounds(560, 80, 21, 20);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Cep");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(880, 260, 24, 20);
+        jLabel9.setBounds(990, 260, 24, 20);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Bairro");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(880, 440, 36, 20);
+        jLabel10.setBounds(990, 440, 36, 20);
         jPanel1.add(jTextField3);
-        jTextField3.setBounds(880, 370, 220, 60);
+        jTextField3.setBounds(990, 370, 220, 60);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Logradouro");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(880, 350, 72, 20);
+        jLabel11.setBounds(990, 350, 72, 20);
         jPanel1.add(jTextField4);
-        jTextField4.setBounds(880, 540, 340, 60);
+        jTextField4.setBounds(990, 540, 340, 60);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Logradouro");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(880, 520, 72, 20);
+        jLabel12.setBounds(990, 520, 72, 20);
         jPanel1.add(jTextField5);
-        jTextField5.setBounds(880, 630, 340, 60);
+        jTextField5.setBounds(990, 630, 340, 60);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Cidade");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(880, 610, 42, 20);
+        jLabel13.setBounds(990, 610, 42, 20);
+
+        btDownload.setBackground(new java.awt.Color(85, 6, 124));
+        btDownload.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btDownload.setForeground(new java.awt.Color(255, 255, 255));
+        btDownload.setText("Download");
+        jPanel1.add(btDownload);
+        btDownload.setBounds(60, 560, 140, 60);
+
+        btGerarQrCode.setBackground(new java.awt.Color(85, 6, 124));
+        btGerarQrCode.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btGerarQrCode.setForeground(new java.awt.Color(255, 255, 255));
+        btGerarQrCode.setText("Gerar Qrcode");
+        jPanel1.add(btGerarQrCode);
+        btGerarQrCode.setBounds(60, 480, 140, 60);
+        jPanel1.add(jlQrCode);
+        jlQrCode.setBounds(240, 480, 230, 200);
+
+        jbBuscarCep1.setBackground(new java.awt.Color(85, 6, 124));
+        jbBuscarCep1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbBuscarCep1.setForeground(new java.awt.Color(255, 255, 255));
+        jbBuscarCep1.setText("Buscar Cep");
+        jbBuscarCep1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarCep1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbBuscarCep1);
+        jbBuscarCep1.setBounds(1230, 280, 100, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
         );
 
         pack();
@@ -273,7 +308,14 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbWhastappReservaActionPerformed
 
+    private void jbBuscarCep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarCep1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jbBuscarCep1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btDownload;
+    private javax.swing.JButton btGerarQrCode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -294,11 +336,13 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JButton jbBuscarCep;
+    private javax.swing.JButton jbBuscarCep1;
     private javax.swing.JButton jbLupa;
     private javax.swing.JCheckBox jcbPaiMae;
     private javax.swing.JCheckBox jcbPodeBuscar;
     private javax.swing.JCheckBox jcbWhastapp;
     private javax.swing.JCheckBox jcbWhastappReserva;
+    private javax.swing.JLabel jlQrCode;
     private javax.swing.JLabel jlSelecioneAMae;
     private javax.swing.JTextField jtfCep;
     private javax.swing.JTextField jtfCpfPai;
