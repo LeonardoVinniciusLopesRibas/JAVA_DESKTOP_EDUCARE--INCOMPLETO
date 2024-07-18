@@ -2,12 +2,15 @@ C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndD
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\model\Usuario.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\CadastrarPaiView.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\UsuarioRequestCadastro.java
+C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\CepFormatter.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\LoginView.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\CpfFormatter.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\Log.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\Splash.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\RetaguardaView.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\TrocarUsuarioView.java
+C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\NumeroFormatter.java
+C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\CepService.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\TelefoneFormatter.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\WindowsCloseHandler.java
 C:\Users\Suporte GermanTech\IdeaProjects\EduCareFrontEndDesktop\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\UsuarioRequest.java
