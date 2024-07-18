@@ -13,9 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import projeto.unipar.educarefrontend.dto.CepResponse;
 import projeto.unipar.educarefrontend.service.CepService;
-import projeto.unipar.educarefrontend.util.BorderBlack;
 import projeto.unipar.educarefrontend.util.CepFormatter;
-import projeto.unipar.educarefrontend.util.RoundedBorder;
 
 import projeto.unipar.educarefrontend.util.CpfFormatter;
 import projeto.unipar.educarefrontend.util.Log;
@@ -40,6 +38,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         setIcon.setIconJFrame(this);
         log.escreverLogInfoAvulso("INFO", "Tela de Cadastro de Pai Aberta");
         validaCamposMostrarMae();
+        validaQrCodeTrue();
     }
     
     @SuppressWarnings("unchecked")
@@ -81,6 +80,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jlQrCode = new javax.swing.JLabel();
         jbBuscarCep1 = new javax.swing.JButton();
         jFTFCep = new CepFormatter(log).createFormatterCep();
+        jbLimparQrCode = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -299,6 +299,15 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jFTFCep);
         jFTFCep.setBounds(1080, 100, 150, 40);
 
+        jbLimparQrCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/iconVassoura.png"))); // NOI18N
+        jbLimparQrCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimparQrCodeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbLimparQrCode);
+        jbLimparQrCode.setBounds(480, 540, 40, 40);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -370,12 +379,15 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         }
         
         BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
-        
         ImageIcon icon = new ImageIcon(qrCodeImage);
         jlQrCode.setIcon(icon);
-
+        validaQrCodeTrue();
     }//GEN-LAST:event_btGerarQrCodeActionPerformed
 
+    public void validaQrCodeTrue(){
+        jbLimparQrCode.setVisible(jlQrCode.getIcon() != null);
+    }
+    
     private void btDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDownloadActionPerformed
         // TODO add your handling code here:
         if (jlQrCode.getIcon() == null) {
@@ -416,6 +428,23 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btDownloadActionPerformed
 
+    private void jbLimparQrCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparQrCodeActionPerformed
+        // TODO add your handling code here:
+        jlQrCode.setIcon(null);
+        validaQrCodeTrue();
+
+    }//GEN-LAST:event_jbLimparQrCodeActionPerformed
+
+    private void validaCamposMostrarMae() {
+        boolean selected = jcbPaiMae.isSelected();
+        //jlSelecioneAMae.setEnabled(selected);
+        jbLupa.setEnabled(selected);
+        jtfMaeSelecionada.setEnabled(selected);
+        //jlSelecioneAMae.setVisible(selected);
+        jbLupa.setVisible(selected);
+        jtfMaeSelecionada.setVisible(selected);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDownload;
     private javax.swing.JButton btGerarQrCode;
@@ -440,6 +469,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JButton jbBuscarCep;
     private javax.swing.JButton jbBuscarCep1;
+    private javax.swing.JButton jbLimparQrCode;
     private javax.swing.JButton jbLupa;
     private javax.swing.JCheckBox jcbPaiMae;
     private javax.swing.JCheckBox jcbPodeBuscar;
@@ -454,13 +484,5 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JTextField jtfTelefonePai;
     // End of variables declaration//GEN-END:variables
 
-    private void validaCamposMostrarMae() {
-        boolean selected = jcbPaiMae.isSelected();
-        //jlSelecioneAMae.setEnabled(selected);
-        jbLupa.setEnabled(selected);
-        jtfMaeSelecionada.setEnabled(selected);
-        //jlSelecioneAMae.setVisible(selected);
-        jbLupa.setVisible(selected);
-        jtfMaeSelecionada.setVisible(selected);
-    }
+    
 }
