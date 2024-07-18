@@ -29,6 +29,7 @@ public class Pai {
     private String complemento;
     private String unidade;
     private String bairro;
+    private String localidade;
     private String uf;
     private String ibge;
     private String gia;
@@ -36,7 +37,8 @@ public class Pai {
     private String numero;
     private String siafi;
     
-    private String qrCode;
+    //private Mae mae
+
     
     public static String objectToJson(Pai pai){
         Log log = new Log();

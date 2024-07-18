@@ -74,7 +74,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jtfComplemento = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jtfCidade = new javax.swing.JTextField();
+        jtfUf = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         btDownload = new javax.swing.JButton();
         btGerarQrCode = new javax.swing.JButton();
@@ -82,6 +82,8 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jbBuscarCep1 = new javax.swing.JButton();
         jftfCep = new CepFormatter(log).createFormatterCep();
         jbLimparQrCode = new javax.swing.JButton();
+        jtfCidade1 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -253,15 +255,15 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jLabel12);
         jLabel12.setBounds(980, 300, 100, 20);
 
-        jtfCidade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jtfCidade);
-        jtfCidade.setBounds(1080, 350, 260, 40);
+        jtfUf.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfUf);
+        jtfUf.setBounds(1080, 400, 260, 40);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("Cidade");
+        jLabel13.setText("UF - Estado");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(980, 350, 100, 20);
+        jLabel13.setBounds(980, 400, 100, 20);
 
         btDownload.setBackground(new java.awt.Color(85, 6, 124));
         btDownload.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -314,6 +316,16 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jbLimparQrCode);
         jbLimparQrCode.setBounds(480, 540, 40, 40);
 
+        jtfCidade1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfCidade1);
+        jtfCidade1.setBounds(1080, 350, 260, 40);
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("Cidade");
+        jPanel1.add(jLabel14);
+        jLabel14.setBounds(980, 350, 100, 20);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -358,7 +370,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         if (cepResponse != null) {
             jtfLogradouro.setText(cepResponse.getBairro());
             jtfComplemento.setText(cepResponse.getLogradouro());
-            jtfCidade.setText(cepResponse.getComplemento());
+            jtfUf.setText(cepResponse.getComplemento());
             jtfNumero.setText(cepResponse.getNumero());
             jtfBairro.setText(cepResponse.getCidade());
         } else {
@@ -443,8 +455,6 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
     private void jbCadastrarPaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarPaiActionPerformed
         // TODO add your handling code here:
-        Pai pai = new Pai();
-        pai.set
         
         
     }//GEN-LAST:event_jbCadastrarPaiActionPerformed
@@ -467,6 +477,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -486,7 +497,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jftfCep;
     private javax.swing.JLabel jlQrCode;
     private javax.swing.JTextField jtfBairro;
-    private javax.swing.JTextField jtfCidade;
+    private javax.swing.JTextField jtfCidade1;
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfCpfPai;
     private javax.swing.JTextField jtfLogradouro;
@@ -496,6 +507,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfTelefoneContatoReserva;
     private javax.swing.JTextField jtfTelefoneReserva;
+    private javax.swing.JTextField jtfUf;
     // End of variables declaration//GEN-END:variables
 
     

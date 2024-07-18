@@ -4,10 +4,53 @@
  */
 package projeto.unipar.educarefrontend.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import projeto.unipar.educarefrontend.util.Log;
+
 /**
  *
  * @author leonardo
  */
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PaiDtoRequest {
     
+    private String nomeCompletoPai;
+    private String cpfPai;
+    private String telefonePai;
+    private boolean telefonePaiWhatsapp;
+    private String contatoReserva;
+    private boolean podeBuscar;
+    private String telefoneReserva;
+    private boolean telefoneReservaWhatsapp;
+    
+    private String cep;
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
+    private String ibge;
+    private String numero;
+    
+    //private Mae mae
+    
+    
+    public static String objectToJson(PaiDtoRequest paiDto){
+        Log log = new Log();
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(paiDto);
+        }catch(JsonProcessingException e){
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+        return null;
+    }
 }
