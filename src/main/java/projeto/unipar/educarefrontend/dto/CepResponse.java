@@ -1,5 +1,6 @@
 package projeto.unipar.educarefrontend.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -12,14 +13,15 @@ import projeto.unipar.educarefrontend.util.Log;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CepResponse {
     
     private String cep;
     private String logradouro;
-    private String numero;
     private String bairro;
     private String complemento;
-    private String cidade;
+    private String localidade;
+    private String uf;
     
     
     public static CepResponse jsonToObjeto(String json){

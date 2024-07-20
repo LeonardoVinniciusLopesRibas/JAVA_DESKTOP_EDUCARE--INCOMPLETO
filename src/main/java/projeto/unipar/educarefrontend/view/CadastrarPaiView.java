@@ -25,12 +25,12 @@ import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.util.ValidaCpf;
 
 public class CadastrarPaiView extends javax.swing.JFrame {
-    
+
     private final SetIcon setIcon = new SetIcon();
     private final Log log = new Log();
     private final JFrame pai;
     private ValidaCpf validaCpf = new ValidaCpf();
-    
+
     public CadastrarPaiView(JFrame pai) {
         initComponents();
         this.pai = pai;
@@ -41,7 +41,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         validaCamposMostrarMae();
         validaQrCodeTrue();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -82,7 +82,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jbBuscarCep1 = new javax.swing.JButton();
         jftfCep = new CepFormatter(log).createFormatterCep();
         jbLimparQrCode = new javax.swing.JButton();
-        jtfCidade1 = new javax.swing.JTextField();
+        jtfCidade = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -304,6 +304,11 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jbBuscarCep1.setBounds(1240, 100, 100, 40);
 
         jftfCep.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jftfCep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jftfCepKeyPressed(evt);
+            }
+        });
         jPanel1.add(jftfCep);
         jftfCep.setBounds(1080, 100, 150, 40);
 
@@ -316,9 +321,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jbLimparQrCode);
         jbLimparQrCode.setBounds(480, 540, 40, 40);
 
-        jtfCidade1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jtfCidade1);
-        jtfCidade1.setBounds(1080, 350, 260, 40);
+        jtfCidade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfCidade);
+        jtfCidade.setBounds(1080, 350, 260, 40);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
@@ -365,14 +370,15 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         String cepComMascara = jftfCep.getText();
         String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
         CepService cepService = new CepService();
+        limparCamposEnderecoAoBuscar();
         CepResponse cepResponse = cepService.buscarCep(cepSemMascara);
-        
+
         if (cepResponse != null) {
-            jtfLogradouro.setText(cepResponse.getBairro());
-            jtfComplemento.setText(cepResponse.getLogradouro());
-            jtfUf.setText(cepResponse.getComplemento());
-            jtfNumero.setText(cepResponse.getNumero());
-            jtfBairro.setText(cepResponse.getCidade());
+            jtfLogradouro.setText(cepResponse.getLogradouro());
+            jtfBairro.setText(cepResponse.getBairro());
+            jtfComplemento.setText(cepResponse.getComplemento());
+            jtfCidade.setText(cepResponse.getLocalidade());
+            jtfUf.setText(cepResponse.getUf());
         } else {
             JOptionPane.showMessageDialog(null, "CEP não encontrado.");
         }
@@ -385,47 +391,47 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             return;
         }
         String cpfPai = jtfCpfPai.getText().replaceAll("[^\\d]", "");
-        
+
         if (cpfPai.length() != 11) {
             JOptionPane.showMessageDialog(null, "CPF deve conter 11 dígitos", "Cpf Inválido", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         if (!validaCpf.isValidCPF(cpfPai)) {
             JOptionPane.showMessageDialog(null, "CPF inválido", "Cpf Inválido", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
         ImageIcon icon = new ImageIcon(qrCodeImage);
         jlQrCode.setIcon(icon);
         validaQrCodeTrue();
     }//GEN-LAST:event_btGerarQrCodeActionPerformed
 
-    public void validaQrCodeTrue(){
+    public void validaQrCodeTrue() {
         jbLimparQrCode.setVisible(jlQrCode.getIcon() != null);
     }
-    
+
     private void btDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDownloadActionPerformed
         // TODO add your handling code here:
         if (jlQrCode.getIcon() == null) {
             JOptionPane.showMessageDialog(null, "Nenhum QR code para salvar", "Erro", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Salvar QR code");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Imagem PNG", "png"));
-        
+
         fileChooser.setSelectedFile(new File("qrCode-EduCare-" + jtfCpfPai.getText() + ".png"));
         int userSelection = fileChooser.showSaveDialog(null);
-        
+
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             if (!fileToSave.getAbsolutePath().endsWith(".png")) {
                 fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
             }
-            
+
             try {
                 ImageIcon icon = (ImageIcon) jlQrCode.getIcon();
                 BufferedImage qrCodeImage = new BufferedImage(
@@ -436,7 +442,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
                 Graphics2D g2d = qrCodeImage.createGraphics();
                 icon.paintIcon(null, g2d, 0, 0);
                 g2d.dispose();
-                
+
                 ImageIO.write(qrCodeImage, "png", fileToSave);
                 JOptionPane.showMessageDialog(null, "QR code salvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
@@ -455,9 +461,30 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
     private void jbCadastrarPaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarPaiActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jbCadastrarPaiActionPerformed
+
+    private void jftfCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jftfCepKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            String cepComMascara = jftfCep.getText();
+            String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
+            CepService cepService = new CepService();
+            limparCamposEnderecoAoBuscar();
+            CepResponse cepResponse = cepService.buscarCep(cepSemMascara);
+
+            if (cepResponse != null) {
+                jtfLogradouro.setText(cepResponse.getLogradouro());
+                jtfBairro.setText(cepResponse.getBairro());
+                jtfComplemento.setText(cepResponse.getComplemento());
+                jtfCidade.setText(cepResponse.getLocalidade());
+                jtfUf.setText(cepResponse.getUf());
+            } else {
+                JOptionPane.showMessageDialog(null, "CEP não encontrado.");
+            }
+        }
+    }//GEN-LAST:event_jftfCepKeyPressed
 
     private void validaCamposMostrarMae() {
         boolean selected = jcbPaiMae.isSelected();
@@ -468,7 +495,16 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jbLupa.setVisible(selected);
         jtfMaeSelecionada.setVisible(selected);
     }
-    
+
+    public void limparCamposEnderecoAoBuscar() {
+        jtfLogradouro.setText("");
+        jtfNumero.setText("");
+        jtfBairro.setText("");
+        jtfComplemento.setText("");
+        jtfCidade.setText("");
+        jtfUf.setText("");
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDownload;
     private javax.swing.JButton btGerarQrCode;
@@ -497,7 +533,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jftfCep;
     private javax.swing.JLabel jlQrCode;
     private javax.swing.JTextField jtfBairro;
-    private javax.swing.JTextField jtfCidade1;
+    private javax.swing.JTextField jtfCidade;
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfCpfPai;
     private javax.swing.JTextField jtfLogradouro;
@@ -510,5 +546,4 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JTextField jtfUf;
     // End of variables declaration//GEN-END:variables
 
-    
 }
