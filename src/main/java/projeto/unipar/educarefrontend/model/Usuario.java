@@ -17,7 +17,7 @@ public class Usuario {
     
     private Long id;
     private String nome;
-    private String email;
+    private String usuario;
     private String senha;
     
     public static Usuario jsonToObjeto(String json){

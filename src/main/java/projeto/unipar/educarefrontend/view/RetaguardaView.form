@@ -26,7 +26,6 @@
           <Color blue="7c" green="6" red="55" type="rgb"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jmArquivo">
@@ -44,7 +43,6 @@
               <Image iconType="3" name="/META-INF/jmArquivo32px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Arquivo"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmiTrocarUsuario">
@@ -62,7 +60,6 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new RoundedBorder(15)" type="code"/>
                 </Property>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiTrocarUsuarioActionPerformed"/>
@@ -83,7 +80,6 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new RoundedBorder(15)" type="code"/>
                 </Property>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiReiniciarActionPerformed"/>
@@ -104,7 +100,6 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new RoundedBorder(15)" type="code"/>
                 </Property>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiSairActionPerformed"/>
@@ -127,7 +122,6 @@
               <Image iconType="3" name="/META-INF/jmFerramenta32px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ferramentas"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -145,7 +139,6 @@
                   <Image iconType="3" name="/META-INF/jmCrianca.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Crian&#xe7;a"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
@@ -163,7 +156,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
@@ -181,7 +173,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
@@ -199,7 +190,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
@@ -219,7 +209,6 @@
                   <Image iconType="3" name="/META-INF/jmMae.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe3;e"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
@@ -237,7 +226,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
@@ -255,7 +243,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
@@ -273,7 +260,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
@@ -293,7 +279,6 @@
                   <Image iconType="3" name="/META-INF/jmPai.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pai"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jmiCadastrarPai">
@@ -311,7 +296,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCadastrarPaiActionPerformed"/>
@@ -332,7 +316,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jmiReativarPai">
@@ -350,7 +333,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
@@ -370,7 +352,6 @@
                   <Image iconType="3" name="/META-INF/jmResponsavel.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Respons&#xe1;vel"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
@@ -388,7 +369,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
@@ -406,7 +386,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
@@ -424,7 +403,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
@@ -444,7 +422,6 @@
                   <Image iconType="3" name="/META-INF/jmProduto.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Produto"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
@@ -462,7 +439,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
@@ -480,7 +456,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15">
@@ -498,7 +473,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
@@ -518,7 +492,6 @@
                   <Image iconType="3" name="/META-INF/jmUsuario.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jmiCadastrarUsuario">
@@ -536,7 +509,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCadastrarUsuarioActionPerformed"/>
@@ -557,7 +529,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jmiReativarUsuario">
@@ -575,7 +546,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RoundedBorder(15)" type="code"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
@@ -597,7 +567,6 @@
               <Image iconType="3" name="/META-INF/jmEstoque.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Estoque"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Menu>
       </SubComponents>

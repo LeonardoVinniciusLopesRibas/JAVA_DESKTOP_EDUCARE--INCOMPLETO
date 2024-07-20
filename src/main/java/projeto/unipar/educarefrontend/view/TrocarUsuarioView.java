@@ -65,7 +65,7 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Email");
+        jLabel2.setText("Usuario");
 
         jpfSenha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jpfSenha.setBorder(new RoundedBorder(15));
@@ -175,7 +175,7 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
 
     private void trocarUsuario() {
         UsuarioRequest usuarioRequest = new UsuarioRequest();
-        usuarioRequest.setEmail(jtfEmail.getText());
+        usuarioRequest.setUsuario(jtfEmail.getText());
         usuarioRequest.setSenha(new String(jpfSenha.getPassword()));
 
         Object[] options = {"Sim", "Não"};

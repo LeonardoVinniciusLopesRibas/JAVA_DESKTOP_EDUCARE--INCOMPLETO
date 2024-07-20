@@ -63,7 +63,7 @@ public class LoginView extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("E-MAIL");
+        jLabel3.setText("USUÁRIO");
         jLabel3.setToolTipText("");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -223,7 +223,7 @@ public class LoginView extends javax.swing.JFrame {
 
     public void logar() {
         UsuarioRequest usuarioRequest = new UsuarioRequest();
-        usuarioRequest.setEmail(jtfEmail.getText());
+        usuarioRequest.setUsuario(jtfEmail.getText());
         usuarioRequest.setSenha(new String(jpfSenha.getPassword()));
 
         usuario = usuarioService.logar(usuarioRequest);

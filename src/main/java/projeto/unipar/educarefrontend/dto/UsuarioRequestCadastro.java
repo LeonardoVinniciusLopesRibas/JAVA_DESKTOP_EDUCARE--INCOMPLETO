@@ -15,7 +15,7 @@ import projeto.unipar.educarefrontend.util.Log;
 public class UsuarioRequestCadastro {
     
     private String nome;
-    private String email;
+    private String usuario;
     private String senha;
     
     public static UsuarioRequestCadastro jsonToObjeto(String json){

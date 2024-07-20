@@ -30,45 +30,30 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jtfNome = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jtfEmail = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         btVisualizarSenha = new javax.swing.JButton();
         jpfSenha = new javax.swing.JPasswordField();
         jbCadastrarUsuario = new javax.swing.JButton();
-        jbFecharRetornar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRAR USUÁRIO");
 
         jPanel1.setBackground(new java.awt.Color(204, 160, 238));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 100));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastrar Usuário");
+        jPanel1.setLayout(null);
 
         jtfNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jtfNome.setBorder(new RoundedBorder(15));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Nome");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Email");
+        jPanel1.add(jtfNome);
+        jtfNome.setBounds(130, 100, 539, 40);
 
         jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jtfEmail.setBorder(new RoundedBorder(15));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Senha");
+        jPanel1.add(jtfEmail);
+        jtfEmail.setBounds(130, 150, 539, 40);
 
         btVisualizarSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/olhoNaoVer.png"))); // NOI18N
         btVisualizarSenha.setBorder(new RoundedBorder(15));
@@ -77,12 +62,15 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
                 btVisualizarSenhaMousePressed(evt);
             }
         });
+        jPanel1.add(btVisualizarSenha);
+        btVisualizarSenha.setBounds(640, 200, 33, 40);
 
         jpfSenha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpfSenha.setBorder(new RoundedBorder(15));
+        jPanel1.add(jpfSenha);
+        jpfSenha.setBounds(130, 200, 500, 40);
 
-        jbCadastrarUsuario.setBackground(new java.awt.Color(85, 6, 124));
-        jbCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbCadastrarUsuario.setBackground(new java.awt.Color(51, 153, 0));
+        jbCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jbCadastrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         jbCadastrarUsuario.setText("Cadastrar");
         jbCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -90,66 +78,32 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
                 jbCadastrarUsuarioActionPerformed(evt);
             }
         });
+        jPanel1.add(jbCadastrarUsuario);
+        jbCadastrarUsuario.setBounds(20, 630, 140, 45);
 
-        jbFecharRetornar.setBackground(new java.awt.Color(255, 0, 0));
-        jbFecharRetornar.setText("Fechar e Retornar");
-        jbFecharRetornar.setBorder(new RoundedBorder(15));
-        jbFecharRetornar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbFecharRetornarActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Cadastrar Usuário");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(640, 30, 160, 25);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jbFecharRetornar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(457, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jbCadastrarUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jpfSenha)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btVisualizarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jtfNome)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jtfEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(439, 439, 439))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jbFecharRetornar)
-                .addGap(48, 48, 48)
-                .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btVisualizarSenha)
-                    .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addComponent(jbCadastrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(617, Short.MAX_VALUE))
-        );
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Senha");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(20, 200, 110, 20);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Nome");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(20, 100, 110, 20);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Usuário");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(20, 150, 110, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,7 +115,7 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
         );
 
         pack();
@@ -187,21 +141,11 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
         
         UsuarioRequestCadastro urc = new UsuarioRequestCadastro();
         urc.setNome(nome);
-        urc.setEmail(email);
+        urc.setUsuario(email);
         urc.setSenha(senha);
         
         usuarioService.save(urc, this);
     }//GEN-LAST:event_jbCadastrarUsuarioActionPerformed
-
-    private void jbFecharRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharRetornarActionPerformed
-        // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja fechar?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        if (option == JOptionPane.YES_OPTION) {
-            this.dispose();
-            pai.toFront();
-            pai.repaint();
-        }
-    }//GEN-LAST:event_jbFecharRetornarActionPerformed
 
     public void limparCampos(){
         jtfNome.setText("");
@@ -213,12 +157,11 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btVisualizarSenha;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbCadastrarUsuario;
-    private javax.swing.JButton jbFecharRetornar;
     private javax.swing.JPasswordField jpfSenha;
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfNome;

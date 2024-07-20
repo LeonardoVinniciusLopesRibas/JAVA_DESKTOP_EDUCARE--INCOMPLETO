@@ -542,7 +542,7 @@ public class RetaguardaView extends javax.swing.JFrame {
 
         Long id = usuario.getId();
         String nome = usuario.getNome();
-        String email = usuario.getEmail();
+        String email = usuario.getUsuario();
         String senha = usuario.getSenha();
 
         escreverBemVindo(nome);

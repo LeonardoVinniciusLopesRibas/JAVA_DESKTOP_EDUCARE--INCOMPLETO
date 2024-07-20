@@ -69,7 +69,7 @@ public class UsuarioService {
                     Usuario usuario = new Usuario();
                     usuario.setId(jsonResponse.getLong("id"));
                     usuario.setNome(jsonResponse.getString("nome"));
-                    usuario.setEmail(jsonResponse.getString("email"));
+                    usuario.setUsuario(jsonResponse.getString("usuario"));
                     usuario.setSenha(jsonResponse.getString("senha"));
 
                     log.escreverLogHttp(operacao, responseCode);
