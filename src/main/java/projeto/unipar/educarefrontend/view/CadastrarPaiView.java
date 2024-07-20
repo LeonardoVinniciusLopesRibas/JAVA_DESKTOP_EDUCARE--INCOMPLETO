@@ -389,6 +389,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             jtfComplemento.setText(cepResponse.getComplemento());
             jtfCidade.setText(cepResponse.getLocalidade());
             jtfUf.setText(cepResponse.getUf());
+            String ibge = cepResponse.getIbge();
         } else {
             System.out.println("Cep não encontrado");
         }

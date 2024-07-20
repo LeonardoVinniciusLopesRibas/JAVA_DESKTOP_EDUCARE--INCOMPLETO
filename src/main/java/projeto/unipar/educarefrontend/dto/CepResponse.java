@@ -21,6 +21,7 @@ public class CepResponse {
     private String bairro;
     private String complemento;
     private String localidade;
+    private String ibge;
     private String uf;
     private boolean erro;   
     
