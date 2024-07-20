@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
 import projeto.unipar.educarefrontend.model.Pai;
 import projeto.unipar.educarefrontend.service.CepService;
@@ -94,7 +95,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Cadastrar Pai");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(652, 30, 117, 25);
+        jLabel1.setBounds(630, 30, 117, 25);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -335,14 +336,11 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1342, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
         );
 
         pack();
@@ -378,10 +376,13 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "CEP deve conter 8 dígitos", "CEP Inválido", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        CepService cepService = new CepService();
+        CepService cepService = new CepService(log);
         limparCamposEnderecoAoBuscar();
-        CepResponse cepResponse = cepService.buscarCep(cepSemMascara);
+        CepRequest cepRequest = new CepRequest();
+        cepRequest.setCep(cepSemMascara);
+        CepResponse cepResponse = cepService.buscarCep(cepRequest);
 
+        
         if (cepResponse != null) {
             jtfLogradouro.setText(cepResponse.getLogradouro());
             jtfBairro.setText(cepResponse.getBairro());
@@ -389,7 +390,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             jtfCidade.setText(cepResponse.getLocalidade());
             jtfUf.setText(cepResponse.getUf());
         } else {
-            JOptionPane.showMessageDialog(null, "CEP não encontrado.");
+            System.out.println("Cep não encontrado");
         }
     }//GEN-LAST:event_jbBuscarCep1ActionPerformed
 
@@ -479,9 +480,11 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             String cepComMascara = jftfCep.getText();
             String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
-            CepService cepService = new CepService();
+            CepService cepService = new CepService(log);
             limparCamposEnderecoAoBuscar();
-            CepResponse cepResponse = cepService.buscarCep(cepSemMascara);
+            CepRequest cepRequest = new CepRequest();
+            cepRequest.setCep(cepSemMascara);
+            CepResponse cepResponse = cepService.buscarCep(cepRequest);
 
             if (cepResponse != null) {
                 jtfLogradouro.setText(cepResponse.getLogradouro());

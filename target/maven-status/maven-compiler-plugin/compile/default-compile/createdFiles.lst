@@ -2,6 +2,7 @@ projeto\unipar\educarefrontend\view\CadastrarPaiView$6.class
 projeto\unipar\educarefrontend\util\QRCodeGenerator.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$9.class
 projeto\unipar\educarefrontend\util\ValidaCpf.class
+projeto\unipar\educarefrontend\dto\CepRequest.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$8.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$10.class
 projeto\unipar\educarefrontend\dto\PaiDtoRequest.class

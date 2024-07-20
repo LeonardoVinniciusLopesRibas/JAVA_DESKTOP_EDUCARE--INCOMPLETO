@@ -22,7 +22,7 @@ public class CepResponse {
     private String complemento;
     private String localidade;
     private String uf;
-    
+    private boolean erro;   
     
     public static CepResponse jsonToObjeto(String json){
         Log log = new Log();
@@ -34,5 +34,6 @@ public class CepResponse {
         }
         return null;
     }
+    
     
 }
