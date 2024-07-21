@@ -14,7 +14,6 @@ import java.awt.Dimension;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JFrame;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;

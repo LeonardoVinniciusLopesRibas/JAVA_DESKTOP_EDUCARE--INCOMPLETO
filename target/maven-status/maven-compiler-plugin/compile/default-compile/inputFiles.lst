@@ -1,9 +1,11 @@
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\SelecionaMaeNoCadastroDoPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\BorderBlack.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\WindowsCloseHandler.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\LoginView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\ReiniciarSystem.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\RetaguardaView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\ValidaCpf.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\MaeResponse.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\TrocarUsuarioView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\RoundedBorder.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\SetIcon.java
@@ -15,9 +17,11 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\UsuarioService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\PaiService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\NumeroFormatter.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\MaeService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\IsAppRunning.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\CepFormatter.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\Log.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\AjustaTamanhoLinhaTabela.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\UsuarioRequest.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\CepRequest.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\CadastrarPaiView.java

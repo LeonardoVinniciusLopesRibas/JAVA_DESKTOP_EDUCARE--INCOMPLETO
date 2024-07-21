@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
+import projeto.unipar.educarefrontend.dto.MaeResponse;
 import projeto.unipar.educarefrontend.model.Pai;
 import projeto.unipar.educarefrontend.service.CepService;
 import projeto.unipar.educarefrontend.util.CepFormatter;
@@ -31,6 +32,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private final Log log = new Log();
     private final JFrame pai;
     private ValidaCpf validaCpf = new ValidaCpf();
+    private String ibge;
 
     public CadastrarPaiView(JFrame pai) {
         initComponents();
@@ -129,6 +131,11 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
         jbLupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIcon.png"))); // NOI18N
         jbLupa.setToolTipText("Selecione a Mãe");
+        jbLupa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLupaActionPerformed(evt);
+            }
+        });
         jPanel1.add(jbLupa);
         jbLupa.setBounds(540, 150, 60, 40);
 
@@ -367,12 +374,12 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cepComMascara = jftfCep.getText();
         String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
-        if(cepSemMascara == null || cepSemMascara.trim().isBlank() || cepSemMascara.trim().isEmpty()){
+        if (cepSemMascara == null || cepSemMascara.trim().isBlank() || cepSemMascara.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe o CEP", "CEP Inválido", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
-        if(cepSemMascara.length() != 8){
+
+        if (cepSemMascara.length() != 8) {
             JOptionPane.showMessageDialog(null, "CEP deve conter 8 dígitos", "CEP Inválido", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -382,14 +389,13 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         cepRequest.setCep(cepSemMascara);
         CepResponse cepResponse = cepService.buscarCep(cepRequest);
 
-        
         if (cepResponse != null) {
             jtfLogradouro.setText(cepResponse.getLogradouro());
             jtfBairro.setText(cepResponse.getBairro());
             jtfComplemento.setText(cepResponse.getComplemento());
             jtfCidade.setText(cepResponse.getLocalidade());
             jtfUf.setText(cepResponse.getUf());
-            String ibge = cepResponse.getIbge();
+            ibge = cepResponse.getIbge();
         } else {
             System.out.println("Cep não encontrado");
         }
@@ -499,6 +505,14 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jftfCepKeyPressed
 
+    private void jbLupaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLupaActionPerformed
+        // TODO add your handling code here:
+        SelecionaMaeNoCadastroDoPai smncdp = new SelecionaMaeNoCadastroDoPai(this);
+        smncdp.setVisible(true);
+
+
+    }//GEN-LAST:event_jbLupaActionPerformed
+
     private void validaCamposMostrarMae() {
         boolean selected = jcbPaiMae.isSelected();
         //jlSelecioneAMae.setEnabled(selected);
@@ -516,6 +530,67 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jtfComplemento.setText("");
         jtfCidade.setText("");
         jtfUf.setText("");
+    }
+
+    public void enviaMaeSelecionada(MaeResponse maeResponseUnit) {
+
+        preencheDadosMae(maeResponseUnit);
+
+    }
+
+    private void preencheDadosMae(MaeResponse maeResponseUnit) {
+        if (maeResponseUnit.getNomeCompletoMae() != null) {
+            jtfMaeSelecionada.setText(maeResponseUnit.getNomeCompletoMae());
+        } else {
+            jtfMaeSelecionada.setText("");
+        }
+
+        if (maeResponseUnit.getCep() != null) {
+            jftfCep.setText(maeResponseUnit.getCep());
+        } else {
+            jftfCep.setText("");
+        }
+
+        if (maeResponseUnit.getLogradouro() != null) {
+            jtfLogradouro.setText(maeResponseUnit.getLogradouro());
+        } else {
+            jtfLogradouro.setText("");
+        }
+
+        if (maeResponseUnit.getNumero() != null) {
+            jtfNumero.setText(maeResponseUnit.getNumero());
+        } else {
+            jtfNumero.setText("");
+        }
+
+        if (maeResponseUnit.getBairro() != null) {
+            jtfBairro.setText(maeResponseUnit.getBairro());
+        } else {
+            jtfBairro.setText("");
+        }
+
+        if (maeResponseUnit.getComplemento() != null) {
+            jtfComplemento.setText(maeResponseUnit.getComplemento());
+        } else {
+            jtfComplemento.setText("");
+        }
+
+        if (maeResponseUnit.getLocalidade() != null) {
+            jtfCidade.setText(maeResponseUnit.getLocalidade());
+        } else {
+            jtfCidade.setText("");
+        }
+
+        if (maeResponseUnit.getUf() != null) {
+            jtfUf.setText(maeResponseUnit.getUf());
+        } else {
+            jtfUf.setText("");
+        }
+
+        if (maeResponseUnit.getIbge() != null) {
+            ibge = maeResponseUnit.getIbge();
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

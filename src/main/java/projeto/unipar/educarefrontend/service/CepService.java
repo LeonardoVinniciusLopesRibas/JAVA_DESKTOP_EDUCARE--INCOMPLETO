@@ -1,17 +1,10 @@
 package projeto.unipar.educarefrontend.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
@@ -30,10 +23,9 @@ public class CepService {
     
     public CepResponse buscarCep(CepRequest cepRequest) {
         String operacao = "CEP CONSULTADO";
-        HttpURLConnection connection = null;
         try {
             URL url = new URL(CONSULTA_CEP + cepRequest.getCep() + JSON);
-            connection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
             int responseCode = connection.getResponseCode();
@@ -62,10 +54,6 @@ public class CepService {
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao consultar o CEP");
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
         }
 
         return null;
