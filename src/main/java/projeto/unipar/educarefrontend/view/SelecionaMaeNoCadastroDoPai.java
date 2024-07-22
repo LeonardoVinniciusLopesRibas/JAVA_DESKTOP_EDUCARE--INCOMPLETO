@@ -214,12 +214,14 @@ public class SelecionaMaeNoCadastroDoPai extends javax.swing.JFrame {
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                int row = jTable1.rowAtPoint(evt.getPoint());
-                if (row >= 0) {
-                    Long id = (Long) jTable1.getValueAt(row, 0);
-                    maeResponseUnit = maeService.buscarMaeById(id);
-                    pai.enviaMaeSelecionada(maeResponseUnit);
-                    dispose();
+                if (evt.getClickCount() == 2) {
+                    int row = jTable1.rowAtPoint(evt.getPoint());
+                    if (row >= 0) {
+                        Long id = (Long) jTable1.getValueAt(row, 0);
+                        maeResponseUnit = maeService.buscarMaeById(id);
+                        pai.enviaMaeSelecionada(maeResponseUnit);
+                        dispose();
+                    }
                 }
             }
         });

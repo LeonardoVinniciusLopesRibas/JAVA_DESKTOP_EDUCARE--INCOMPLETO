@@ -39,6 +39,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         this.pai = pai;
         setLocationRelativeTo(pai);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        jcbPodeBuscar.setSelected(true);
         setIcon.setIconJFrame(this);
         log.escreverLogInfoAvulso("INFO", "Tela de Cadastro de Pai Aberta");
         validaCamposMostrarMae();
@@ -58,15 +59,15 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jcbPaiMae = new javax.swing.JCheckBox();
         jbLupa = new javax.swing.JButton();
         jtfMaeSelecionada = new javax.swing.JTextField();
-        jtfTelefoneReserva = new TelefoneFormatter(log).createFormatterTelefone();
+        jtfTelefoneContatoReserva = new TelefoneFormatter(log).createFormatterTelefone();
         jLabel4 = new javax.swing.JLabel();
         jcbWhastapp = new javax.swing.JCheckBox();
         jtfNomeContatoReserva = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtfTelefoneContatoReserva = new TelefoneFormatter(log).createFormatterTelefone();
-        jLabel6 = new javax.swing.JLabel();
+        jtfTelefone = new TelefoneFormatter(log).createFormatterTelefone();
+        jlLimparQrcode = new javax.swing.JLabel();
         jcbPodeBuscar = new javax.swing.JCheckBox();
-        jcbWhastappReserva = new javax.swing.JCheckBox();
+        jcbPodeBuscarReserva = new javax.swing.JCheckBox();
         jtfNumero = new NumeroFormatter(log).createFormatterNumero();
         jtfBairro = new javax.swing.JTextField();
         jbCadastrarPai = new javax.swing.JButton();
@@ -87,6 +88,10 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jbLimparQrCode = new javax.swing.JButton();
         jtfCidade = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jbLimparQrCode1 = new javax.swing.JButton();
+        jlLimparTudo = new javax.swing.JLabel();
+        jbLimparMae = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -137,17 +142,17 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbLupa);
-        jbLupa.setBounds(540, 150, 60, 40);
+        jbLupa.setBounds(540, 150, 50, 40);
 
         jtfMaeSelecionada.setEditable(false);
         jtfMaeSelecionada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfMaeSelecionada.setToolTipText("Selecione a Mãe");
         jPanel1.add(jtfMaeSelecionada);
-        jtfMaeSelecionada.setBounds(610, 150, 270, 40);
+        jtfMaeSelecionada.setBounds(600, 150, 220, 40);
 
-        jtfTelefoneReserva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jtfTelefoneReserva);
-        jtfTelefoneReserva.setBounds(130, 300, 411, 40);
+        jtfTelefoneContatoReserva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfTelefoneContatoReserva);
+        jtfTelefoneContatoReserva.setBounds(130, 300, 411, 40);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -175,15 +180,15 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(20, 250, 110, 20);
 
-        jtfTelefoneContatoReserva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jtfTelefoneContatoReserva);
-        jtfTelefoneContatoReserva.setBounds(130, 200, 410, 40);
+        jtfTelefone.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(jtfTelefone);
+        jtfTelefone.setBounds(130, 200, 410, 40);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Telefone Reserva");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 300, 110, 20);
+        jlLimparQrcode.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlLimparQrcode.setForeground(new java.awt.Color(0, 0, 0));
+        jlLimparQrcode.setText("Limpar QrCode");
+        jPanel1.add(jlLimparQrcode);
+        jlLimparQrcode.setBounds(440, 520, 100, 20);
 
         jcbPodeBuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbPodeBuscar.setText("Pode buscar");
@@ -195,15 +200,15 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jcbPodeBuscar);
         jcbPodeBuscar.setBounds(540, 200, 160, 30);
 
-        jcbWhastappReserva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jcbWhastappReserva.setText("Pode buscar");
-        jcbWhastappReserva.addActionListener(new java.awt.event.ActionListener() {
+        jcbPodeBuscarReserva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jcbPodeBuscarReserva.setText("Pode buscar");
+        jcbPodeBuscarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbWhastappReservaActionPerformed(evt);
+                jcbPodeBuscarReservaActionPerformed(evt);
             }
         });
-        jPanel1.add(jcbWhastappReserva);
-        jcbWhastappReserva.setBounds(540, 300, 100, 30);
+        jPanel1.add(jcbPodeBuscarReserva);
+        jcbPodeBuscarReserva.setBounds(540, 300, 98, 30);
 
         jtfNumero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jtfNumero);
@@ -223,7 +228,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbCadastrarPai);
-        jbCadastrarPai.setBounds(20, 630, 140, 40);
+        jbCadastrarPai.setBounds(20, 680, 150, 40);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -283,7 +288,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btDownload);
-        btDownload.setBounds(20, 570, 140, 40);
+        btDownload.setBounds(20, 580, 150, 40);
 
         btGerarQrCode.setBackground(new java.awt.Color(85, 6, 124));
         btGerarQrCode.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -295,9 +300,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btGerarQrCode);
-        btGerarQrCode.setBounds(20, 510, 140, 40);
+        btGerarQrCode.setBounds(20, 520, 150, 40);
         jPanel1.add(jlQrCode);
-        jlQrCode.setBounds(190, 510, 230, 200);
+        jlQrCode.setBounds(200, 520, 230, 200);
 
         jbBuscarCep1.setBackground(new java.awt.Color(85, 6, 124));
         jbBuscarCep1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -320,6 +325,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jPanel1.add(jftfCep);
         jftfCep.setBounds(980, 100, 160, 40);
 
+        jbLimparQrCode.setBackground(new java.awt.Color(85, 6, 124));
         jbLimparQrCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/iconVassoura.png"))); // NOI18N
         jbLimparQrCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,7 +333,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbLimparQrCode);
-        jbLimparQrCode.setBounds(430, 510, 40, 40);
+        jbLimparQrCode.setBounds(440, 540, 40, 40);
 
         jtfCidade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jtfCidade);
@@ -338,6 +344,40 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         jLabel14.setText("Cidade");
         jPanel1.add(jLabel14);
         jLabel14.setBounds(890, 350, 90, 20);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Telefone Reserva");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(20, 300, 110, 20);
+
+        jbLimparQrCode1.setBackground(new java.awt.Color(85, 6, 124));
+        jbLimparQrCode1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/iconVassoura.png"))); // NOI18N
+        jbLimparQrCode1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimparQrCode1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbLimparQrCode1);
+        jbLimparQrCode1.setBounds(130, 460, 40, 40);
+
+        jlLimparTudo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlLimparTudo.setForeground(new java.awt.Color(0, 0, 0));
+        jlLimparTudo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jlLimparTudo.setText("Limpar Tudo");
+        jlLimparTudo.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(jlLimparTudo);
+        jlLimparTudo.setBounds(20, 460, 100, 20);
+
+        jbLimparMae.setBackground(new java.awt.Color(85, 6, 124));
+        jbLimparMae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/iconVassoura.png"))); // NOI18N
+        jbLimparMae.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimparMaeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbLimparMae);
+        jbLimparMae.setBounds(830, 150, 40, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -366,9 +406,9 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbPodeBuscarActionPerformed
 
-    private void jcbWhastappReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbWhastappReservaActionPerformed
+    private void jcbPodeBuscarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPodeBuscarReservaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jcbWhastappReservaActionPerformed
+    }//GEN-LAST:event_jcbPodeBuscarReservaActionPerformed
 
     private void jbBuscarCep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarCep1ActionPerformed
         // TODO add your handling code here:
@@ -427,6 +467,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
     public void validaQrCodeTrue() {
         jbLimparQrCode.setVisible(jlQrCode.getIcon() != null);
+        jlLimparQrcode.setVisible(jlQrCode.getIcon() != null);
     }
 
     private void btDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDownloadActionPerformed
@@ -513,6 +554,77 @@ public class CadastrarPaiView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbLupaActionPerformed
 
+    private void jbLimparQrCode1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparQrCode1ActionPerformed
+        // TODO add your handling code here:
+
+        Object[] options = {"Sim", "Não"};
+        int option = JOptionPane.showOptionDialog(
+                null,
+                "Você tem certeza que deseja limpar todas as informações?",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+        if (option == JOptionPane.YES_OPTION) {
+            jtfNome.setText("");
+            jtfCpfPai.setText("");
+            jtfTelefone.setText("");
+            jtfNomeContatoReserva.setText("");
+            jtfTelefoneContatoReserva.setText("");
+            jcbPaiMae.setSelected(false);
+            jtfMaeSelecionada.setText("");
+            jcbPodeBuscar.setSelected(false);
+            jcbWhastapp.setSelected(false);
+            jcbPodeBuscarReserva.setSelected(false);
+            jftfCep.setText("");
+            jtfLogradouro.setText("");
+            jtfNumero.setText("");
+            jtfBairro.setText("");
+            jtfComplemento.setText("");
+            jtfCidade.setText("");
+            jtfUf.setText("");
+            ibge = "";
+        } else {
+
+        }
+
+        jlQrCode.setIcon(null);
+        validaQrCodeTrue();
+    }//GEN-LAST:event_jbLimparQrCode1ActionPerformed
+
+    private void jbLimparMaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparMaeActionPerformed
+        // TODO add your handling code here:
+        Object[] options = {"Sim", "Não"};
+        int option = JOptionPane.showOptionDialog(
+                null,
+                "Deseja realmente remover a mãe",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+        if (jtfMaeSelecionada != null && jtfMaeSelecionada.getText().length() != 0) {
+            if (option == JOptionPane.YES_OPTION) {
+                jtfMaeSelecionada.setText("");
+                jftfCep.setText("");
+                jtfLogradouro.setText("");
+                jtfNumero.setText("");
+                jtfBairro.setText("");
+                jtfComplemento.setText("");
+                jtfCidade.setText("");
+                jtfUf.setText("");
+                ibge = "";
+            }
+        }
+
+
+    }//GEN-LAST:event_jbLimparMaeActionPerformed
+
     private void validaCamposMostrarMae() {
         boolean selected = jcbPaiMae.isSelected();
         //jlSelecioneAMae.setEnabled(selected);
@@ -521,6 +633,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         //jlSelecioneAMae.setVisible(selected);
         jbLupa.setVisible(selected);
         jtfMaeSelecionada.setVisible(selected);
+        jbLimparMae.setVisible(selected);
     }
 
     public void limparCamposEnderecoAoBuscar() {
@@ -606,19 +719,23 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbBuscarCep1;
     private javax.swing.JButton jbCadastrarPai;
+    private javax.swing.JButton jbLimparMae;
     private javax.swing.JButton jbLimparQrCode;
+    private javax.swing.JButton jbLimparQrCode1;
     private javax.swing.JButton jbLupa;
     private javax.swing.JCheckBox jcbPaiMae;
     private javax.swing.JCheckBox jcbPodeBuscar;
+    private javax.swing.JCheckBox jcbPodeBuscarReserva;
     private javax.swing.JCheckBox jcbWhastapp;
-    private javax.swing.JCheckBox jcbWhastappReserva;
     private javax.swing.JFormattedTextField jftfCep;
+    private javax.swing.JLabel jlLimparQrcode;
+    private javax.swing.JLabel jlLimparTudo;
     private javax.swing.JLabel jlQrCode;
     private javax.swing.JTextField jtfBairro;
     private javax.swing.JTextField jtfCidade;
@@ -629,8 +746,8 @@ public class CadastrarPaiView extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNomeContatoReserva;
     private javax.swing.JTextField jtfNumero;
+    private javax.swing.JTextField jtfTelefone;
     private javax.swing.JTextField jtfTelefoneContatoReserva;
-    private javax.swing.JTextField jtfTelefoneReserva;
     private javax.swing.JTextField jtfUf;
     // End of variables declaration//GEN-END:variables
 
