@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.dto.UsuarioRequestCadastro;
 import projeto.unipar.educarefrontend.model.Usuario;
+import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.CadastrarUsuarioView;
 
@@ -45,7 +46,7 @@ public class UsuarioService {
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
 
-            String json = UsuarioRequest.objectToJson(usuarioRequest);
+            String json = JsonUtils.objectToJson(usuarioRequest);
 
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = json.getBytes("utf-8");
@@ -124,7 +125,7 @@ public class UsuarioService {
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
             
-            String json = UsuarioRequestCadastro.objectToJson(urc);
+            String json = JsonUtils.objectToJson(urc);
             
             try(OutputStream os = connection.getOutputStream()){
                 byte[] input = json.getBytes("utf-8");

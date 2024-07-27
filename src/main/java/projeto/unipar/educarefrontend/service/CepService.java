@@ -8,6 +8,7 @@ import java.net.URL;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
+import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 
 public class CepService {
@@ -37,7 +38,7 @@ public class CepService {
                         response.append(responseLine.trim());
                     }
                     
-                    CepResponse cepResponse = CepResponse.jsonToObjeto(response.toString());
+                    CepResponse cepResponse = JsonUtils.jsonToObjeto(response.toString(), CepResponse.class);
                     
                     if (cepResponse.isErro()) {
                         JOptionPane.showMessageDialog(null, "CEP não encontrado ou inválido");

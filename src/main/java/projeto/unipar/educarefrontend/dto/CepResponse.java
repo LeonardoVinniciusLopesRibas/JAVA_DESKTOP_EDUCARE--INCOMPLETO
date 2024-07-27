@@ -25,17 +25,6 @@ public class CepResponse {
     private String uf;
     private boolean erro;   
     
-    public static CepResponse jsonToObjeto(String json){
-        Log log = new Log();
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(json, CepResponse.class);
-        }catch(JsonProcessingException e){
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-        return null;
-    }
-    
    
     
     

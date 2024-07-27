@@ -37,18 +37,6 @@ public class Pai {
     private String numero;
     private String siafi;
     
-    //private Mae mae
-
-    
-    public static String objectToJson(Pai pai){
-        Log log = new Log();
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(pai);
-        }catch(JsonProcessingException e){
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-        return null;
-    }
+ 
     
 }

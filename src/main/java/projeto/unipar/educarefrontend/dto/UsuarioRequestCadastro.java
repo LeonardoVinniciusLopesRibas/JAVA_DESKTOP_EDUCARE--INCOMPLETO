@@ -18,26 +18,5 @@ public class UsuarioRequestCadastro {
     private String usuario;
     private String senha;
     
-    public static UsuarioRequestCadastro jsonToObjeto(String json){
-        Log log = new Log();
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(json, UsuarioRequestCadastro.class);
-        }catch(JsonProcessingException e){
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-        return null;
-    }
-    
-    public static String objectToJson(UsuarioRequestCadastro usuarioRequestCadastro){
-        Log log = new Log();
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(usuarioRequestCadastro);
-        }catch(JsonProcessingException e){
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-        return null;
-    }
     
 }

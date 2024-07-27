@@ -16,16 +16,5 @@ public class CepRequest {
  
     private String cep;
     
-    public static String objectToJson(CepRequest cepRequest){
-        Log log = new Log();
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(cepRequest);
-        }catch(JsonProcessingException e){
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-        return null;
-    }
-
     
 }

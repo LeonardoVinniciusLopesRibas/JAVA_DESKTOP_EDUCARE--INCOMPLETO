@@ -29,28 +29,5 @@ public class MaeResponse {
     private String localidade;
     private String uf;
     private String ibge;
-    
-    public static List<MaeResponse> jsonToObjeto(String json){
-        Log log = new Log();
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            List<MaeResponse> produtoList = mapper.readValue(json, new TypeReference<List<MaeResponse>>(){});
-            return produtoList;
-        }catch(JsonProcessingException e){
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-        return null;
-    }
-    
-    public static MaeResponse jsonToObjetoUnique(String json){
-        Log log = new Log();
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(json, MaeResponse.class);
-        }catch(JsonProcessingException e){
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-        return null;
-    }
-    
+       
 }

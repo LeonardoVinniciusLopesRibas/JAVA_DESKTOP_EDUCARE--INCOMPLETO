@@ -40,17 +40,4 @@ public class PaiDtoRequest {
     private String ibge;
     private String numero;
     
-    //private Mae mae
-    
-    
-    public static String objectToJson(PaiDtoRequest paiDto){
-        Log log = new Log();
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(paiDto);
-        }catch(JsonProcessingException e){
-            log.escreverLogErroOperacaoException(e, e.getMessage());
-        }
-        return null;
-    }
 }

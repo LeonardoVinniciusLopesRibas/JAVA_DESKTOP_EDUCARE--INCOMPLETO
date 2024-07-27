@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.List;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.MaeResponse;
+import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 
 public class MaeService {
@@ -42,7 +43,7 @@ public class MaeService {
                         response.append(responseLine.trim());
                     }
 
-                    return MaeResponse.jsonToObjeto(response.toString());
+                    return JsonUtils.jsonToListUnique(response.toString(), MaeResponse.class);
                 }
             } else if (responseCode == HttpURLConnection.HTTP_NO_CONTENT) {
                 return null;
@@ -75,7 +76,7 @@ public class MaeService {
             }
             in.close();
             log.escreverLogHttp(operacao, responseCode);
-            return MaeResponse.jsonToObjetoUnique(response.toString());
+            return JsonUtils.jsonToObjeto(response.toString(), MaeResponse.class);
         } else {
             log.escreverLogHttp(operacao, responseCode);
             JOptionPane.showMessageDialog(null, "Ocorreu um problema: " + responseCode);
