@@ -64,7 +64,6 @@ public class UsuarioService {
                 br.close();
 
                 if (response.length() > 0) {
-                    // Login successful, parse the user data
                     JSONObject jsonResponse = new JSONObject(response.toString());
                     Usuario usuario = new Usuario();
                     usuario.setId(jsonResponse.getLong("id"));
@@ -75,12 +74,10 @@ public class UsuarioService {
                     log.escreverLogHttp(operacao, responseCode);
                     return usuario;
                 } else {
-                    // Login failed (empty response)
                     log.escreverLogErroAvulso("Erro", "LOGIN FALHOU");
                     return null;
                 }
             } else if (responseCode == 400) {
-                // Validation errors
                 BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream(), "utf-8"));
                 StringBuilder response = new StringBuilder();
                 String responseLine;
@@ -103,7 +100,6 @@ public class UsuarioService {
                 JOptionPane.showMessageDialog(null, scrollPane, "ERRO AO LOGAR", JOptionPane.ERROR_MESSAGE);
                 return null;
             } else {
-                // Other errors
                 JOptionPane.showMessageDialog(null, "UM ERRO OCORREU.", "Error", JOptionPane.ERROR_MESSAGE);
                 log.escreverLogHttp("ERRO NÃO ESPERADO: ", responseCode);
                 return null;

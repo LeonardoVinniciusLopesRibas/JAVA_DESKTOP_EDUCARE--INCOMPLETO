@@ -1,14 +1,14 @@
 package projeto.unipar.educarefrontend.view;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.model.Usuario;
+import projeto.unipar.educarefrontend.model.ValidacaoPreferencia;
+import projeto.unipar.educarefrontend.service.EstadoService;
+import projeto.unipar.educarefrontend.service.MunicipioService;
+import projeto.unipar.educarefrontend.service.RegiaoService;
 import projeto.unipar.educarefrontend.service.UsuarioService;
+import projeto.unipar.educarefrontend.service.ValidacaoPreferenciaService;
 import projeto.unipar.educarefrontend.util.IsAppRunning;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.SetIcon;
@@ -22,8 +22,6 @@ public class LoginView extends javax.swing.JFrame {
     private boolean isPasswordVisible = false;
     private UsuarioService usuarioService = new UsuarioService(log);
     private Usuario usuario = new Usuario();
-    
-    
 
     public LoginView() {
         initComponents();
@@ -237,23 +235,27 @@ public class LoginView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Email ou Senha Inválidos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    
 
     public static void main(String args[]) {
         Splash splash = new Splash();
+        Log log = new Log();
+        ValidacaoPreferenciaService validacaoPreferenciaService = new ValidacaoPreferenciaService(log);
+        ValidacaoPreferencia validacaoPreferencia = new ValidacaoPreferencia();
+        RegiaoService regiaoService = new RegiaoService(log);
+        EstadoService estadoService = new EstadoService(log);
+        MunicipioService municipioService = new MunicipioService(log);
         splash.setVisible(true);
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         if (IsAppRunning.isAppRunning()) {
             JOptionPane.showMessageDialog(null, "O sistema já está em execução.", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -280,15 +282,26 @@ public class LoginView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                boolean sqlAtivo = validacaoPreferenciaService.checkSetTrue();
+                if (!sqlAtivo) {
+                    regiaoService.cadastrarRegiao();
+                    estadoService.cadastrarEstado();
+                    municipioService.cadastrarMunicipio();
+                    validacaoPreferencia.setSqlTrue(true);
+                    validacaoPreferenciaService.setTrue(validacaoPreferencia);
+                    log.escreverLogInfoAvulso("INFORMATIVO", "CADASTRADOS PARAMETROS INICIAIS DE REGIÃO, ESTADO E MUNICIPIO");
+                }
+                
+                if(sqlAtivo){
+                    log.escreverLogInfoAvulso("INFORMATIVO", "REGIÕES, ESTADOS E MUNICÍPIOS JÁ INSERIDOS");
+                }
                 splash.disposeSplash();
                 new LoginView().setVisible(true);
             }
         });
     }
-    
-    
-            
-            
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAcessarSistema;
     private javax.swing.JButton btVisualizarSenha;

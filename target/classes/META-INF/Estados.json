@@ -1,0 +1,245 @@
+[
+    {
+        "id": 1,
+        "codigoUf": 12,
+        "nomeUf": "Acre",
+        "siglaUf": "AC",
+        "regiao": {
+            "id": 1
+        }
+    },
+    {
+        "id": 2,
+        "codigoUf": 27,
+        "nomeUf": "Alagoas",
+        "siglaUf": "AL",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 3,
+        "codigoUf": 16,
+        "nomeUf": "Amapá",
+        "siglaUf": "AP",
+        "regiao": {
+            "id": 1
+        }
+    },
+    {
+        "id": 4,
+        "codigoUf": 13,
+        "nomeUf": "Amazonas",
+        "siglaUf": "AM",
+        "regiao": {
+            "id": 1
+        }
+    },
+    {
+        "id": 5,
+        "codigoUf": 29,
+        "nomeUf": "Bahia",
+        "siglaUf": "BA",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 6,
+        "codigoUf": 23,
+        "nomeUf": "Ceará",
+        "siglaUf": "CE",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 7,
+        "codigoUf": 53,
+        "nomeUf": "Distrito Federal",
+        "siglaUf": "DF",
+        "regiao": {
+            "id": 5
+        }
+    },
+    {
+        "id": 8,
+        "codigoUf": 32,
+        "nomeUf": "Espírito Santo",
+        "siglaUf": "ES",
+        "regiao": {
+            "id": 3
+        }
+    },
+    {
+        "id": 9,
+        "codigoUf": 52,
+        "nomeUf": "Goiás",
+        "siglaUf": "GO",
+        "regiao": {
+            "id": 5
+        }
+    },
+    {
+        "id": 10,
+        "codigoUf": 21,
+        "nomeUf": "Maranhão",
+        "siglaUf": "MA",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 11,
+        "codigoUf": 51,
+        "nomeUf": "Mato Grosso",
+        "siglaUf": "MT",
+        "regiao": {
+            "id": 5
+        }
+    },
+    {
+        "id": 12,
+        "codigoUf": 50,
+        "nomeUf": "Mato Grosso do Sul",
+        "siglaUf": "MS",
+        "regiao": {
+            "id": 5
+        }
+    },
+    {
+        "id": 13,
+        "codigoUf": 31,
+        "nomeUf": "Minas Gerais",
+        "siglaUf": "MG",
+        "regiao": {
+            "id": 3
+        }
+    },
+    {
+        "id": 14,
+        "codigoUf": 15,
+        "nomeUf": "Pará",
+        "siglaUf": "PA",
+        "regiao": {
+            "id": 1
+        }
+    },
+    {
+        "id": 15,
+        "codigoUf": 25,
+        "nomeUf": "Paraíba",
+        "siglaUf": "PB",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 16,
+        "codigoUf": 41,
+        "nomeUf": "Paraná",
+        "siglaUf": "PR",
+        "regiao": {
+            "id": 4
+        }
+    },
+    {
+        "id": 17,
+        "codigoUf": 26,
+        "nomeUf": "Pernambuco",
+        "siglaUf": "PE",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 18,
+        "codigoUf": 22,
+        "nomeUf": "Piauí",
+        "siglaUf": "PI",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 19,
+        "codigoUf": 33,
+        "nomeUf": "Rio de Janeiro",
+        "siglaUf": "RJ",
+        "regiao": {
+            "id": 3
+        }
+    },
+    {
+        "id": 20,
+        "codigoUf": 24,
+        "nomeUf": "Rio Grande do Norte",
+        "siglaUf": "RN",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 21,
+        "codigoUf": 43,
+        "nomeUf": "Rio Grande do Sul",
+        "siglaUf": "RS",
+        "regiao": {
+            "id": 4
+        }
+    },
+    {
+        "id": 22,
+        "codigoUf": 11,
+        "nomeUf": "Rondônia",
+        "siglaUf": "RO",
+        "regiao": {
+            "id": 1
+        }
+    },
+    {
+        "id": 23,
+        "codigoUf": 14,
+        "nomeUf": "Roraima",
+        "siglaUf": "RR",
+        "regiao": {
+            "id": 1
+        }
+    },
+    {
+        "id": 24,
+        "codigoUf": 42,
+        "nomeUf": "Santa Catarina",
+        "siglaUf": "SC",
+        "regiao": {
+            "id": 4
+        }
+    },
+    {
+        "id": 25,
+        "codigoUf": 35,
+        "nomeUf": "São Paulo",
+        "siglaUf": "SP",
+        "regiao": {
+            "id": 3
+        }
+    },
+    {
+        "id": 26,
+        "codigoUf": 28,
+        "nomeUf": "Sergipe",
+        "siglaUf": "SE",
+        "regiao": {
+            "id": 2
+        }
+    },
+    {
+        "id": 27,
+        "codigoUf": 17,
+        "nomeUf": "Tocantins",
+        "siglaUf": "TO",
+        "regiao": {
+            "id": 1
+        }
+    }
+]

@@ -3,7 +3,9 @@ projeto\unipar\educarefrontend\util\QRCodeGenerator.class
 projeto\unipar\educarefrontend\view\SelecionaMaeNoCadastroDoPai$2.class
 projeto\unipar\educarefrontend\dto\CepRequest.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$11.class
+projeto\unipar\educarefrontend\util\JsonUtils$1.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$13.class
+projeto\unipar\educarefrontend\model\ValidacaoPreferencia.class
 projeto\unipar\educarefrontend\service\RegiaoService.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$6.class
 projeto\unipar\educarefrontend\service\MaeService.class
@@ -20,6 +22,7 @@ projeto\unipar\educarefrontend\model\Estado.class
 projeto\unipar\educarefrontend\service\EstadoService.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$8.class
 projeto\unipar\educarefrontend\model\Municipio.class
+projeto\unipar\educarefrontend\service\ValidacaoPreferenciaService.class
 projeto\unipar\educarefrontend\util\JsonUtils.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$10.class
 projeto\unipar\educarefrontend\dto\PaiDtoRequest.class
