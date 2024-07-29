@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.dto.UsuarioRequestCadastro;
 import projeto.unipar.educarefrontend.model.Usuario;
+import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.CadastrarUsuarioView;
@@ -74,7 +75,7 @@ public class UsuarioService {
                     log.escreverLogHttp(operacao, responseCode);
                     return usuario;
                 } else {
-                    log.escreverLogErroAvulso("Erro", "LOGIN FALHOU");
+                    log.escreverLogErroAvulso("LOGIN FALHOU");
                     return null;
                 }
             } else if (responseCode == 400) {
@@ -93,20 +94,15 @@ public class UsuarioService {
                     errorMessage.append(errorList.getString(i)).append("\n");
                 }
 
-                JTextArea textArea = new JTextArea(errorMessage.toString());
-                textArea.setEditable(false);
-                JScrollPane scrollPane = new JScrollPane(textArea);
-                scrollPane.setPreferredSize(new Dimension(400, 200));
-                JOptionPane.showMessageDialog(null, scrollPane, "ERRO AO LOGAR", JOptionPane.ERROR_MESSAGE);
+                
+                
                 return null;
             } else {
-                JOptionPane.showMessageDialog(null, "UM ERRO OCORREU.", "Error", JOptionPane.ERROR_MESSAGE);
                 log.escreverLogHttp("ERRO NÃO ESPERADO: ", responseCode);
                 return null;
             }
         } catch (Exception e) {
             log.escreverLogErroOperacaoException(e, e.getMessage());
-            JOptionPane.showMessageDialog(null, "UM ERRO OCORREU DURANTE O LOGIN: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

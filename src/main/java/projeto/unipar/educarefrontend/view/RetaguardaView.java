@@ -27,7 +27,7 @@ public class RetaguardaView extends javax.swing.JFrame {
 
     public RetaguardaView() {
         initComponents();
-        log.escreverLogInfoAvulso("INFORMATIVO", "ABRINDO RETAGUARDA");
+        log.escreverLogInfoAvulso("ABRINDO RETAGUARDA");
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setIcon.setIconJFrame(this);
 
@@ -465,7 +465,7 @@ public class RetaguardaView extends javax.swing.JFrame {
             isCadastrarUsuarioOpen = true;
             cadastrarUsuarioInstancia = new CadastrarUsuarioView(this);
             cadastrarUsuarioInstancia.setVisible(true);
-            log.escreverLogInfoAvulso("INFORMATIVO", "Tela de cadastrar usuário aberta");
+            log.escreverLogInfoAvulso("Tela de cadastrar usuário aberta");
             cadastrarUsuarioInstancia.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
@@ -492,7 +492,7 @@ public class RetaguardaView extends javax.swing.JFrame {
             isTrocarUsuarioOpen = true;
             trocarUsuarioInstancia = new TrocarUsuarioView(this, cadastrarUsuarioInstancia, cadastrarPaiInstancia);
             trocarUsuarioInstancia.setVisible(true);
-            log.escreverLogInfoAvulso("INFORMATIVO", "Tela de troca de usuário aberta");
+            log.escreverLogInfoAvulso("Tela de troca de usuário aberta");
             trocarUsuarioInstancia.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
@@ -519,7 +519,7 @@ public class RetaguardaView extends javax.swing.JFrame {
             isCadastrarPaiOpen = true;
             cadastrarPaiInstancia = new CadastrarPaiView(this);
             cadastrarPaiInstancia.setVisible(true);
-            log.escreverLogInfoAvulso("INFORMATIVO", "Tela de cadastro de pai aberta");
+            log.escreverLogInfoAvulso("Tela de cadastro de pai aberta");
             cadastrarPaiInstancia.addWindowListener(new WindowAdapter(){
                 @Override
                 public void windowClosed(WindowEvent e) {

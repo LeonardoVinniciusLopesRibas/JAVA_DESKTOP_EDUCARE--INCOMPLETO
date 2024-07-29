@@ -41,7 +41,7 @@ public class CadastrarPaiView extends javax.swing.JFrame {
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         jcbPodeBuscar.setSelected(true);
         setIcon.setIconJFrame(this);
-        log.escreverLogInfoAvulso("INFO", "Tela de Cadastro de Pai Aberta");
+        log.escreverLogInfoAvulso("Tela de Cadastro de Pai Aberta");
         validaCamposMostrarMae();
         validaQrCodeTrue();
     }

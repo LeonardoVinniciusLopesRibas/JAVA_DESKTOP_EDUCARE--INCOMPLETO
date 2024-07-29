@@ -3,6 +3,7 @@ package projeto.unipar.educarefrontend.util;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class SetIcon {
     
@@ -14,8 +15,9 @@ public class SetIcon {
             ImageIcon icon = new ImageIcon(iconUrl);
             parent.setIconImage(icon.getImage());
         } else {
-            log.escreverLogErroAvulso("ERRO", "ÍCONE ESTÁ NULO - Caminho: /META-INF/EduCareLogo32px.png");
+            log.escreverLogErroAvulso("ÍCONE ESTÁ NULO - Caminho: /META-INF/EduCareLogo32px.png");
         }
     }
+   
     
 }

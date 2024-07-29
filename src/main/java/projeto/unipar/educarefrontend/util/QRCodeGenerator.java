@@ -22,9 +22,10 @@ public class QRCodeGenerator {
             return MatrixToImageWriter.toBufferedImage(bitMatrix);
             
         } catch (WriterException e) {
+            log.escreverLogInfoAvulso("NÃO FOI POSSÍVEL GERAR O QRCODE");
             log.escreverLogErroOperacaoException(e, e.getMessage());
         }
-        log.escreverLogInfoAvulso("ERRO", "NÃO FOI POSSÍVEL GERAR O QRCODE");
+        log.escreverLogInfoAvulso("NÃO FOI POSSÍVEL GERAR O QRCODE");
         return null;
     }
 

@@ -22,7 +22,7 @@ public class CadastrarUsuarioView extends javax.swing.JFrame {
         setLocationRelativeTo(pai);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setIcon.setIconJFrame(this);
-        log.escreverLogInfoAvulso("INFO", "Tela de Cadastro de Usuário Aberta");
+        log.escreverLogInfoAvulso("Tela de Cadastro de Usuário Aberta");
     }
 
     @SuppressWarnings("unchecked")

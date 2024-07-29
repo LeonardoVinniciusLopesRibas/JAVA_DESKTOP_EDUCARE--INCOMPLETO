@@ -39,7 +39,7 @@ public class SelecionaMaeNoCadastroDoPai extends javax.swing.JFrame {
         clickComEnter();
         clickComMouse();
         setIcon.setIconJFrame(this);
-        log.escreverLogInfoAvulso("INFORMATIVO", "Tela de seleção de mãe, no cadastro do pai ABERTA");
+        log.escreverLogInfoAvulso("Tela de seleção de mãe, no cadastro do pai ABERTA");
     }
 
     @SuppressWarnings("unchecked")

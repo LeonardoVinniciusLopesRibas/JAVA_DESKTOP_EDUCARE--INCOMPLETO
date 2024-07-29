@@ -8,33 +8,40 @@ import java.nio.channels.FileLock;
 
 public class IsAppRunning {
 
-private static FileLock lock;
+    private static FileLock lock;
     private static FileChannel channel;
     private static final String LOCK_FILE = "app.lock";
-    
+    private static Log log = new Log();
+
     public static boolean isAppRunning() {
         try {
             File lockFile = new File(LOCK_FILE);
             channel = new RandomAccessFile(lockFile, "rw").getChannel();
             lock = channel.tryLock();
             if (lock == null) {
-                channel.close();
-                return true;
+                return true; // Another instance is running
             }
+
+            // Shutdown hook to ensure the lock file is deleted on JVM shutdown
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
-                    lock.release();
-                    channel.close();
+                    if (lock != null) {
+                        lock.release();
+                    }
+                    if (channel != null) {
+                        channel.close();
+                    }
+                    // Directly delete the file
                     lockFile.delete();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.escreverLogErroOperacaoException(e, e.getMessage());
                 }
             }));
-            return false;
+
+            return false; // Application is not running
         } catch (IOException e) {
-            e.printStackTrace();
-            return true; 
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+            return true; // Error occurred, assume application is running
         }
     }
-    
 }

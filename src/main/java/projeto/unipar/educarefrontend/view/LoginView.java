@@ -1,5 +1,6 @@
 package projeto.unipar.educarefrontend.view;
 
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.model.Usuario;
@@ -9,8 +10,10 @@ import projeto.unipar.educarefrontend.service.MunicipioService;
 import projeto.unipar.educarefrontend.service.RegiaoService;
 import projeto.unipar.educarefrontend.service.UsuarioService;
 import projeto.unipar.educarefrontend.service.ValidacaoPreferenciaService;
+import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.IsAppRunning;
 import projeto.unipar.educarefrontend.util.Log;
+import projeto.unipar.educarefrontend.util.PasswordViewDontView;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.RoundedBorder;
 import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
@@ -19,17 +22,21 @@ public class LoginView extends javax.swing.JFrame {
 
     private final Log log = new Log();
     private final SetIcon setIcon = new SetIcon();
-    private boolean isPasswordVisible = false;
     private UsuarioService usuarioService = new UsuarioService(log);
     private Usuario usuario = new Usuario();
+    private PasswordViewDontView passwordViewDontView = new PasswordViewDontView();
 
     public LoginView() {
         initComponents();
-        log.escreverLogInfoAvulso("INFORMATIVO", "INICIANDO APLICAÇÃO");
+        log.escreverLogInfoAvulso("INICIANDO APLICAÇÃO");
+        this.setPreferredSize(new Dimension(1366, 768));
+        this.setMinimumSize(new Dimension(1366, 768));
+        this.setMaximumSize(new Dimension(1366, 768));
+        this.setSize(new Dimension(1366, 768));
+        this.setSize(1366, 768);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setIcon.setIconJFrame(this);
         WindowsCloseHandler.addCloseHandler(this, log);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -50,6 +57,7 @@ public class LoginView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EDUCARE");
         setBackground(new java.awt.Color(148, 98, 171));
+        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(148, 100, 172));
         jPanel1.setForeground(new java.awt.Color(148, 100, 172));
@@ -148,10 +156,20 @@ public class LoginView extends javax.swing.JFrame {
                 .addContainerGap(568, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(917, 0, 536, 1084);
+
         jPanel2.setBackground(new java.awt.Color(229, 218, 235));
+        jPanel2.setMaximumSize(new java.awt.Dimension(887, 768));
+        jPanel2.setMinimumSize(new java.awt.Dimension(887, 768));
+        jPanel2.setPreferredSize(new java.awt.Dimension(887, 768));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/EduCareLogo.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(887, 768));
+        jLabel1.setMinimumSize(new java.awt.Dimension(887, 768));
+        jLabel1.setName(""); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(887, 768));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -170,34 +188,15 @@ public class LoginView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 887, 768);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVisualizarSenhaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVisualizarSenhaMousePressed
         // TODO add your handling code here:
-        if (isPasswordVisible) {
-            jpfSenha.setEchoChar('*');
-            btVisualizarSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/olhoNaoVer.png")));
-        } else {
-            jpfSenha.setEchoChar((char) 0);
-            btVisualizarSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/olhoVer.png")));
-        }
-        isPasswordVisible = !isPasswordVisible;
+        passwordViewDontView.viewPassword(btVisualizarSenha, jpfSenha);
     }//GEN-LAST:event_btVisualizarSenhaMousePressed
 
     private void btAcessarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessarSistemaActionPerformed
@@ -227,12 +226,15 @@ public class LoginView extends javax.swing.JFrame {
         usuario = usuarioService.logar(usuarioRequest);
 
         if (usuario != null) {
-            RetaguardaView retaguardaView = new RetaguardaView();
-            retaguardaView.setVisible(true);
-            retaguardaView.userSession(usuario);
+            Retaguarda retaguarda = new Retaguarda();
+            retaguarda.setVisible(true);
+            retaguarda.userSession(usuario);
             this.dispose();
+            BalloonNotification balloon = new BalloonNotification("Usuário acessando! - Bem Vindo: " + usuario.getNome());
+            balloon.show("Usuário acessando! - Bem Vindo: " + usuario.getNome());
         } else {
-            JOptionPane.showMessageDialog(this, "Email ou Senha Inválidos", "Error", JOptionPane.ERROR_MESSAGE);
+            BalloonNotification balloon = new BalloonNotification("Usuário ou Senha Inválidos!");
+            balloon.show("Usuário ou Senha Inválidos!");
         }
     }
 
@@ -289,14 +291,15 @@ public class LoginView extends javax.swing.JFrame {
                     municipioService.cadastrarMunicipio();
                     validacaoPreferencia.setSqlTrue(true);
                     validacaoPreferenciaService.setTrue(validacaoPreferencia);
-                    log.escreverLogInfoAvulso("INFORMATIVO", "CADASTRADOS PARAMETROS INICIAIS DE REGIÃO, ESTADO E MUNICIPIO");
+                    log.escreverLogInfoAvulso("CADASTRADOS PARAMETROS INICIAIS DE REGIÃO, ESTADO E MUNICIPIO");
                 }
-                
-                if(sqlAtivo){
-                    log.escreverLogInfoAvulso("INFORMATIVO", "REGIÕES, ESTADOS E MUNICÍPIOS JÁ INSERIDOS");
+
+                if (sqlAtivo) {
+                    log.escreverLogInfoAvulso("REGIÕES, ESTADOS E MUNICÍPIOS JÁ INSERIDOS");
                 }
                 splash.disposeSplash();
                 new LoginView().setVisible(true);
+
             }
         });
     }

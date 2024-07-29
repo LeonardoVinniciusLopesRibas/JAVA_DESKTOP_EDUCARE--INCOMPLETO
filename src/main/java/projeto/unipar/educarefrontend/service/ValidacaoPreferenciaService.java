@@ -111,7 +111,7 @@ public class ValidacaoPreferenciaService {
                     response.append(inputLine);
                 }
                 in.close();
-                log.escreverLogErroAvulso("ERRO", response.toString());
+                log.escreverLogErroAvulso(response.toString());
             }
         } catch (IOException e) {
             log.escreverLogErroOperacaoException(e, e.getMessage());

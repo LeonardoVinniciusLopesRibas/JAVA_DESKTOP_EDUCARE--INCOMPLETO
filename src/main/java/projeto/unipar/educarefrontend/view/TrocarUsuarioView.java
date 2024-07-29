@@ -27,7 +27,7 @@ public class TrocarUsuarioView extends javax.swing.JFrame {
         this.pai = pai;
         this.cadastrarPaiView = cadastrarPaiView;
         setIcon.setIconJFrame(this);
-        log.escreverLogInfoAvulso("INFORMATIVO", "ABRINDO TELA DE TROCA DE USUÁRIO");
+        log.escreverLogInfoAvulso("ABRINDO TELA DE TROCA DE USUÁRIO");
         setLocationRelativeTo(pai);
 
     }

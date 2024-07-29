@@ -25,9 +25,11 @@ public class WindowsCloseHandler {
                         options[0]
                 );
                 if (option == JOptionPane.YES_OPTION) {
-                    frameSendoFechado.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    
+                    //SE ESSE MÉTODO FOR USADO EM ALGUM LUGAR QUE NÃO PODERÁ FECHAR TODA A APLICAÇÃO, NÃO VAI FUNCIONAR
+                    System.exit(0);
 
-                    log.escreverLogInfoAvulso("INFORMATIVO", "Aplicação fechada com sucesso");
+                    log.escreverLogInfoAvulso("Aplicação fechada com sucesso");
                 } else {
                     frameSendoFechado.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 }

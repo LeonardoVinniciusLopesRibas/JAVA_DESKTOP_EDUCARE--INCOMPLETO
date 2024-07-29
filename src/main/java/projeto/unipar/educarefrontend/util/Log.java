@@ -36,20 +36,22 @@ public class Log {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
     
-    public void escreverLogErroAvulso(String tipo, String erro) {
+    public void escreverLogErroAvulso(String erro) {
         try {
+            String tipo = "ERRO AVULSO!";
             String horaLog = getHoraLog();
-            String logEntry = String.format("%s - %s - %s%n", horaLog, tipo, erro);
+            String logEntry = String.format("%s - %s - %s%n", horaLog, tipo, erro.toUpperCase());
             Files.write(Paths.get(ARQUIVO), logEntry.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             escreverLogErroOperacaoException(e, e.getMessage());
         }
     }
     
-    public void escreverLogInfoAvulso(String tipo, String info) {
+    public void escreverLogInfoAvulso(String info) {
         try {
+            String tipo = "INFORMAÇÃO AVULSO!";
             String horaLog = getHoraLog();
-            String logEntry = String.format("%s - %s - %s%n", horaLog, tipo, info);
+            String logEntry = String.format("%s - %s - %s%n", horaLog, tipo, info.toUpperCase());
             Files.write(Paths.get(ARQUIVO), logEntry.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             escreverLogErroOperacaoException(e, e.getMessage());
@@ -78,7 +80,7 @@ public class Log {
         try {
             criarArquivo();
             String horaLog = getHoraLog();
-            String logEntry = String.format("%s - %s - %d%n", horaLog, operacao, code);
+            String logEntry = String.format("%s - %s - %d%n", horaLog, operacao.toUpperCase(), code);
             Files.write(Paths.get(ARQUIVO), logEntry.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             escreverLogErroOperacaoException(e, e.getMessage());
