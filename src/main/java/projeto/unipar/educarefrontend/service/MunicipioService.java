@@ -17,10 +17,17 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import projeto.unipar.educarefrontend.enumerated.Ip;
 
 public class MunicipioService {
 
-    private static final String SECURITY = "http://localhost:4848";
+    private static final Ip IP;
+    
+    static {
+        IP = Ip.IP;
+    }
+    
+    private static final String SECURITY = "http://"+IP.getIpAddress()+":4848";
     private static final String BASE_URL = "/educare/municipio";
     private static final String CADASTRAR = "/cadastrar";
 

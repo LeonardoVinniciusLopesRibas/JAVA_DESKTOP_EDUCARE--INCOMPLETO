@@ -8,12 +8,19 @@ import java.net.URL;
 import java.util.List;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.MaeResponse;
+import projeto.unipar.educarefrontend.enumerated.Ip;
 import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 
 public class MaeService {
-
-    private static final String SECURITY = "http://localhost:4848";
+    
+    private static final Ip IP;
+    
+    static {
+        IP = Ip.IP;
+    }
+    
+    private static final String SECURITY = "http://"+IP.getIpAddress()+":4848";
     private static final String BASE_URL = "/educare/mae";
     private static final String BUSCAR_MAE_POR_PARAMETRO = "/buscaMaePorParametros?query=";
     private static final String BUSCAR_MAE_POR_ID = "/buscaMaeById/";

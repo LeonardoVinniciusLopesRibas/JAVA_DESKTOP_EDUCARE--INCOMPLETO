@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.dto.UsuarioRequestCadastro;
+import projeto.unipar.educarefrontend.enumerated.Ip;
 import projeto.unipar.educarefrontend.model.Usuario;
 import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.JsonUtils;
@@ -26,7 +27,13 @@ import projeto.unipar.educarefrontend.view.CadastrarUsuarioView;
 
 public class UsuarioService {
 
-    private static final String SECURITY = "http://localhost:4848";
+    private static final Ip IP;
+    
+    static {
+        IP = Ip.IP;
+    }
+    
+    private static final String SECURITY = "http://"+IP.getIpAddress()+":4848";
     private static final String BASE_URL = "/educare/usuario";
     private static final String LOGIN = "/login";
     private static final String CADASTRAR = "/cadastrar";

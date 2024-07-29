@@ -14,13 +14,20 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import projeto.unipar.educarefrontend.enumerated.Ip;
 import projeto.unipar.educarefrontend.model.ValidacaoPreferencia;
 import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 
 public class ValidacaoPreferenciaService {
 
-    private static final String SECURITY = "http://localhost:4848";
+    private static final Ip IP;
+    
+    static {
+        IP = Ip.IP;
+    }
+    
+    private static final String SECURITY = "http://"+IP.getIpAddress()+":4848";
     private static final String BASE_URL = "/educare/validacao";
     private static final String SET_TRUE = "/setTrue";
     private static final String CHECK_SET_TRUE = "/checkSetTrue";
