@@ -20,14 +20,23 @@ import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
 
 public class LoginView extends javax.swing.JFrame {
 
+    //ÁREA DE INSTÂNCIAS E VARIÁVEIS
     private final Log log = new Log();
     private final SetIcon setIcon = new SetIcon();
     private UsuarioService usuarioService = new UsuarioService(log);
     private Usuario usuario = new Usuario();
     private PasswordViewDontView passwordViewDontView = new PasswordViewDontView();
-
+    //FIM ÁREA DE INSTÂNCIAS E VARIÁVEIS
+    
+    //CONSTRUTOR
     public LoginView() {
         initComponents();
+        initiallyManuallyComponents();
+    }
+    //FIM CONSTRUTOR
+    
+    //INÍCIO MÉTODOS
+    private void initiallyManuallyComponents(){
         log.escreverLogInfoAvulso("INICIANDO APLICAÇÃO");
         this.setPreferredSize(new Dimension(1366, 768));
         this.setMinimumSize(new Dimension(1366, 768));
@@ -39,6 +48,28 @@ public class LoginView extends javax.swing.JFrame {
         WindowsCloseHandler.addCloseHandler(this, log);
     }
 
+    public void logar() {
+        UsuarioRequest usuarioRequest = new UsuarioRequest();
+        usuarioRequest.setUsuario(jtfEmail.getText());
+        usuarioRequest.setSenha(new String(jpfSenha.getPassword()));
+
+        usuario = usuarioService.logar(usuarioRequest);
+
+        if (usuario != null) {
+            Retaguarda retaguarda = new Retaguarda();
+            retaguarda.setVisible(true);
+            retaguarda.userSession(usuario);
+            this.dispose();
+            BalloonNotification balloon = new BalloonNotification("Usuário acessando! - Bem Vindo: " + usuario.getNome());
+            balloon.show("Usuário acessando! - Bem Vindo: " + usuario.getNome());
+        } else {
+            BalloonNotification balloon = new BalloonNotification("Usuário ou Senha Inválidos!");
+            balloon.show("Usuário ou Senha Inválidos!");
+        }
+    }
+    
+    //FIM MÉTODOS
+    //INÍCIO MÉTODOS AUTOMÁTICOS
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -227,27 +258,8 @@ public class LoginView extends javax.swing.JFrame {
             logar();
         }
     }//GEN-LAST:event_jpfSenhaKeyPressed
-
-    public void logar() {
-        UsuarioRequest usuarioRequest = new UsuarioRequest();
-        usuarioRequest.setUsuario(jtfEmail.getText());
-        usuarioRequest.setSenha(new String(jpfSenha.getPassword()));
-
-        usuario = usuarioService.logar(usuarioRequest);
-
-        if (usuario != null) {
-            Retaguarda retaguarda = new Retaguarda();
-            retaguarda.setVisible(true);
-            retaguarda.userSession(usuario);
-            this.dispose();
-            BalloonNotification balloon = new BalloonNotification("Usuário acessando! - Bem Vindo: " + usuario.getNome());
-            balloon.show("Usuário acessando! - Bem Vindo: " + usuario.getNome());
-        } else {
-            BalloonNotification balloon = new BalloonNotification("Usuário ou Senha Inválidos!");
-            balloon.show("Usuário ou Senha Inválidos!");
-        }
-    }
-
+    //FIM MÉTODOS AUTOMÁTICOS
+    //MAIN
     public static void main(String args[]) {
         Splash splash = new Splash();
         Log log = new Log();
@@ -313,8 +325,8 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
     }
-
-
+    //FIM MAIN
+    //ÁREA DE VARIÁVEIS AUTOMÁTICAS
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAcessarSistema;
     private javax.swing.JButton btVisualizarSenha;
@@ -327,4 +339,5 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JPasswordField jpfSenha;
     private javax.swing.JTextField jtfEmail;
     // End of variables declaration//GEN-END:variables
+    //FIM ÁREA DE VARIÁVEIS AUTOMÁTICAS
 }
