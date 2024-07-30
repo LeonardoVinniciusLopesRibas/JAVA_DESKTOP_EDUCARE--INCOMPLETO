@@ -27,7 +27,7 @@ public class ReiniciarSystem {
             log.escreverLogInfoAvulso("Sistema sendo fechado");
             System.exit(0);
             Thread.sleep(5000);
-            process.waitFor();
+            //process.waitFor();
 
         } catch (IOException | InterruptedException ex) {
             String errorMessage = "Erro ao reiniciar a aplicação: " + ex.getMessage();
