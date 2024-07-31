@@ -3,6 +3,7 @@ package projeto.unipar.educarefrontend.util;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
@@ -15,9 +16,12 @@ public class AdjustWindowSize {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice[] devices = ge.getScreenDevices();
 
+        Point windowCenter = new Point(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2);
+
         for (GraphicsDevice device : devices) {
             Rectangle bounds = device.getDefaultConfiguration().getBounds();
-            if (bounds.contains(frame.getLocation())) {
+            System.out.println("Device bounds: " + bounds);
+            if (bounds.contains(windowCenter)) {
                 return new Dimension(bounds.width, bounds.height);
             }
         }
@@ -26,6 +30,4 @@ public class AdjustWindowSize {
         return ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds().getSize();
     }
 
-    
-    
 }

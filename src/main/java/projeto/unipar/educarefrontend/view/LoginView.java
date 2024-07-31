@@ -1,7 +1,13 @@
 package projeto.unipar.educarefrontend.view;
 
 import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.model.Usuario;
 import projeto.unipar.educarefrontend.model.ValidacaoPreferencia;
@@ -10,10 +16,12 @@ import projeto.unipar.educarefrontend.service.MunicipioService;
 import projeto.unipar.educarefrontend.service.RegiaoService;
 import projeto.unipar.educarefrontend.service.UsuarioService;
 import projeto.unipar.educarefrontend.service.ValidacaoPreferenciaService;
+import projeto.unipar.educarefrontend.util.AdjustWindowSize;
 import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.IsAppRunning;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.PasswordViewDontView;
+import projeto.unipar.educarefrontend.util.ReturnSize;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.RoundedBorder;
 import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
@@ -26,26 +34,62 @@ public class LoginView extends javax.swing.JFrame {
     private UsuarioService usuarioService = new UsuarioService(log);
     private Usuario usuario = new Usuario();
     private PasswordViewDontView passwordViewDontView = new PasswordViewDontView();
+    private boolean isDragging = false;
+    private AdjustWindowSize adjustWindowSize = new AdjustWindowSize();
     //FIM ÁREA DE INSTÂNCIAS E VARIÁVEIS
-    
+
     //CONSTRUTOR
     public LoginView() {
         initComponents();
         initiallyManuallyComponents();
     }
     //FIM CONSTRUTOR
-    
+
     //INÍCIO MÉTODOS
-    private void initiallyManuallyComponents(){
+    private void initiallyManuallyComponents() {
         log.escreverLogInfoAvulso("INICIANDO APLICAÇÃO");
         this.setPreferredSize(new Dimension(1366, 768));
-        this.setMinimumSize(new Dimension(1366, 768));
-        this.setMaximumSize(new Dimension(1366, 768));
+        this.setMinimumSize(new Dimension(1024, 768));
         this.setSize(new Dimension(1366, 768));
-        this.setSize(1366, 768);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setIcon.setIconJFrame(this);
         WindowsCloseHandler.addCloseHandler(this, log);
+        organizeJLayeredPanel();
+        moveAndCheckSizeJLayeredPaneRight();
+    }
+
+    private void organizeJLayeredPanel() {
+        Dimension dimension = adjustWindowSize.adjustWindowSize(this);
+        System.out.println("Window location: " + this.getLocation());
+        System.out.println("Screen dimension: " + dimension);
+
+        int screenWidth = dimension.width;
+        int screenHeight = dimension.height;
+
+        int panelWidth = (int) (screenWidth * 0.4);
+        int panelHeight = screenHeight;
+        int panelX = screenWidth - panelWidth;
+        int panelY = 0;
+
+        jLayeredPaneRight.setPreferredSize(new Dimension(panelWidth, panelHeight));
+        jLayeredPaneRight.setSize(new Dimension(panelWidth, panelHeight));
+        jLayeredPaneRight.setLocation(panelX, panelY);
+        jLayeredPaneRight.setBounds(panelX, panelY, panelWidth, panelHeight);
+    }
+
+    private void moveAndCheckSizeJLayeredPaneRight() {
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                organizeJLayeredPanel();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                organizeJLayeredPanel();
+            }
+
+        });
     }
 
     public void logar() {
@@ -67,14 +111,14 @@ public class LoginView extends javax.swing.JFrame {
             balloon.show("Usuário ou Senha Inválidos!");
         }
     }
-    
+
     //FIM MÉTODOS
     //INÍCIO MÉTODOS AUTOMÁTICOS
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLayeredPaneRight = new javax.swing.JLayeredPane();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -82,16 +126,17 @@ public class LoginView extends javax.swing.JFrame {
         jpfSenha = new javax.swing.JPasswordField();
         btAcessarSistema = new javax.swing.JButton();
         btVisualizarSenha = new javax.swing.JButton();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
+        jLayeredPaneLeft = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EDUCARE");
         setBackground(new java.awt.Color(148, 98, 171));
+        setSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(null);
 
-        jLayeredPane1.setBackground(new java.awt.Color(148, 100, 172));
-        jLayeredPane1.setOpaque(true);
+        jLayeredPaneRight.setBackground(new java.awt.Color(148, 100, 172));
+        jLayeredPaneRight.setOpaque(true);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -143,44 +188,44 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jtfEmail, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jpfSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(btAcessarSistema, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(btVisualizarSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneRight.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneRight.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneRight.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneRight.setLayer(jtfEmail, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneRight.setLayer(jpfSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneRight.setLayer(btAcessarSistema, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneRight.setLayer(btVisualizarSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jLayeredPaneRightLayout = new javax.swing.GroupLayout(jLayeredPaneRight);
+        jLayeredPaneRight.setLayout(jLayeredPaneRightLayout);
+        jLayeredPaneRightLayout.setHorizontalGroup(
+            jLayeredPaneRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+            .addGroup(jLayeredPaneRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPaneRightLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGroup(jLayeredPaneRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jLayeredPaneRightLayout.createSequentialGroup()
                             .addGap(84, 84, 84)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jLayeredPaneRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel3)
                                 .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4)
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addGroup(jLayeredPaneRightLayout.createSequentialGroup()
                                     .addGap(103, 103, 103)
                                     .addComponent(btAcessarSistema))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPaneRightLayout.createSequentialGroup()
                                     .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(btVisualizarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap()))
         );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jLayeredPaneRightLayout.setVerticalGroup(
+            jLayeredPaneRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 769, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+            .addGroup(jLayeredPaneRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPaneRightLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel2)
                     .addGap(72, 72, 72)
@@ -190,7 +235,7 @@ public class LoginView extends javax.swing.JFrame {
                     .addGap(47, 47, 47)
                     .addComponent(jLabel4)
                     .addGap(18, 18, 18)
-                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jLayeredPaneRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btVisualizarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(57, 57, 57)
@@ -198,11 +243,11 @@ public class LoginView extends javax.swing.JFrame {
                     .addContainerGap(359, Short.MAX_VALUE)))
         );
 
-        getContentPane().add(jLayeredPane1);
-        jLayeredPane1.setBounds(880, 0, 484, 769);
+        getContentPane().add(jLayeredPaneRight);
+        jLayeredPaneRight.setBounds(880, 0, 484, 769);
 
-        jLayeredPane2.setBackground(new java.awt.Color(229, 218, 235));
-        jLayeredPane2.setOpaque(true);
+        jLayeredPaneLeft.setBackground(new java.awt.Color(229, 218, 235));
+        jLayeredPaneLeft.setOpaque(true);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/EduCareLogo.png"))); // NOI18N
@@ -211,26 +256,26 @@ public class LoginView extends javax.swing.JFrame {
         jLabel1.setName(""); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(887, 768));
 
-        jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneLeft.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jLayeredPaneLeftLayout = new javax.swing.GroupLayout(jLayeredPaneLeft);
+        jLayeredPaneLeft.setLayout(jLayeredPaneLeftLayout);
+        jLayeredPaneLeftLayout.setHorizontalGroup(
+            jLayeredPaneLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPaneLeftLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+        jLayeredPaneLeftLayout.setVerticalGroup(
+            jLayeredPaneLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPaneLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jLayeredPane2);
-        jLayeredPane2.setBounds(0, -10, 910, 790);
+        getContentPane().add(jLayeredPaneLeft);
+        jLayeredPaneLeft.setBounds(0, -10, 910, 790);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -321,7 +366,6 @@ public class LoginView extends javax.swing.JFrame {
                 }
                 splash.disposeSplash();
                 new LoginView().setVisible(true);
-
             }
         });
     }
@@ -334,8 +378,8 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane2;
+    private javax.swing.JLayeredPane jLayeredPaneLeft;
+    private javax.swing.JLayeredPane jLayeredPaneRight;
     private javax.swing.JPasswordField jpfSenha;
     private javax.swing.JTextField jtfEmail;
     // End of variables declaration//GEN-END:variables
