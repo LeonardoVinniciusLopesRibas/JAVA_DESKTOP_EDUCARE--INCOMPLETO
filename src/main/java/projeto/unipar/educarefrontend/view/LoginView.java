@@ -5,6 +5,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -98,17 +99,24 @@ public class LoginView extends javax.swing.JFrame {
         jLayeredPaneRight.setLocation(panelX, panelY);
         jLayeredPaneRight.setBounds(panelX, panelY, panelWidth, panelHeight);
 
-        int labelWidth = jLabel2.getPreferredSize().width;
-        int labelHeight = jLabel2.getPreferredSize().height;
+        /*GroupLayout layout = new GroupLayout(jLayeredPaneRight);
+        jLayeredPaneRight.setLayout(layout);
 
-        int labelX = panelX + (panelWidth - labelWidth) / 2;
-        int labelY = jLabel2.getY();
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
 
-        //jLabel2.setPreferredSize(new Dimension(labelWidth, labelHeight));
-        //jLabel2.setSize(new Dimension(labelWidth, labelHeight));
-        //jLabel2.setLocation(labelX, labelY);
-        //jLabel2.setBounds(labelX, labelY, labelWidth, labelHeight);
-        
+        int newX = panelX + (int) (panelWidth * 0.25);
+
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2, GroupLayout.Alignment.CENTER, 308, newX, GroupLayout.DEFAULT_SIZE)
+        );
+
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                        .addComponent(jLabel2, newX, newX, newX)
+        );*/
+
     }
 
     private void moveAndCheckSizeJLayeredPaneRight() {
@@ -243,7 +251,6 @@ public class LoginView extends javax.swing.JFrame {
                         .addGap(84, 84, 84)
                         .addGroup(jLayeredPaneRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3)
-                            .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addGroup(jLayeredPaneRightLayout.createSequentialGroup()
                                 .addGap(103, 103, 103)
@@ -251,7 +258,8 @@ public class LoginView extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPaneRightLayout.createSequentialGroup()
                                 .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btVisualizarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btVisualizarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfEmail)))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 12, Short.MAX_VALUE))
         );

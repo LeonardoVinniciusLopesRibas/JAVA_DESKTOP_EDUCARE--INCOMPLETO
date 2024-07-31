@@ -54,7 +54,6 @@
                           <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfEmail" min="-2" pref="308" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
@@ -65,6 +64,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btVisualizarSenha" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="jtfEmail" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jLabel2" alignment="0" min="-2" pref="472" max="-2" attributes="0"/>
