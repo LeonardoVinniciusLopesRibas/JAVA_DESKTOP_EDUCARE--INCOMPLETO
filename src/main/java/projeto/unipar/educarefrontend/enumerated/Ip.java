@@ -1,7 +1,7 @@
 package projeto.unipar.educarefrontend.enumerated;
 
 public enum Ip {
-    IP("192.168.0.188");
+    IP("192.168.1.108");
     //CASA 192.168.1.108
     //TRABALHO 192.168.0.188
     private final String ipAddress;

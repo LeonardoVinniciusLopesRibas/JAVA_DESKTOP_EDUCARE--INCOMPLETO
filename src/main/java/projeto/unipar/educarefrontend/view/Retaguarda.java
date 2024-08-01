@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import projeto.unipar.educarefrontend.model.Usuario;
 import projeto.unipar.educarefrontend.util.AdjustWindowSize;
 import projeto.unipar.educarefrontend.util.BalloonNotification;
@@ -72,16 +74,15 @@ public class Retaguarda extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new Dimension(ReturnSize.getScreenSize()));
         jPanel1.setMaximumSize(new Dimension(ReturnSize.getScreenSize()));
         jPanel1.setSize(new Dimension(ReturnSize.getScreenSize()));
-        moveAndCheckSizeJFrame();
         moveAndCheckSizeJPanel();
-        moveAndCheckSizeJToolBar();
-        moveAndCheckSizeJTabbedPane();
+        organizeJPanel();
         this.setTitle("Retaguarda");
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setIcon.setIconJFrame(this);
         windowsCloseHandler.addCloseHandler(this, log);
         addInfToolBar();
-        action();
+        actionBtSair();
+        actionBtVisualizarPai();
         BalloonNotification balloonNotification = new BalloonNotification("sistema iniciado");
         balloonNotification.show("sistema iniciado");
     }
@@ -196,7 +197,8 @@ public class Retaguarda extends javax.swing.JFrame {
     }
     // </editor-fold>
 
-    private void action() {
+    // <editor-fold defaultstate="collapsed" desc="Método de evento dos botões do JToolBar"> 
+    private void actionBtSair() {
         btSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSairActionPerformed(evt);
@@ -207,6 +209,20 @@ public class Retaguarda extends javax.swing.JFrame {
     private void btSairActionPerformed(ActionEvent evt) {
         close();
     }
+    
+    private void actionBtVisualizarPai(){
+        visualizarPai.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                visualizarPaiPerformed(evt);
+            }
+        });
+    }
+    
+    private void visualizarPaiPerformed(ActionEvent evt) {
+        addSawPai();
+    }
+    
+    //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos para trabalhar com as abas do sistema"> 
     private void addSawPai() {
@@ -246,117 +262,82 @@ public class Retaguarda extends javax.swing.JFrame {
     }
 
     //</editor-fold>
-
-
-    private void moveAndCheckSizeJFrame() {
+    
+    // <editor-fold defaultstate="collapsed" desc="Métodos para fazer resizable nos componentes">
+    private void moveAndCheckSizeJPanel() {
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentMoved(ComponentEvent e) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
-                Dimension dimension = adjustWindowSize.adjustWindowSize(parentFrame);
-                jPanel1.setPreferredSize(dimension);
-                jPanel1.setMinimumSize(dimension);
-                jPanel1.setMaximumSize(dimension);
-                jPanel1.setSize(dimension);
-                JFrame parentToolBar = (JFrame) SwingUtilities.getWindowAncestor(jToolBar);
-                int largura = adjustWindowSize.adjustWindowSize(parentToolBar).width;
-                jToolBar.setPreferredSize(new Dimension(largura, 60));
-                jToolBar.setMinimumSize(new Dimension(largura, 60));
-                jToolBar.setMaximumSize(new Dimension(largura, 60));
-                jToolBar.setSize(new Dimension(largura, 60));
-                JFrame parentAbas = (JFrame) SwingUtilities.getWindowAncestor(abas);
-                Dimension dimensionAbas = adjustWindowSize.adjustWindowSize(parentAbas);
-                abas.setPreferredSize(dimensionAbas);
-                abas.setMinimumSize(dimensionAbas);
-                abas.setMaximumSize(dimensionAbas);
-                abas.setSize(dimensionAbas);
+                organizeJPanel();
             }
 
             @Override
             public void componentResized(ComponentEvent e) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
-                Dimension dimension = adjustWindowSize.adjustWindowSize(parentFrame);
-                jPanel1.setPreferredSize(dimension);
-                jPanel1.setMinimumSize(dimension);
-                jPanel1.setMaximumSize(dimension);
-                jPanel1.setSize(dimension);
+                organizeJPanel();
             }
         });
-            
+
     }
+
+    private void organizeJPanel() {
+        Dimension dimension = adjustWindowSize.adjustWindowSize(this);
+
+        int screenWidth = dimension.width;
+        int screenHeight = dimension.height;
+
+        int panelWidth = screenWidth;
+        int panelHeight = screenHeight;
+
+        int panelX = 0;
+        int panelY = 0;
+
+        int toolBarWidth = panelWidth;
+        int toolBarHeight = 61;
+        int toolBarX = 0;
+        int toolBary = 0;
+
+        int tabbedPaneWidth = panelWidth;
+        int tabbedPaneHeight = panelHeight;
+        int tabbedPaneX = 0;
+        int tabbedPaney = 62;
+
+        jPanel1.setPreferredSize(new Dimension(panelWidth, panelHeight));
+        jPanel1.setSize(new Dimension(panelWidth, panelHeight));
+        jPanel1.setLocation(panelX, panelY);
+        jPanel1.setBounds(panelX, panelY, panelWidth, panelHeight);
+
+        abas.setPreferredSize(new Dimension(tabbedPaneWidth, tabbedPaneHeight));
+        abas.setSize(new Dimension(tabbedPaneWidth, tabbedPaneHeight));
+        abas.setLocation(tabbedPaneX, tabbedPaney);
+        abas.setBounds(tabbedPaneX, tabbedPaney, tabbedPaneWidth, tabbedPaneHeight);
+
+        jToolBar.setPreferredSize(new Dimension(toolBarWidth, toolBarHeight));
+        jToolBar.setSize(new Dimension(toolBarWidth, toolBarHeight));
+        jToolBar.setLocation(toolBarX, toolBary);
+        jToolBar.setBounds(toolBarX, toolBary, toolBarWidth, toolBarHeight);
+
+        jPanel1.revalidate();
+        jPanel1.repaint();
+        this.setLayout(new BorderLayout());
+        jPanel1.setLayout(new BorderLayout());
+
+        jPanel1.add(jToolBar, BorderLayout.NORTH);
+        jPanel1.add(abas, BorderLayout.CENTER);
+
+        abas.revalidate();
+        abas.repaint();
+        abas.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0)); 
+
+        UIManager.put("TabbedPane.contentOpaque", false); 
+        UIManager.put("TabbedPane.tabsOverlapBorder", true);
+
+
+        jToolBar.revalidate();
+        jToolBar.repaint();
+    }
+
+    //</editor-fold>
     
-    private void moveAndCheckSizeJPanel() {
-        jPanel1.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
-                Dimension dimension = adjustWindowSize.adjustWindowSize(parentFrame);
-                jPanel1.setPreferredSize(dimension);
-                jPanel1.setMinimumSize(dimension);
-                jPanel1.setMaximumSize(dimension);
-                jPanel1.setSize(dimension);
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
-                Dimension dimension = adjustWindowSize.adjustWindowSize(parentFrame);
-                jPanel1.setPreferredSize(dimension);
-                jPanel1.setMinimumSize(dimension);
-                jPanel1.setMaximumSize(dimension);
-                jPanel1.setSize(dimension);
-            }
-        });
-    }
-
-    private void moveAndCheckSizeJToolBar() {
-        jToolBar.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(jToolBar);
-                int largura = adjustWindowSize.adjustWindowSize(parentFrame).width;
-                jToolBar.setPreferredSize(new Dimension(largura, 60));
-                jToolBar.setMinimumSize(new Dimension(largura, 60));
-                jToolBar.setMaximumSize(new Dimension(largura, 60));
-                jToolBar.setSize(new Dimension(largura, 60));
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(jToolBar);
-                int largura = adjustWindowSize.adjustWindowSize(parentFrame).width;
-                jToolBar.setPreferredSize(new Dimension(largura, 60));
-                jToolBar.setMinimumSize(new Dimension(largura, 60));
-                jToolBar.setMaximumSize(new Dimension(largura, 60));
-                jToolBar.setSize(new Dimension(largura, 60));
-            }
-        });
-    }
-
-    private void moveAndCheckSizeJTabbedPane() {
-        abas.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(abas);
-                Dimension dimension = adjustWindowSize.adjustWindowSize(parentFrame);
-                abas.setPreferredSize(dimension);
-                abas.setMinimumSize(dimension);
-                abas.setMaximumSize(dimension);
-                abas.setSize(dimension);
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(abas);
-                Dimension dimension = adjustWindowSize.adjustWindowSize(parentFrame);
-                abas.setPreferredSize(dimension);
-                abas.setMinimumSize(dimension);
-                abas.setMaximumSize(dimension);
-                abas.setSize(dimension);
-            }
-        });
-    }
-
     //FIM DA ÁREA DE MÉTODOS
     //CÓDIGO AUTOMÁTICO
     @SuppressWarnings("unchecked")
@@ -403,7 +384,6 @@ public class Retaguarda extends javax.swing.JFrame {
         jMenuItemConsultarPendencias = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jPanel1.setBackground(new java.awt.Color(204, 160, 238));
         jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));

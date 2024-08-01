@@ -21,7 +21,6 @@ projeto\unipar\educarefrontend\util\CpfFormatter$1.class
 projeto\unipar\educarefrontend\dto\CepRequest.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$11.class
 projeto\unipar\educarefrontend\util\Log.class
-projeto\unipar\educarefrontend\view\Retaguarda$12.class
 projeto\unipar\educarefrontend\view\RetaguardaView$2.class
 projeto\unipar\educarefrontend\view\LoginView$5.class
 projeto\unipar\educarefrontend\model\Pai.class
@@ -98,7 +97,6 @@ projeto\unipar\educarefrontend\service\ValidacaoPreferenciaService.class
 projeto\unipar\educarefrontend\util\JsonUtils.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView.class
 projeto\unipar\educarefrontend\util\BorderBlack.class
-projeto\unipar\educarefrontend\view\Retaguarda$11.class
 projeto\unipar\educarefrontend\util\ReturnSize.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$1.class
 projeto\unipar\educarefrontend\view\Retaguarda$2.class

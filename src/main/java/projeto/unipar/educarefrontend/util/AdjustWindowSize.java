@@ -20,7 +20,6 @@ public class AdjustWindowSize {
 
         for (GraphicsDevice device : devices) {
             Rectangle bounds = device.getDefaultConfiguration().getBounds();
-            System.out.println("Device bounds: " + bounds);
             if (bounds.contains(windowCenter)) {
                 return new Dimension(bounds.width, bounds.height);
             }
