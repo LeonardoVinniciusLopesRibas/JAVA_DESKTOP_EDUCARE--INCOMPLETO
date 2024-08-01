@@ -1,10 +1,14 @@
 package projeto.unipar.educarefrontend.view.panel;
 
 import projeto.unipar.educarefrontend.abstractView.ViewPanel;
+import projeto.unipar.educarefrontend.model.Pai;
+import projeto.unipar.educarefrontend.service.PaiService;
 
 public class VisualizarPai extends ViewPanel {
 
     //ÁREA DE INSTÂNCIAS E VARIÁVEIS
+        private Pai pai = new Pai();
+        private PaiService paiService = new PaiService();
     //FIM DA ÁREA DE INSTÂNCIAS E VARIÁVEIS
     //CONSTRUTOR
     
@@ -13,6 +17,11 @@ public class VisualizarPai extends ViewPanel {
     }
     //FIM DO CONSTRUTOR
     //AREA DE MÉTODOS
+    
+        private void searchAllPai(){
+            //pai = paiService.
+        }
+    
     //FIM DA ÁREA DE MÉTODOS
     //CÓDIGO AUTOMÁTICO
     @SuppressWarnings("unchecked")
