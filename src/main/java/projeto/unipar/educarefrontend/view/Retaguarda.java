@@ -10,13 +10,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import projeto.unipar.educarefrontend.model.Usuario;
 import projeto.unipar.educarefrontend.util.AdjustWindowSize;
@@ -27,6 +25,7 @@ import projeto.unipar.educarefrontend.util.ReiniciarSystem;
 import projeto.unipar.educarefrontend.util.ReturnSize;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
+import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
 import projeto.unipar.educarefrontend.view.panel.VisualizarPai;
 
 public class Retaguarda extends javax.swing.JFrame {
@@ -83,6 +82,7 @@ public class Retaguarda extends javax.swing.JFrame {
         addInfToolBar();
         actionBtSair();
         actionBtVisualizarPai();
+        actionBtCadastrarPai();
         BalloonNotification balloonNotification = new BalloonNotification("sistema iniciado");
         balloonNotification.show("sistema iniciado");
     }
@@ -222,23 +222,57 @@ public class Retaguarda extends javax.swing.JFrame {
         addSawPai();
     }
     
+    private void actionBtCadastrarPai(){
+        cadastrarPai.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                cadastrarPaiPerformed(evt);
+            }
+        });
+    }
+    
+    private void cadastrarPaiPerformed(ActionEvent evt) {
+        addAddPai();
+    }
+    
     //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos para trabalhar com as abas do sistema"> 
-    private void addSawPai() {
+    public void addSawPai() {
         boolean abaExistente = false;
         String title = "Visualizar pai";
         for (int i = 0; i < abas.getTabCount(); i++) {
             if (abas.getTitleAt(i).equals(title)) {
                 abaExistente = true;
+                abas.setSelectedIndex(i);
                 break;
             }
         }
         if (!abaExistente) {
-            VisualizarPai tabPai = new VisualizarPai();
-            abas.addTab(title, tabPai);
-            int index = abas.indexOfComponent(tabPai);
-            abas.setTabComponentAt(index, createTabTitle(title, tabPai));
+            VisualizarPai tabSawPai = new VisualizarPai(this);
+            abas.addTab(title, tabSawPai);
+            int index = abas.indexOfComponent(tabSawPai);
+            abas.setTabComponentAt(index, createTabTitle(title, tabSawPai));
+            abas.setSelectedComponent(tabSawPai);
+
+        }
+    }
+    
+    public void addAddPai(){
+        boolean abaExistente = false;
+        String title = "Cadastrar pai";
+        for(int i = 0; i < abas.getTabCount(); i++){
+            if(abas.getTitleAt(i).equals(title)){
+                abaExistente = true;
+                abas.setSelectedIndex(i);
+                break;
+            }
+        }
+            if (!abaExistente) {
+            CadastrarPai tabAddPai = new CadastrarPai();
+            abas.addTab(title, tabAddPai);
+            int index = abas.indexOfComponent(tabAddPai);
+            abas.setTabComponentAt(index, createTabTitle(title, tabAddPai));
+            abas.setSelectedComponent(tabAddPai);
         }
     }
 
