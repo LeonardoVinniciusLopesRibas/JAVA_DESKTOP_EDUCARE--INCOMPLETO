@@ -95,8 +95,11 @@ public class ChangeUser extends javax.swing.JInternalFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(85, 6, 124));
+        setBorder(null);
         setMaximumSize(new java.awt.Dimension(300, 300));
         setMinimumSize(new java.awt.Dimension(300, 300));
+        setOpaque(true);
         setPreferredSize(new java.awt.Dimension(300, 300));
         getContentPane().setLayout(null);
 
@@ -110,11 +113,11 @@ public class ChangeUser extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Usuário");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(12, 30, 79, 15);
+        jLabel1.setBounds(12, 30, 79, 16);
 
         jLabel2.setText("Senha");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(12, 80, 79, 15);
+        jLabel2.setBounds(12, 80, 79, 16);
 
         jbSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/olhoNaoVer.png"))); // NOI18N
         jbSenha.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +144,7 @@ public class ChangeUser extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(20, 220, 100, 25);
+        jButton1.setBounds(20, 220, 100, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

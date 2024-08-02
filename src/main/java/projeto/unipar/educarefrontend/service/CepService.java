@@ -8,6 +8,7 @@ import java.net.URL;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
+import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 
@@ -41,7 +42,8 @@ public class CepService {
                     CepResponse cepResponse = JsonUtils.jsonToObjeto(response.toString(), CepResponse.class);
                     
                     if (cepResponse.isErro()) {
-                        JOptionPane.showMessageDialog(null, "CEP não encontrado ou inválido");
+                        BalloonNotification balloonNotification = new BalloonNotification("CEP não encontrado ou inválido");
+                        balloonNotification.show("CEP não encontrado ou inválido");
                     } else {
                         return cepResponse;
                     }
