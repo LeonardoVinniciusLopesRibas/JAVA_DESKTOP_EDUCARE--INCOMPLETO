@@ -289,6 +289,7 @@ public class CadastrarPai extends javax.swing.JPanel {
         iconWhatsappReserva.setBounds(300, 190, 20, 20);
 
         jcbPodeBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        jcbPodeBuscar.setSelected(true);
         jcbPodeBuscar.setText("Pai pode buscar");
         add(jcbPodeBuscar);
         jcbPodeBuscar.setBounds(320, 90, 120, 20);
