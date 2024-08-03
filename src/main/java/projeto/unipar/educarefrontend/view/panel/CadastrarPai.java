@@ -48,7 +48,6 @@ public class CadastrarPai extends javax.swing.JPanel {
     private ValidaCpf validaCpf = new ValidaCpf();
     private EstadoService estadoService = new EstadoService(log);
     private AdjustWindowSize adjustWindowSize = new AdjustWindowSize();
-    
 
     private boolean isSelectEstado;
     private SelectEstado selectEstadoInstance;
@@ -119,6 +118,8 @@ public class CadastrarPai extends javax.swing.JPanel {
             jtfCidade.setText(cepResponse.getLocalidade());
             jtfEstado.setText(cepResponse.getUf());
             ibge = cepResponse.getIbge();
+            ibgeMom = "";
+            ibgeMunicipio = "";
         } else {
             System.out.println("Cep não encontrado");
         }
@@ -270,7 +271,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         ibgeMunicipio = municipio.getIbge();
         nomeMunicipio = municipio.getNome();
         ufToMunicipio = municipio.getUf();
-
+        ibge = "";
+        ibgeMom = "";
         jtfCidade.setText(nomeMunicipio);
     }
 
@@ -286,6 +288,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         localidadeMom = maeResponse.getLocalidade();
         ufMom = maeResponse.getUf();
         ibgeMom = maeResponse.getIbge();
+        ibge = "";
+        ibgeMunicipio = "";
 
         jtfMomSelected.setText(idMom + " - " + nomeMom);
         jtfCep.setText(cepMom);
@@ -350,7 +354,28 @@ public class CadastrarPai extends javax.swing.JPanel {
         }
     }
 
-
+    public void salvarRequestDad(){
+        Boolean ativo = true;
+        String bairro = jtfBairro.getText();
+        String cep = jtfCep.getText();
+        String complemento = jtfComplemento.getText();
+        String contatoReserva = jtfNomeReserva.getText();
+        String cpfPai = jtfCpfPai.getText();
+        String ibgeRequest;
+        if (ibge.length() >= 1) {
+            ibgeRequest = ibge;
+        } else if (ibgeMunicipio.length() >= 1) {
+            ibgeRequest = ibgeMunicipio;
+        } else {
+            ibgeRequest = ibgeMom;
+        }
+        String localidade = jtfCidade.getText();
+        String logradouro = jtfLogradouro.getText();
+        String nomeCompletoPai = jtfNomePai.getText();
+        String numero = jtfNumero.getText();
+        //Boolean podeBuscar = jcbPodeBuscar.getSelectedObjects();
+    }
+    
     //FIM MÉTODOS
     //INÍCIO MÉTODOS AUTOMÁTICOS
     @SuppressWarnings("unchecked")
@@ -705,7 +730,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         btSelectEstado.setBounds(740, 260, 30, 23);
 
         btSalvar.setBackground(new java.awt.Color(0, 204, 0));
-        btSalvar.setForeground(new java.awt.Color(255, 255, 255));
+        btSalvar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/IconSave32x32.png"))); // NOI18N
         btSalvar.setText("Salvar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -764,6 +790,7 @@ public class CadastrarPai extends javax.swing.JPanel {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btSalvarActionPerformed
     //FIM MÉTODOS AUTOMÁTICOS
     //INICIO VARIÁVEIS AUTOMÁTICAS
