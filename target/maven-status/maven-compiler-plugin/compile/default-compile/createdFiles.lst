@@ -16,6 +16,7 @@ projeto\unipar\educarefrontend\dto\UsuarioRequest.class
 projeto\unipar\educarefrontend\view\panel\CadastrarPai$6.class
 projeto\unipar\educarefrontend\view\panel\VisualizarPai.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$2.class
+projeto\unipar\educarefrontend\dto\EstadoResponse.class
 projeto\unipar\educarefrontend\util\SetIcon.class
 projeto\unipar\educarefrontend\dto\UsuarioRequestCadastro.class
 projeto\unipar\educarefrontend\util\CpfFormatter$1.class

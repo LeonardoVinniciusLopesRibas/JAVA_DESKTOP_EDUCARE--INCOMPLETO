@@ -30,6 +30,7 @@ public class MunicipioService {
     private static final String SECURITY = "http://"+IP.getIpAddress()+":4848";
     private static final String BASE_URL = "/educare/municipio";
     private static final String CADASTRAR = "/cadastrar";
+    //private static final 
 
     private final Log log;
 
@@ -89,4 +90,5 @@ public class MunicipioService {
         }
         return false;
     }
+     
 }

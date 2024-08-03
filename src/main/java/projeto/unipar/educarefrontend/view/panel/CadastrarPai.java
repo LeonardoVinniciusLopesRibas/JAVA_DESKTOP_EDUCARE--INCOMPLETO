@@ -4,14 +4,20 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerListModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
+import projeto.unipar.educarefrontend.dto.EstadoResponse;
+import projeto.unipar.educarefrontend.model.Estado;
 import projeto.unipar.educarefrontend.service.CepService;
+import projeto.unipar.educarefrontend.service.EstadoService;
 import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.CepFormatter;
 import projeto.unipar.educarefrontend.util.CpfFormatter;
@@ -20,6 +26,7 @@ import projeto.unipar.educarefrontend.util.NumeroFormatter;
 import projeto.unipar.educarefrontend.util.QRCodeGenerator;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.util.ValidaCpf;
+import projeto.unipar.educarefrontend.view.SelectEstado;
 
 public class CadastrarPai extends javax.swing.JPanel {
 
@@ -27,12 +34,14 @@ public class CadastrarPai extends javax.swing.JPanel {
     private Log log = new Log();
     private String ibge;
     private ValidaCpf validaCpf = new ValidaCpf();
+    private EstadoService estadoService = new EstadoService(log);
 
     //FIM ÁREA DE INSTÂNCIAS E VARIÁVEIS
     //CONSTRUTOR
     public CadastrarPai() {
         initComponents();
         initManuallyComponents();
+
     }
     //FIM CONSTRUTOR
     //INÍCIO MÉTODOS
@@ -40,7 +49,7 @@ public class CadastrarPai extends javax.swing.JPanel {
     private void initManuallyComponents() {
         showAdressMom();
     }
-
+    
     private void searchCep() {
         String cepComMascara = jtfCep.getText();
         String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
@@ -49,18 +58,18 @@ public class CadastrarPai extends javax.swing.JPanel {
             balloonNotification.show("O CEP está inválido");
             return;
         }
-
+        
         if (cepSemMascara.length() != 8) {
             BalloonNotification balloonNotification = new BalloonNotification("O CEP deve conter 8 dígitos");
             balloonNotification.show("O CEP deve conter 8 dígitos");
             return;
         }
         CepService cepService = new CepService(log);
-
+        
         CepRequest cepRequest = new CepRequest();
         cepRequest.setCep(cepSemMascara);
         CepResponse cepResponse = cepService.buscarCep(cepRequest);
-
+        
         if (cepResponse != null) {
             jtfLogradouro.setText(cepResponse.getLogradouro());
             jtfBairro.setText(cepResponse.getBairro());
@@ -72,7 +81,7 @@ public class CadastrarPai extends javax.swing.JPanel {
             System.out.println("Cep não encontrado");
         }
     }
-
+    
     private void showAdressMom() {
         boolean selected = jcbSelectPaiMae.isSelected();
         jbLupa.setEnabled(selected);
@@ -81,7 +90,7 @@ public class CadastrarPai extends javax.swing.JPanel {
         jtfMomSelected.setVisible(selected);
         btCleanMomAndAdress.setVisible(selected);
     }
-
+    
     private void cleanAdressAndMomSelected() {
         Object[] options = {"Sim", "Não"};
         int option = JOptionPane.showOptionDialog(
@@ -108,58 +117,58 @@ public class CadastrarPai extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void generatedQrCode() {
         if (jtfCpfPai == null || jtfCpfPai.getText().trim().isBlank() || jtfCpfPai.getText().trim().isEmpty()) {
             BalloonNotification balloonNotification = new BalloonNotification("Informe o CPF primeiro");
             balloonNotification.show("Informe o CPF primeiro");
-
+            
             return;
         }
         String cpfPai = jtfCpfPai.getText().replaceAll("[^\\d]", "");
-
+        
         if (cpfPai.length() != 11) {
             BalloonNotification balloonNotification = new BalloonNotification("CPF deve conter 11 dígitos");
             balloonNotification.show("CPF deve conter 11 dígitos");
             return;
         }
-
+        
         if (!validaCpf.isValidCPF(cpfPai)) {
             BalloonNotification balloonNotification = new BalloonNotification("CPF inválido");
             balloonNotification.show("CPF inválido");
             return;
         }
-
+        
         BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
         ImageIcon icon = new ImageIcon(qrCodeImage);
         lblQrCode.setIcon(icon);
-
+        
     }
-
+    
     private void cleanQrCode() {
         lblQrCode.setIcon(null);
     }
-
+    
     private void downloadQrCode() {
         if (lblQrCode.getIcon() == null) {
             BalloonNotification balloonNotification = new BalloonNotification("Nenhum QrCode para salvar");
             balloonNotification.show("Nenhum QrCode para salvar");
             return;
         }
-
+        
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Salvar QR code");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Imagem PNG", "png"));
-
+        
         fileChooser.setSelectedFile(new File("qrCode-EduCare-" + jtfCpfPai.getText() + ".png"));
         int userSelection = fileChooser.showSaveDialog(null);
-
+        
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             if (!fileToSave.getAbsolutePath().endsWith(".png")) {
                 fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
             }
-
+            
             try {
                 ImageIcon icon = (ImageIcon) lblQrCode.getIcon();
                 BufferedImage qrCodeImage = new BufferedImage(
@@ -170,7 +179,7 @@ public class CadastrarPai extends javax.swing.JPanel {
                 Graphics2D g2d = qrCodeImage.createGraphics();
                 icon.paintIcon(null, g2d, 0, 0);
                 g2d.dispose();
-
+                
                 ImageIO.write(qrCodeImage, "png", fileToSave);
                 BalloonNotification balloonNotification = new BalloonNotification("QrCode salvo com sucesso");
                 balloonNotification.show("QrCode salvo com sucesso");
@@ -236,6 +245,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         btCleanQrCode = new javax.swing.JButton();
         btDownload = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JSeparator();
+        btSelectMunicipio = new javax.swing.JButton();
+        btSelectEstado = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 160, 238));
         setMinimumSize(new java.awt.Dimension(1366, 678));
@@ -263,8 +274,10 @@ public class CadastrarPai extends javax.swing.JPanel {
         jSeparator1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add(jSeparator1);
         jSeparator1.setBounds(780, 40, 10, 280);
+
+        jtfEstado.setEditable(false);
         add(jtfEstado);
-        jtfEstado.setBounds(540, 290, 230, 24);
+        jtfEstado.setBounds(540, 260, 190, 24);
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Telefone do Pai");
@@ -381,12 +394,12 @@ public class CadastrarPai extends javax.swing.JPanel {
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Cidade");
         add(jLabel12);
-        jLabel12.setBounds(460, 260, 80, 16);
+        jLabel12.setBounds(460, 290, 80, 16);
 
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("UF - Estado");
         add(jLabel13);
-        jLabel13.setBounds(460, 290, 80, 16);
+        jLabel13.setBounds(460, 260, 80, 16);
         add(jtfNomePai);
         jtfNomePai.setBounds(130, 60, 150, 24);
 
@@ -410,8 +423,10 @@ public class CadastrarPai extends javax.swing.JPanel {
         jtfBairro.setBounds(540, 200, 230, 24);
         add(jtfComplemento);
         jtfComplemento.setBounds(540, 230, 230, 24);
+
+        jtfCidade.setEditable(false);
         add(jtfCidade);
-        jtfCidade.setBounds(540, 260, 230, 24);
+        jtfCidade.setBounds(540, 290, 190, 24);
 
         jSeparator8.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
@@ -476,6 +491,28 @@ public class CadastrarPai extends javax.swing.JPanel {
         jSeparator9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add(jSeparator9);
         jSeparator9.setBounds(450, 320, 330, 10);
+
+        btSelectMunicipio.setBackground(new java.awt.Color(85, 6, 124));
+        btSelectMunicipio.setForeground(new java.awt.Color(255, 255, 255));
+        btSelectMunicipio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIconWhite.png"))); // NOI18N
+        btSelectMunicipio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSelectMunicipioActionPerformed(evt);
+            }
+        });
+        add(btSelectMunicipio);
+        btSelectMunicipio.setBounds(740, 290, 30, 23);
+
+        btSelectEstado.setBackground(new java.awt.Color(85, 6, 124));
+        btSelectEstado.setForeground(new java.awt.Color(255, 255, 255));
+        btSelectEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIconWhite.png"))); // NOI18N
+        btSelectEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSelectEstadoActionPerformed(evt);
+            }
+        });
+        add(btSelectEstado);
+        btSelectEstado.setBounds(740, 260, 30, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarCepActionPerformed
@@ -507,6 +544,16 @@ public class CadastrarPai extends javax.swing.JPanel {
         // TODO add your handling code here:
         downloadQrCode();
     }//GEN-LAST:event_btDownloadActionPerformed
+
+    private void btSelectMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelectMunicipioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btSelectMunicipioActionPerformed
+
+    private void btSelectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelectEstadoActionPerformed
+        // TODO add your handling code here:
+        //SelectEstado selectEstado = new SelectEstado(pai);
+        //selectEstado.setVisible(true);
+    }//GEN-LAST:event_btSelectEstadoActionPerformed
     //FIM MÉTODOS AUTOMÁTICOS
     //INICIO VARIÁVEIS AUTOMÁTICAS
 
@@ -516,6 +563,8 @@ public class CadastrarPai extends javax.swing.JPanel {
     private javax.swing.JButton btCleanQrCode;
     private javax.swing.JButton btDownload;
     private javax.swing.JButton btGeneratedQrCode;
+    private javax.swing.JButton btSelectEstado;
+    private javax.swing.JButton btSelectMunicipio;
     private javax.swing.JCheckBox iconBuscar;
     private javax.swing.JCheckBox iconWhatsapp2;
     private javax.swing.JCheckBox iconWhatsappReserva;

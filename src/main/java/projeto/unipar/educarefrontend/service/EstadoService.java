@@ -12,24 +12,30 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import projeto.unipar.educarefrontend.dto.EstadoResponse;
 import projeto.unipar.educarefrontend.enumerated.Ip;
+import projeto.unipar.educarefrontend.model.Estado;
+import projeto.unipar.educarefrontend.util.BalloonNotification;
 
 public class EstadoService {
 
     private static final Ip IP;
-    
+
     static {
         IP = Ip.IP;
     }
-    
-    private static final String SECURITY = "http://"+IP.getIpAddress()+":4848";
+
+    private static final String SECURITY = "http://" + IP.getIpAddress() + ":4848";
     private static final String BASE_URL = "/educare/estado";
     private static final String CADASTRAR = "/cadastrar";
+    private static final String GET = "/get";
+    private static final String GET_SIGLA = "/get/nomes";
 
     private final Log log;
 
@@ -89,4 +95,46 @@ public class EstadoService {
         }
         return false;
     }
+
+    public List<EstadoResponse> getEstados() {
+        String operacao = "estado buscados";
+        List<EstadoResponse> estados = null;    
+        try {
+            URL url = new URL(SECURITY + BASE_URL + GET_SIGLA);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            int responseCode = connection.getResponseCode();
+            
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String inputLine;
+                
+                while((inputLine = in.readLine()) != null){
+                    response.append(inputLine);
+                }
+                in.close();
+                
+                log.escreverLogHttp(operacao, responseCode);
+                estados = JsonUtils.jsonToList(response.toString(), EstadoResponse.class);
+                return estados;
+            }else{
+                BalloonNotification balloonNotification = new BalloonNotification("Estados não encontrados");
+                balloonNotification.show("Estados não encontrados");
+            }
+        }catch(IOException e){
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+        return estados;
+    }
+
+//    public Estado searchEstadoId(Long id) {
+//        String operacao = "ESTADO ENCONTRADO POR ID";
+//        try{
+//            URL url = new 
+//        }
+//    }
+
 }
