@@ -1,6 +1,11 @@
 package projeto.unipar.educarefrontend.view.panel;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,18 +20,25 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
 import projeto.unipar.educarefrontend.dto.EstadoResponse;
+import projeto.unipar.educarefrontend.dto.MaeResponse;
 import projeto.unipar.educarefrontend.model.Estado;
+import projeto.unipar.educarefrontend.model.Municipio;
 import projeto.unipar.educarefrontend.service.CepService;
 import projeto.unipar.educarefrontend.service.EstadoService;
+import projeto.unipar.educarefrontend.util.AdjustWindowSize;
 import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.CepFormatter;
 import projeto.unipar.educarefrontend.util.CpfFormatter;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.NumeroFormatter;
+import projeto.unipar.educarefrontend.util.OpenOrganizeInternalFrame;
 import projeto.unipar.educarefrontend.util.QRCodeGenerator;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.util.ValidaCpf;
+import projeto.unipar.educarefrontend.view.Retaguarda;
 import projeto.unipar.educarefrontend.view.SelectEstado;
+import projeto.unipar.educarefrontend.view.SelectMunicipio;
+import projeto.unipar.educarefrontend.view.SelectedMomOnDad;
 
 public class CadastrarPai extends javax.swing.JPanel {
 
@@ -35,6 +47,36 @@ public class CadastrarPai extends javax.swing.JPanel {
     private String ibge;
     private ValidaCpf validaCpf = new ValidaCpf();
     private EstadoService estadoService = new EstadoService(log);
+    private AdjustWindowSize adjustWindowSize = new AdjustWindowSize();
+    
+
+    private boolean isSelectEstado;
+    private SelectEstado selectEstadoInstance;
+    private boolean isSelectMunicipio;
+    private SelectMunicipio selectMunicipioInstance;
+    private boolean isSelectMom;
+    private SelectedMomOnDad selectMomInstance;
+
+    private Long idEstado;
+    private String siglaUfEstado;
+    private String nomeEstado;
+
+    private Long idMunicipio;
+    private String ibgeMunicipio;
+    private String nomeMunicipio;
+    private String ufToMunicipio;
+
+    private Long idMom;
+    private String nomeMom;
+    private String cpfMom;
+    private String cepMom;
+    private String logradouroMom;
+    private String numeroMom;
+    private String bairroMom;
+    private String complementoMom;
+    private String localidadeMom;
+    private String ufMom;
+    private String ibgeMom;
 
     //FIM ÁREA DE INSTÂNCIAS E VARIÁVEIS
     //CONSTRUTOR
@@ -49,7 +91,7 @@ public class CadastrarPai extends javax.swing.JPanel {
     private void initManuallyComponents() {
         showAdressMom();
     }
-    
+
     private void searchCep() {
         String cepComMascara = jtfCep.getText();
         String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
@@ -58,18 +100,18 @@ public class CadastrarPai extends javax.swing.JPanel {
             balloonNotification.show("O CEP está inválido");
             return;
         }
-        
+
         if (cepSemMascara.length() != 8) {
             BalloonNotification balloonNotification = new BalloonNotification("O CEP deve conter 8 dígitos");
             balloonNotification.show("O CEP deve conter 8 dígitos");
             return;
         }
         CepService cepService = new CepService(log);
-        
+
         CepRequest cepRequest = new CepRequest();
         cepRequest.setCep(cepSemMascara);
         CepResponse cepResponse = cepService.buscarCep(cepRequest);
-        
+
         if (cepResponse != null) {
             jtfLogradouro.setText(cepResponse.getLogradouro());
             jtfBairro.setText(cepResponse.getBairro());
@@ -81,16 +123,16 @@ public class CadastrarPai extends javax.swing.JPanel {
             System.out.println("Cep não encontrado");
         }
     }
-    
+
     private void showAdressMom() {
         boolean selected = jcbSelectPaiMae.isSelected();
-        jbLupa.setEnabled(selected);
+        jbLupaMom.setEnabled(selected);
         jtfMomSelected.setEnabled(selected);
-        jbLupa.setVisible(selected);
+        jbLupaMom.setVisible(selected);
         jtfMomSelected.setVisible(selected);
         btCleanMomAndAdress.setVisible(selected);
     }
-    
+
     private void cleanAdressAndMomSelected() {
         Object[] options = {"Sim", "Não"};
         int option = JOptionPane.showOptionDialog(
@@ -117,58 +159,58 @@ public class CadastrarPai extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void generatedQrCode() {
         if (jtfCpfPai == null || jtfCpfPai.getText().trim().isBlank() || jtfCpfPai.getText().trim().isEmpty()) {
             BalloonNotification balloonNotification = new BalloonNotification("Informe o CPF primeiro");
             balloonNotification.show("Informe o CPF primeiro");
-            
+
             return;
         }
         String cpfPai = jtfCpfPai.getText().replaceAll("[^\\d]", "");
-        
+
         if (cpfPai.length() != 11) {
             BalloonNotification balloonNotification = new BalloonNotification("CPF deve conter 11 dígitos");
             balloonNotification.show("CPF deve conter 11 dígitos");
             return;
         }
-        
+
         if (!validaCpf.isValidCPF(cpfPai)) {
             BalloonNotification balloonNotification = new BalloonNotification("CPF inválido");
             balloonNotification.show("CPF inválido");
             return;
         }
-        
+
         BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
         ImageIcon icon = new ImageIcon(qrCodeImage);
         lblQrCode.setIcon(icon);
-        
+
     }
-    
+
     private void cleanQrCode() {
         lblQrCode.setIcon(null);
     }
-    
+
     private void downloadQrCode() {
         if (lblQrCode.getIcon() == null) {
             BalloonNotification balloonNotification = new BalloonNotification("Nenhum QrCode para salvar");
             balloonNotification.show("Nenhum QrCode para salvar");
             return;
         }
-        
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Salvar QR code");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Imagem PNG", "png"));
-        
+
         fileChooser.setSelectedFile(new File("qrCode-EduCare-" + jtfCpfPai.getText() + ".png"));
         int userSelection = fileChooser.showSaveDialog(null);
-        
+
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             if (!fileToSave.getAbsolutePath().endsWith(".png")) {
                 fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
             }
-            
+
             try {
                 ImageIcon icon = (ImageIcon) lblQrCode.getIcon();
                 BufferedImage qrCodeImage = new BufferedImage(
@@ -179,7 +221,7 @@ public class CadastrarPai extends javax.swing.JPanel {
                 Graphics2D g2d = qrCodeImage.createGraphics();
                 icon.paintIcon(null, g2d, 0, 0);
                 g2d.dispose();
-                
+
                 ImageIO.write(qrCodeImage, "png", fileToSave);
                 BalloonNotification balloonNotification = new BalloonNotification("QrCode salvo com sucesso");
                 balloonNotification.show("QrCode salvo com sucesso");
@@ -190,6 +232,124 @@ public class CadastrarPai extends javax.swing.JPanel {
             }
         }
     }
+
+    private void loadSelectEstado() {
+        if (isSelectEstado) {
+            selectEstadoInstance.toFront();
+            selectEstadoInstance.repaint();
+        } else {
+            isSelectEstado = true;
+            selectEstadoInstance = new SelectEstado(this);
+            selectEstadoInstance.setVisible(true);
+            selectEstadoInstance.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    isSelectEstado = false;
+                    selectEstadoInstance = null;
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    isSelectEstado = false;
+                    selectEstadoInstance = null;
+                }
+            });
+        }
+    }
+
+    public void recebeEstadoSelected(Estado estado) {
+        idEstado = estado.getId();
+        siglaUfEstado = estado.getSiglaUf();
+        nomeEstado = estado.getNomeUf();
+
+        jtfEstado.setText(idEstado + " - " + nomeEstado + " (" + siglaUfEstado + ")");
+    }
+
+    public void recebeMunicipioSelected(Municipio municipio) {
+        idMunicipio = municipio.getId();
+        ibgeMunicipio = municipio.getIbge();
+        nomeMunicipio = municipio.getNome();
+        ufToMunicipio = municipio.getUf();
+
+        jtfCidade.setText(nomeMunicipio);
+    }
+
+    public void recebeMomSelected(MaeResponse maeResponse) {
+        idMom = maeResponse.getId();
+        nomeMom = maeResponse.getNomeCompletoMae();
+        cepMom = maeResponse.getCep();
+        cpfMom = maeResponse.getCpfMae();
+        logradouroMom = maeResponse.getLogradouro();
+        numeroMom = maeResponse.getNumero();
+        bairroMom = maeResponse.getBairro();
+        complementoMom = maeResponse.getComplemento();
+        localidadeMom = maeResponse.getLocalidade();
+        ufMom = maeResponse.getUf();
+        ibgeMom = maeResponse.getIbge();
+
+        jtfMomSelected.setText(idMom + " - " + nomeMom);
+        jtfCep.setText(cepMom);
+        jtfLogradouro.setText(logradouroMom);
+        jtfNumero.setText(numeroMom);
+        jtfBairro.setText(bairroMom);
+        jtfComplemento.setText(complementoMom);
+        jtfEstado.setText(ufMom);
+        jtfCidade.setText(localidadeMom);
+    }
+
+    public void loadSelectMunicipio() {
+        if (jtfEstado.getText().length() >= 1) {
+            if (isSelectMunicipio) {
+                selectMunicipioInstance.toFront();
+                selectMunicipioInstance.repaint();
+            } else {
+                isSelectMunicipio = true;
+                selectMunicipioInstance = new SelectMunicipio(this, siglaUfEstado);
+                selectMunicipioInstance.setVisible(true);
+                selectMunicipioInstance.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        isSelectMunicipio = false;
+                        selectMunicipioInstance = null;
+                    }
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        isSelectMunicipio = false;
+                        selectMunicipioInstance = null;
+                    }
+                });
+            }
+        } else {
+            BalloonNotification b = new BalloonNotification("Informe um estado primeiro");
+            b.show("Informe um estado primeiro");
+        }
+    }
+
+    public void loadSelectMom() {
+        if (isSelectMom) {
+            selectMomInstance.toFront();
+            selectMomInstance.repaint();
+        } else {
+            isSelectMom = true;
+            selectMomInstance = new SelectedMomOnDad(this);
+            selectMomInstance.setVisible(true);
+            selectMomInstance.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    isSelectMom = false;
+                    selectMomInstance = null;
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    isSelectMom = false;
+                    selectMomInstance = null;
+                }
+            });
+        }
+    }
+
 
     //FIM MÉTODOS
     //INÍCIO MÉTODOS AUTOMÁTICOS
@@ -239,7 +399,7 @@ public class CadastrarPai extends javax.swing.JPanel {
         jSeparator8 = new javax.swing.JSeparator();
         jtfLogradouro = new javax.swing.JTextField();
         btCleanMomAndAdress = new javax.swing.JButton();
-        jbLupa = new javax.swing.JButton();
+        jbLupaMom = new javax.swing.JButton();
         lblQrCode = new javax.swing.JLabel();
         btGeneratedQrCode = new javax.swing.JButton();
         btCleanQrCode = new javax.swing.JButton();
@@ -247,10 +407,13 @@ public class CadastrarPai extends javax.swing.JPanel {
         jSeparator9 = new javax.swing.JSeparator();
         btSelectMunicipio = new javax.swing.JButton();
         btSelectEstado = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 160, 238));
         setMinimumSize(new java.awt.Dimension(1366, 678));
         setLayout(null);
+
+        jtfCpfPai.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfCpfPai);
         jtfCpfPai.setBounds(130, 90, 150, 24);
 
@@ -258,6 +421,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         jLabel1.setText("Nome Reserva");
         add(jLabel1);
         jLabel1.setBounds(30, 160, 100, 16);
+
+        jtfTelefonePai.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfTelefonePai);
         jtfTelefonePai.setBounds(130, 120, 150, 24);
 
@@ -265,6 +430,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         jLabel3.setText("Cpf do Pai");
         add(jLabel3);
         jLabel3.setBounds(30, 90, 100, 16);
+
+        jtfNomeReserva.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfNomeReserva);
         jtfNomeReserva.setBounds(130, 160, 150, 24);
 
@@ -276,6 +443,7 @@ public class CadastrarPai extends javax.swing.JPanel {
         jSeparator1.setBounds(780, 40, 10, 280);
 
         jtfEstado.setEditable(false);
+        jtfEstado.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfEstado);
         jtfEstado.setBounds(540, 260, 190, 24);
 
@@ -288,6 +456,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         jLabel5.setText("Telefone Reserva");
         add(jLabel5);
         jLabel5.setBounds(30, 190, 100, 16);
+
+        jtfNumeroReserva.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfNumeroReserva);
         jtfNumeroReserva.setBounds(130, 190, 150, 24);
 
@@ -400,6 +570,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         jLabel13.setText("UF - Estado");
         add(jLabel13);
         jLabel13.setBounds(460, 260, 80, 16);
+
+        jtfNomePai.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfNomePai);
         jtfNomePai.setBounds(130, 60, 150, 24);
 
@@ -413,18 +585,29 @@ public class CadastrarPai extends javax.swing.JPanel {
         });
         add(btBuscarCep);
         btBuscarCep.setBounds(700, 110, 70, 23);
+
+        jtfCep.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfCep);
         jtfCep.setBounds(540, 110, 150, 24);
+
+        jtfMomSelected.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfMomSelected);
         jtfMomSelected.setBounds(460, 80, 190, 24);
+
+        jtfNumero.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfNumero);
         jtfNumero.setBounds(540, 170, 230, 24);
+
+        jtfBairro.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfBairro);
         jtfBairro.setBounds(540, 200, 230, 24);
+
+        jtfComplemento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfComplemento);
         jtfComplemento.setBounds(540, 230, 230, 24);
 
         jtfCidade.setEditable(false);
+        jtfCidade.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfCidade);
         jtfCidade.setBounds(540, 290, 190, 24);
 
@@ -433,6 +616,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         jSeparator8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add(jSeparator8);
         jSeparator8.setBounds(450, 40, 330, 10);
+
+        jtfLogradouro.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfLogradouro);
         jtfLogradouro.setBounds(540, 140, 230, 24);
 
@@ -446,10 +631,15 @@ public class CadastrarPai extends javax.swing.JPanel {
         add(btCleanMomAndAdress);
         btCleanMomAndAdress.setBounds(740, 50, 32, 32);
 
-        jbLupa.setBackground(new java.awt.Color(85, 6, 124));
-        jbLupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIconWhite.png"))); // NOI18N
-        add(jbLupa);
-        jbLupa.setBounds(660, 80, 30, 23);
+        jbLupaMom.setBackground(new java.awt.Color(85, 6, 124));
+        jbLupaMom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIconWhite.png"))); // NOI18N
+        jbLupaMom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLupaMomActionPerformed(evt);
+            }
+        });
+        add(jbLupaMom);
+        jbLupaMom.setBounds(660, 80, 30, 23);
         add(lblQrCode);
         lblQrCode.setBounds(290, 230, 150, 150);
 
@@ -513,6 +703,18 @@ public class CadastrarPai extends javax.swing.JPanel {
         });
         add(btSelectEstado);
         btSelectEstado.setBounds(740, 260, 30, 23);
+
+        btSalvar.setBackground(new java.awt.Color(0, 204, 0));
+        btSalvar.setForeground(new java.awt.Color(255, 255, 255));
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/IconSave32x32.png"))); // NOI18N
+        btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
+        add(btSalvar);
+        btSalvar.setBounds(20, 410, 100, 50);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarCepActionPerformed
@@ -547,13 +749,22 @@ public class CadastrarPai extends javax.swing.JPanel {
 
     private void btSelectMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelectMunicipioActionPerformed
         // TODO add your handling code here:
+        loadSelectMunicipio();
     }//GEN-LAST:event_btSelectMunicipioActionPerformed
 
     private void btSelectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelectEstadoActionPerformed
         // TODO add your handling code here:
-        //SelectEstado selectEstado = new SelectEstado(pai);
-        //selectEstado.setVisible(true);
+        loadSelectEstado();
     }//GEN-LAST:event_btSelectEstadoActionPerformed
+
+    private void jbLupaMomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLupaMomActionPerformed
+        // TODO add your handling code here:
+        loadSelectMom();
+    }//GEN-LAST:event_jbLupaMomActionPerformed
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btSalvarActionPerformed
     //FIM MÉTODOS AUTOMÁTICOS
     //INICIO VARIÁVEIS AUTOMÁTICAS
 
@@ -563,6 +774,7 @@ public class CadastrarPai extends javax.swing.JPanel {
     private javax.swing.JButton btCleanQrCode;
     private javax.swing.JButton btDownload;
     private javax.swing.JButton btGeneratedQrCode;
+    private javax.swing.JButton btSalvar;
     private javax.swing.JButton btSelectEstado;
     private javax.swing.JButton btSelectMunicipio;
     private javax.swing.JCheckBox iconBuscar;
@@ -589,7 +801,7 @@ public class CadastrarPai extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JButton jbLupa;
+    private javax.swing.JButton jbLupaMom;
     private javax.swing.JCheckBox jcbPodeBuscar;
     private javax.swing.JCheckBox jcbSelectPaiMae;
     private javax.swing.JCheckBox jcbWhatsapp;

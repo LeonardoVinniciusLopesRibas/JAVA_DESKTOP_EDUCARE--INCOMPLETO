@@ -4,6 +4,7 @@ package projeto.unipar.educarefrontend.util;
 
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
 
 public class OpenOrganizeInternalFrame {
     

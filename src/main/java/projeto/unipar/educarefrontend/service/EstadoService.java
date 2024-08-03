@@ -36,6 +36,7 @@ public class EstadoService {
     private static final String CADASTRAR = "/cadastrar";
     private static final String GET = "/get";
     private static final String GET_SIGLA = "/get/nomes";
+    private static final String GET_ID = "/get/";
 
     private final Log log;
 
@@ -118,7 +119,7 @@ public class EstadoService {
                 in.close();
                 
                 log.escreverLogHttp(operacao, responseCode);
-                estados = JsonUtils.jsonToList(response.toString(), EstadoResponse.class);
+                estados = JsonUtils.jsonToListUnique(response.toString(), EstadoResponse.class);
                 return estados;
             }else{
                 BalloonNotification balloonNotification = new BalloonNotification("Estados não encontrados");
@@ -130,11 +131,36 @@ public class EstadoService {
         return estados;
     }
 
-//    public Estado searchEstadoId(Long id) {
-//        String operacao = "ESTADO ENCONTRADO POR ID";
-//        try{
-//            URL url = new 
-//        }
-//    }
+    public Estado searchEstadoId(Long id) {
+        String operacao = "ESTADO ENCONTRADO POR ID";
+        try{
+            URL url = new URL(SECURITY+BASE_URL+GET_ID+id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            
+            int responseCode = connection.getResponseCode();
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String inputLine;
+                
+                while((inputLine = in.readLine())!= null){
+                    response.append(inputLine);
+                }
+                
+                in.close();
+                log.escreverLogHttp(operacao, responseCode);
+                return JsonUtils.jsonToObjeto(response.toString(), Estado.class);
+            }else{
+                BalloonNotification balloonNotification = new BalloonNotification("Ocorreu algum erro ao selecionar!");
+                balloonNotification.show("Ocorreu algum erro ao selecionar!");
+            }
+        }catch(IOException e){
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+        return null;
+    }
 
 }

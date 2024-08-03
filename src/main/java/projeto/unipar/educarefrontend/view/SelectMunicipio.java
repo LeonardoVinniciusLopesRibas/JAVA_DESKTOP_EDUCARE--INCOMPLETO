@@ -11,43 +11,44 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import projeto.unipar.educarefrontend.dto.EstadoResponse;
-import projeto.unipar.educarefrontend.dto.MaeResponse;
-import projeto.unipar.educarefrontend.model.Estado;
+import projeto.unipar.educarefrontend.dto.MunicipioResponse;
+import projeto.unipar.educarefrontend.model.Municipio;
 import projeto.unipar.educarefrontend.service.EstadoService;
+import projeto.unipar.educarefrontend.service.MunicipioService;
 import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
 
-public class SelectEstado extends javax.swing.JFrame {
+public class SelectMunicipio extends javax.swing.JFrame {
 
     //ÁREA DE INSTÂNCIAS DE VARIÁVEIS
     private Log log = new Log();
-    private EstadoService estadoService = new EstadoService(log);
-    private EstadoResponse estadoResponse = new EstadoResponse();
-    private Estado estado = new Estado();
-    private List<EstadoResponse> estados = new ArrayList<>();
-    private DefaultTableModel model;
+    private MunicipioService municipioService = new MunicipioService(log);
+    private Municipio municipio = new Municipio();
     private CadastrarPai pai = new CadastrarPai();
-    //FIM ÁREA DE INSTÂNCIAS DE VARIÁVEIS
+    private String ufEstado;
+    private List<MunicipioResponse> municipios = new ArrayList<>();
+    private DefaultTableModel model;
 
+    //FIM ÁREA DE INSTÂNCIAS DE VARIÁVEIS
     //CONSTRUTOR
-    public SelectEstado(CadastrarPai pai) {
-        this.pai = pai;
+    public SelectMunicipio(CadastrarPai pai, String ufEstado) {
+        this.ufEstado = ufEstado;
         initComponents();
         initManuallyComponents();
+        this.pai = pai;
     }
+
     //FIM CONSTRUTOR
     //INICIO MÉTODOS
-
     private void initManuallyComponents() {
         this.setLocationRelativeTo(null);
-        log.escreverLogInfoAvulso("tela de seleção de estados aberta");
+        log.escreverLogInfoAvulso("tela de seleção de municipios aberta");
         searchTable();
         ajustaTamanhoLinhaTabela();
         adjustColumnTable();
@@ -57,13 +58,14 @@ public class SelectEstado extends javax.swing.JFrame {
     }
 
     private void searchTable() {
-        estados = estadoService.getEstados();
-        model = (DefaultTableModel) jtbEstados.getModel();
+        municipios = municipioService.getMunicipio(ufEstado);
+        model = (DefaultTableModel) jtbMunicipios.getModel();
         model.setRowCount(0);
-        for (EstadoResponse estado : estados) {
+        for (MunicipioResponse municipio : municipios) {
             Object[] row = {
-                estado.getId(),
-                estado.getSiglaUf()
+                municipio.getId(),
+                municipio.getNome(),
+                municipio.getUf()
             };
             model.addRow(row);
             ajustaTamanhoLinhaTabela();
@@ -72,15 +74,15 @@ public class SelectEstado extends javax.swing.JFrame {
     }
 
     private void clickComMouse() {
-        jtbEstados.addMouseListener(new MouseAdapter() {
+        jtbMunicipios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
-                    int row = jtbEstados.rowAtPoint(evt.getPoint());
+                    int row = jtbMunicipios.rowAtPoint(evt.getPoint());
                     if (row >= 0) {
-                        Long id = (Long) jtbEstados.getValueAt(row, 0);
-                        estado = estadoService.searchEstadoId(id);
-                        pai.recebeEstadoSelected(estado);
+                        Long id = (Long) jtbMunicipios.getValueAt(row, 0);
+                        municipio = municipioService.searchMunicipioById(id);
+                        pai.recebeMunicipioSelected(municipio);
                         ajustaTamanhoLinhaTabela();
                         adjustColumnTable();
                         dispose();
@@ -101,28 +103,29 @@ public class SelectEstado extends javax.swing.JFrame {
     }
 
     private void selectRow() {
-        int selectedRow = jtbEstados.getSelectedRow();
+        int selectedRow = jtbMunicipios.getSelectedRow();
         if (selectedRow >= 0) {
-            Long id = (Long) jtbEstados.getValueAt(selectedRow, 0);
-            estado = estadoService.searchEstadoId(id);
-            pai.recebeEstadoSelected(estado);
+            Long id = (Long) jtbMunicipios.getValueAt(selectedRow, 0);
+            municipio = municipioService.searchMunicipioById(id);
+            pai.recebeMunicipioSelected(municipio);
             ajustaTamanhoLinhaTabela();
             adjustColumnTable();
             dispose();
         } else {
+
         }
     }
 
     private void clickComEnter() {
-        jtbEstados.addKeyListener(new KeyAdapter() {
+        jtbMunicipios.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    int row = jtbEstados.getSelectedRow();
+                    int row = jtbMunicipios.getSelectedRow();
                     if (row >= 0) {
-                        Long id = (Long) jtbEstados.getValueAt(row, 0);
-                        estado = estadoService.searchEstadoId(id);
-                        pai.recebeEstadoSelected(estado);
+                        Long id = (Long) jtbMunicipios.getValueAt(row, 0);
+                        municipio = municipioService.searchMunicipioById(id);
+                        pai.recebeMunicipioSelected(municipio);
                         ajustaTamanhoLinhaTabela();
                         adjustColumnTable();
                         dispose();
@@ -131,21 +134,20 @@ public class SelectEstado extends javax.swing.JFrame {
             }
         });
     }
-
     private void ajustaTamanhoLinhaTabela() {
-        jtbEstados.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(25));
+        jtbMunicipios.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(20));
     }
     
     private void adjustColumnTable() {
-        for (int column = 0; column < jtbEstados.getColumnCount(); column++) {
-            TableColumn tableColumn = jtbEstados.getColumnModel().getColumn(column);
+        for (int column = 0; column < jtbMunicipios.getColumnCount(); column++) {
+            TableColumn tableColumn = jtbMunicipios.getColumnModel().getColumn(column);
             int preferredWidth = tableColumn.getMinWidth();
             int maxWidth = tableColumn.getMaxWidth();
 
-            for (int row = 0; row < jtbEstados.getRowCount(); row++) {
-                TableCellRenderer cellRenderer = jtbEstados.getCellRenderer(row, column);
-                Component c = jtbEstados.prepareRenderer(cellRenderer, row, column);
-                int width = c.getPreferredSize().width + jtbEstados.getIntercellSpacing().width;
+            for (int row = 0; row < jtbMunicipios.getRowCount(); row++) {
+                TableCellRenderer cellRenderer = jtbMunicipios.getCellRenderer(row, column);
+                Component c = jtbMunicipios.prepareRenderer(cellRenderer, row, column);
+                int width = c.getPreferredSize().width + jtbMunicipios.getIntercellSpacing().width;
                 preferredWidth = Math.max(preferredWidth, width);
 
                 if (preferredWidth >= maxWidth) {
@@ -157,6 +159,8 @@ public class SelectEstado extends javax.swing.JFrame {
             tableColumn.setPreferredWidth(preferredWidth);
         }
     }
+    
+
     //FIM METODOS
     //METODOS AUTOMATICOS
     @SuppressWarnings("unchecked")
@@ -164,58 +168,55 @@ public class SelectEstado extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtbEstados = new javax.swing.JTable();
-        btSelect = new javax.swing.JButton();
-        btCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbMunicipios = new javax.swing.JTable();
+        btCancelar = new javax.swing.JButton();
+        btSelect = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 500));
         setMinimumSize(new java.awt.Dimension(400, 500));
         setUndecorated(true);
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(400, 500));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(204, 82, 234));
         jPanel1.setMaximumSize(new java.awt.Dimension(400, 500));
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
         jPanel1.setLayout(null);
 
-        jtbEstados.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Dê dois cliques! Ou selecione um município!");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(70, 20, 260, 16);
+
+        jtbMunicipios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Id", "Sigla"
+                "Id", "Municipio", "Uf"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jtbEstados.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jtbEstados);
+        jtbMunicipios.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jtbMunicipios);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(70, 50, 257, 402);
-
-        btSelect.setBackground(new java.awt.Color(85, 6, 124));
-        btSelect.setForeground(new java.awt.Color(255, 255, 255));
-        btSelect.setText("Selecionar");
-        btSelect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSelectActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btSelect);
-        btSelect.setBounds(70, 470, 90, 23);
+        jScrollPane1.setBounds(10, 50, 370, 402);
 
         btCancelar.setBackground(new java.awt.Color(85, 6, 124));
         btCancelar.setForeground(new java.awt.Color(255, 255, 255));
@@ -228,11 +229,16 @@ public class SelectEstado extends javax.swing.JFrame {
         jPanel1.add(btCancelar);
         btCancelar.setBounds(240, 470, 90, 23);
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Dê dois cliques! Ou selecione um estado!");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(70, 20, 260, 16);
+        btSelect.setBackground(new java.awt.Color(85, 6, 124));
+        btSelect.setForeground(new java.awt.Color(255, 255, 255));
+        btSelect.setText("Selecionar");
+        btSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSelectActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btSelect);
+        btSelect.setBounds(70, 470, 90, 23);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 400, 500);
@@ -258,7 +264,7 @@ public class SelectEstado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtbEstados;
+    private javax.swing.JTable jtbMunicipios;
     // End of variables declaration//GEN-END:variables
     //FIM VARIAVEIS AUTOMATICAS
 }

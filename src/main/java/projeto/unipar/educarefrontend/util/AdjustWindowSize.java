@@ -28,5 +28,22 @@ public class AdjustWindowSize {
         // Retorna o tamanho da tela principal como padrão
         return ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds().getSize();
     }
+    
+    public Dimension adjustWindowSize(JPanel panel) {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] devices = ge.getScreenDevices();
+
+        Point windowCenter = new Point(panel.getX() + panel.getWidth() / 2, panel.getY() + panel.getHeight() / 2);
+
+        for (GraphicsDevice device : devices) {
+            Rectangle bounds = device.getDefaultConfiguration().getBounds();
+            if (bounds.contains(windowCenter)) {
+                return new Dimension(bounds.width, bounds.height);
+            }
+        }
+
+        // Retorna o tamanho da tela principal como padrão
+        return ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds().getSize();
+    }
 
 }

@@ -17,20 +17,25 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import projeto.unipar.educarefrontend.dto.EstadoResponse;
+import projeto.unipar.educarefrontend.dto.MunicipioResponse;
 import projeto.unipar.educarefrontend.enumerated.Ip;
+import projeto.unipar.educarefrontend.model.Municipio;
+import projeto.unipar.educarefrontend.util.BalloonNotification;
 
 public class MunicipioService {
 
     private static final Ip IP;
-    
+
     static {
         IP = Ip.IP;
     }
-    
-    private static final String SECURITY = "http://"+IP.getIpAddress()+":4848";
+
+    private static final String SECURITY = "http://" + IP.getIpAddress() + ":4848";
     private static final String BASE_URL = "/educare/municipio";
     private static final String CADASTRAR = "/cadastrar";
-    //private static final 
+    private static final String GET_BY_UF = "/get/uf/";
+    private static final String GET_ID = "/get/";
 
     private final Log log;
 
@@ -90,5 +95,69 @@ public class MunicipioService {
         }
         return false;
     }
-     
+
+    public List<MunicipioResponse> getMunicipio(String uf) {
+        String operacao = "municipios buscados";
+        List<MunicipioResponse> municipios = null;
+        try {
+            URL url = new URL(SECURITY + BASE_URL + GET_BY_UF + uf);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String inputLine;
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                log.escreverLogHttp(operacao, responseCode);
+                municipios = JsonUtils.jsonToListUnique(response.toString(), MunicipioResponse.class);
+                return municipios;
+            } else {
+                BalloonNotification balloonNotification = new BalloonNotification("Municipios não encontrados");
+                balloonNotification.show("Municipios não encontrados");
+            }
+        } catch (IOException e) {
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+        return municipios;
+    }
+
+    public Municipio searchMunicipioById(Long id) {
+        String operacao = "Municipio encontrado pelo id";
+        try {
+            URL url = new URL(SECURITY + BASE_URL + GET_ID + id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String inputLine;
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                log.escreverLogHttp(operacao, responseCode);
+                return JsonUtils.jsonToObjeto(response.toString(), Municipio.class);
+            } else {
+                BalloonNotification balloonNotification = new BalloonNotification("Ocorreu algum erro ao selecionar!");
+                balloonNotification.show("Ocorreu algum erro ao selecionar!");
+            }
+        } catch (IOException e) {
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+        return null;
+    }
+
 }

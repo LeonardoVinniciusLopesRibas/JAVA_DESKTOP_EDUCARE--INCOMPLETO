@@ -1,4 +1,4 @@
-package projeto.unipar.educarefrontend.model;
+package projeto.unipar.educarefrontend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Municipio {
+public class MunicipioResponse {
 
     private Long id;
-    private String ibge;
     private String nome;
     private String uf;
     
