@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -36,6 +38,10 @@ public class Retaguarda extends javax.swing.JFrame {
     private static final SetIcon setIcon = new SetIcon();
     private static final OpenOrganizeInternalFrame openOrganizeInternalFrame = new OpenOrganizeInternalFrame();
     private AdjustWindowSize adjustWindowSize = new AdjustWindowSize();
+
+    private boolean isChangeUser;
+    private ChangeUserForm changeUserInstance;
+
     private JButton btSair = new JButton("Sair");
     private JButton menuPai = new JButton("Pai");
     private JPopupMenu paiPopup = new JPopupMenu();
@@ -134,6 +140,32 @@ public class Retaguarda extends javax.swing.JFrame {
 
     }
 
+    public void trocarUsuario() {
+
+        if (isChangeUser) {
+            changeUserInstance.toFront();
+            changeUserInstance.repaint();
+        } else {
+            isChangeUser = true;
+            changeUserInstance = new ChangeUserForm(this);
+            changeUserInstance.setVisible(true);
+            changeUserInstance.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    isChangeUser = false;
+                    changeUserInstance = null;
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    isChangeUser = false;
+                    changeUserInstance = null;
+                }
+            });
+        }
+
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Métodos para adicionar os botões no ToolBar"> 
     private void addInfToolBar() {
 
@@ -209,33 +241,32 @@ public class Retaguarda extends javax.swing.JFrame {
     private void btSairActionPerformed(ActionEvent evt) {
         close();
     }
-    
-    private void actionBtVisualizarPai(){
-        visualizarPai.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent evt){
+
+    private void actionBtVisualizarPai() {
+        visualizarPai.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 visualizarPaiPerformed(evt);
             }
         });
     }
-    
+
     private void visualizarPaiPerformed(ActionEvent evt) {
         addSawPai();
     }
-    
-    private void actionBtCadastrarPai(){
-        cadastrarPai.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent evt){
+
+    private void actionBtCadastrarPai() {
+        cadastrarPai.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 cadastrarPaiPerformed(evt);
             }
         });
     }
-    
+
     private void cadastrarPaiPerformed(ActionEvent evt) {
         addAddPai();
     }
-    
-    //</editor-fold>
 
+    //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Métodos para trabalhar com as abas do sistema"> 
     public void addSawPai() {
         boolean abaExistente = false;
@@ -256,18 +287,18 @@ public class Retaguarda extends javax.swing.JFrame {
 
         }
     }
-    
-    public void addAddPai(){
+
+    public void addAddPai() {
         boolean abaExistente = false;
         String title = "Cadastrar pai";
-        for(int i = 0; i < abas.getTabCount(); i++){
-            if(abas.getTitleAt(i).equals(title)){
+        for (int i = 0; i < abas.getTabCount(); i++) {
+            if (abas.getTitleAt(i).equals(title)) {
                 abaExistente = true;
                 abas.setSelectedIndex(i);
                 break;
             }
         }
-            if (!abaExistente) {
+        if (!abaExistente) {
             CadastrarPai tabAddPai = new CadastrarPai();
             abas.addTab(title, tabAddPai);
             int index = abas.indexOfComponent(tabAddPai);
@@ -296,7 +327,6 @@ public class Retaguarda extends javax.swing.JFrame {
     }
 
     //</editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Métodos para fazer resizable nos componentes">
     private void moveAndCheckSizeJPanel() {
         this.addComponentListener(new ComponentAdapter() {
@@ -360,18 +390,16 @@ public class Retaguarda extends javax.swing.JFrame {
 
         abas.revalidate();
         abas.repaint();
-        abas.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0)); 
+        abas.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
 
-        UIManager.put("TabbedPane.contentOpaque", false); 
+        UIManager.put("TabbedPane.contentOpaque", false);
         UIManager.put("TabbedPane.tabsOverlapBorder", true);
-
 
         jToolBar.revalidate();
         jToolBar.repaint();
     }
 
     //</editor-fold>
-    
     //FIM DA ÁREA DE MÉTODOS
     //CÓDIGO AUTOMÁTICO
     @SuppressWarnings("unchecked")
@@ -613,8 +641,7 @@ public class Retaguarda extends javax.swing.JFrame {
 
     private void jMenuItemTrocarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTrocarUsuarioActionPerformed
         // TODO add your handling code here:
-        ChangeUser changeUser = new ChangeUser(this);
-        openOrganizeInternalFrame.openOrganizeInternalFrame(changeUser, this);
+        trocarUsuario();
     }//GEN-LAST:event_jMenuItemTrocarUsuarioActionPerformed
 
     private void jMenuItemReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReiniciarActionPerformed

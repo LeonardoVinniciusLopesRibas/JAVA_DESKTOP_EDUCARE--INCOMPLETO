@@ -1,8 +1,8 @@
 projeto\unipar\educarefrontend\view\CadastrarUsuarioView$1.class
+projeto\unipar\educarefrontend\view\ChangeUserForm$1.class
 projeto\unipar\educarefrontend\util\NumeroFormatter.class
 projeto\unipar\educarefrontend\util\QRCodeGenerator.class
 projeto\unipar\educarefrontend\view\LoginView$2.class
-projeto\unipar\educarefrontend\view\ChangeUser$3.class
 projeto\unipar\educarefrontend\view\Retaguarda$7.class
 projeto\unipar\educarefrontend\view\SelectEstado$3.class
 projeto\unipar\educarefrontend\view\LoginView.class
@@ -28,7 +28,7 @@ projeto\unipar\educarefrontend\util\NumeroFormatter$2.class
 projeto\unipar\educarefrontend\util\CepFormatter.class
 projeto\unipar\educarefrontend\util\IsAppRunning.class
 projeto\unipar\educarefrontend\util\TelefoneFormatter$1.class
-projeto\unipar\educarefrontend\view\ChangeUser.class
+projeto\unipar\educarefrontend\view\ChangeUserForm$2.class
 projeto\unipar\educarefrontend\view\panel\CadastrarPai$11.class
 projeto\unipar\educarefrontend\util\BalloonNotification.class
 projeto\unipar\educarefrontend\util\CepFormatter$1.class
@@ -40,7 +40,6 @@ projeto\unipar\educarefrontend\service\UsuarioService.class
 projeto\unipar\educarefrontend\view\SelecionaMaeNoCadastroDoPai$3.class
 projeto\unipar\educarefrontend\view\SelectEstado$4.class
 projeto\unipar\educarefrontend\util\PasswordViewDontView.class
-projeto\unipar\educarefrontend\view\ChangeUser$2.class
 projeto\unipar\educarefrontend\view\panel\CadastrarPai$12.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$6.class
 projeto\unipar\educarefrontend\util\WindowsCloseHandler$1.class
@@ -59,15 +58,16 @@ projeto\unipar\educarefrontend\view\panel\CadastrarPai$13.class
 projeto\unipar\educarefrontend\view\RetaguardaView$8.class
 projeto\unipar\educarefrontend\view\SelecionaMaeNoCadastroDoPai$4.class
 projeto\unipar\educarefrontend\view\CadastrarUsuarioView$2.class
+projeto\unipar\educarefrontend\view\ChangeUserForm$3.class
 projeto\unipar\educarefrontend\dto\MaeResponse.class
 projeto\unipar\educarefrontend\view\Retaguarda$3.class
 projeto\unipar\educarefrontend\util\AjustaTamanhoLinhaTabela.class
-projeto\unipar\educarefrontend\view\ChangeUser$4.class
 projeto\unipar\educarefrontend\view\SelectEstado$2.class
 projeto\unipar\educarefrontend\model\Estado.class
 projeto\unipar\educarefrontend\service\EstadoService.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$8.class
 projeto\unipar\educarefrontend\model\Municipio.class
+projeto\unipar\educarefrontend\view\ChangeUserForm.class
 projeto\unipar\educarefrontend\view\SelectMunicipio$3.class
 projeto\unipar\educarefrontend\view\panel\CadastrarPai$7.class
 projeto\unipar\educarefrontend\view\SelectedMomOnDad$1.class
@@ -77,6 +77,7 @@ projeto\unipar\educarefrontend\view\SelectedMomOnDad$2.class
 projeto\unipar\educarefrontend\view\SelectEstado$1.class
 projeto\unipar\educarefrontend\dto\PaiDtoRequest.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$7.class
+projeto\unipar\educarefrontend\util\RemoveMaskUtil.class
 projeto\unipar\educarefrontend\view\panel\CadastrarPai$8.class
 projeto\unipar\educarefrontend\view\TrocarUsuarioView.class
 projeto\unipar\educarefrontend\view\SelectMunicipio$4.class
@@ -85,6 +86,7 @@ projeto\unipar\educarefrontend\util\TelefoneFormatter.class
 projeto\unipar\educarefrontend\view\RetaguardaView$7.class
 projeto\unipar\educarefrontend\view\SelecionaMaeNoCadastroDoPai$5.class
 projeto\unipar\educarefrontend\view\Retaguarda$4.class
+projeto\unipar\educarefrontend\view\ChangeUserForm$4.class
 projeto\unipar\educarefrontend\view\Retaguarda.class
 projeto\unipar\educarefrontend\util\BalloonNotification$2.class
 projeto\unipar\educarefrontend\view\panel\CadastrarPai$6.class
@@ -94,6 +96,7 @@ projeto\unipar\educarefrontend\view\SelectMunicipio$5.class
 projeto\unipar\educarefrontend\util\SetIcon.class
 projeto\unipar\educarefrontend\util\CpfFormatter$1.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$11.class
+projeto\unipar\educarefrontend\view\Retaguarda$12.class
 projeto\unipar\educarefrontend\view\RetaguardaView$2.class
 projeto\unipar\educarefrontend\view\LoginView$5.class
 projeto\unipar\educarefrontend\view\RetaguardaView.class
@@ -119,6 +122,7 @@ projeto\unipar\educarefrontend\service\RegiaoService.class
 projeto\unipar\educarefrontend\dto\CepResponse.class
 projeto\unipar\educarefrontend\util\BalloonNotification$1.class
 projeto\unipar\educarefrontend\view\CadastrarPaiView$3.class
+projeto\unipar\educarefrontend\model\Mae.class
 projeto\unipar\educarefrontend\view\Retaguarda$10.class
 projeto\unipar\educarefrontend\view\panel\CadastrarPai$2.class
 projeto\unipar\educarefrontend\view\SelectedMomOnDad$6.class
@@ -130,7 +134,6 @@ projeto\unipar\educarefrontend\view\panel\CadastrarPai.class
 projeto\unipar\educarefrontend\view\RetaguardaView$6.class
 projeto\unipar\educarefrontend\view\SelecionaMaeNoCadastroDoPai$1.class
 projeto\unipar\educarefrontend\view\SelectMunicipio.class
-projeto\unipar\educarefrontend\view\ChangeUser$1.class
 projeto\unipar\educarefrontend\view\panel\CadastrarPai$10.class
 projeto\unipar\educarefrontend\view\Retaguarda$6.class
 projeto\unipar\educarefrontend\view\SelectedMomOnDad$8.class

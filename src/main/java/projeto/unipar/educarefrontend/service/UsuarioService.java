@@ -20,7 +20,6 @@ import projeto.unipar.educarefrontend.dto.UsuarioRequest;
 import projeto.unipar.educarefrontend.dto.UsuarioRequestCadastro;
 import projeto.unipar.educarefrontend.enumerated.Ip;
 import projeto.unipar.educarefrontend.model.Usuario;
-import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.CadastrarUsuarioView;

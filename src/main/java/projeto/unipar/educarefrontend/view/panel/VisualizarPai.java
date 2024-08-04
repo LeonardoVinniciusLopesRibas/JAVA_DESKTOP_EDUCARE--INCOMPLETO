@@ -1,18 +1,17 @@
 package projeto.unipar.educarefrontend.view.panel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import projeto.unipar.educarefrontend.model.Pai;
 import projeto.unipar.educarefrontend.service.PaiService;
+import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.Retaguarda;
 
 public class VisualizarPai extends JPanel {
 
     //ÁREA DE INSTÂNCIAS E VARIÁVEIS
+        private Log log = new Log();
         private Pai pai = new Pai();
-        private PaiService paiService = new PaiService();
+        private PaiService paiService = new PaiService(log);
         private Retaguarda retaguarda;
     //FIM DA ÁREA DE INSTÂNCIAS E VARIÁVEIS
     //CONSTRUTOR

@@ -1,4 +1,5 @@
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\model\Estado.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\model\Mae.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\AdjustWindowSize.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\WindowsCloseHandler.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\LoginView.java
@@ -6,7 +7,6 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\SelectMunicipio.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\RetaguardaView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\PasswordViewDontView.java
-C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\ChangeUser.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\MaeResponse.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\ReturnSize.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\RoundedBorder.java
@@ -15,6 +15,7 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\CadastrarUsuarioView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\VisualizarPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\MunicipioResponse.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\ChangeUserForm.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\CadastrarPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\SelectedMomOnDad.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\BalloonNotification.java
@@ -40,6 +41,7 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\PaiDtoRequest.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\model\Pai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\CepService.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\RemoveMaskUtil.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\UsuarioService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\PaiService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\enumerated\Ip.java

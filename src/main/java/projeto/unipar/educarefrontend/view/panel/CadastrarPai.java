@@ -22,9 +22,13 @@ import projeto.unipar.educarefrontend.dto.CepResponse;
 import projeto.unipar.educarefrontend.dto.EstadoResponse;
 import projeto.unipar.educarefrontend.dto.MaeResponse;
 import projeto.unipar.educarefrontend.model.Estado;
+import projeto.unipar.educarefrontend.model.Mae;
 import projeto.unipar.educarefrontend.model.Municipio;
+import projeto.unipar.educarefrontend.model.Pai;
 import projeto.unipar.educarefrontend.service.CepService;
 import projeto.unipar.educarefrontend.service.EstadoService;
+import projeto.unipar.educarefrontend.service.MaeService;
+import projeto.unipar.educarefrontend.service.PaiService;
 import projeto.unipar.educarefrontend.util.AdjustWindowSize;
 import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.CepFormatter;
@@ -33,6 +37,7 @@ import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.NumeroFormatter;
 import projeto.unipar.educarefrontend.util.OpenOrganizeInternalFrame;
 import projeto.unipar.educarefrontend.util.QRCodeGenerator;
+import projeto.unipar.educarefrontend.util.RemoveMaskUtil;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.util.ValidaCpf;
 import projeto.unipar.educarefrontend.view.Retaguarda;
@@ -47,7 +52,11 @@ public class CadastrarPai extends javax.swing.JPanel {
     private String ibge;
     private ValidaCpf validaCpf = new ValidaCpf();
     private EstadoService estadoService = new EstadoService(log);
+    private MaeService maeService = new MaeService(log);
+    private PaiService paiService = new PaiService(log);
     private AdjustWindowSize adjustWindowSize = new AdjustWindowSize();
+    private Mae mae = new Mae();
+    private Pai pai = new Pai();
 
     private boolean isSelectEstado;
     private SelectEstado selectEstadoInstance;
@@ -89,6 +98,7 @@ public class CadastrarPai extends javax.swing.JPanel {
 
     private void initManuallyComponents() {
         showAdressMom();
+        cleanDataForNewRegister();
     }
 
     private void searchCep() {
@@ -132,6 +142,30 @@ public class CadastrarPai extends javax.swing.JPanel {
         jbLupaMom.setVisible(selected);
         jtfMomSelected.setVisible(selected);
         btCleanMomAndAdress.setVisible(selected);
+    }
+
+    private void cleanDataForNewRegister() {
+        ibge = "";
+        ibgeMom = "";
+        ibgeMunicipio = "";
+
+        jtfNomePai.setText("");
+        jtfCpfPai.setText("");
+        jtfTelefonePai.setText("");
+        jtfNomeReserva.setText("");
+        jtfTelefoneReserva.setText("");
+        jcbSelectPaiMae.setSelected(false);
+        jcbPodeBuscar.setSelected(true);
+        jcbWhatsapp.setSelected(true);
+        jcbWhatsappReserva.setSelected(true);
+        jtfMomSelected.setText("");
+        jtfCep.setText("");
+        jtfLogradouro.setText("");
+        jtfNumero.setText("");
+        jtfBairro.setText("");
+        jtfComplemento.setText("");
+        jtfEstado.setText("");
+        jtfCidade.setText("");
     }
 
     private void cleanAdressAndMomSelected() {
@@ -263,7 +297,7 @@ public class CadastrarPai extends javax.swing.JPanel {
         siglaUfEstado = estado.getSiglaUf();
         nomeEstado = estado.getNomeUf();
 
-        jtfEstado.setText(idEstado + " - " + nomeEstado + " (" + siglaUfEstado + ")");
+        jtfEstado.setText(siglaUfEstado);
     }
 
     public void recebeMunicipioSelected(Municipio municipio) {
@@ -354,28 +388,81 @@ public class CadastrarPai extends javax.swing.JPanel {
         }
     }
 
-    public void salvarRequestDad(){
+    public void salvarRequestDad() {
         Boolean ativo = true;
         String bairro = jtfBairro.getText();
-        String cep = jtfCep.getText();
+        String cep = RemoveMaskUtil.removeMask(jtfCep.getText());
         String complemento = jtfComplemento.getText();
         String contatoReserva = jtfNomeReserva.getText();
-        String cpfPai = jtfCpfPai.getText();
+        String cpfPai = RemoveMaskUtil.removeMask(jtfCpfPai.getText());
         String ibgeRequest;
-        if (ibge.length() >= 1) {
+        if (ibge != null && ibge.length() >= 1) {
             ibgeRequest = ibge;
-        } else if (ibgeMunicipio.length() >= 1) {
+        } else if (ibgeMunicipio != null && ibgeMunicipio.length() >= 1) {
             ibgeRequest = ibgeMunicipio;
-        } else {
+        } else if (ibgeMom != null) {
             ibgeRequest = ibgeMom;
+        } else {
+            ibgeRequest = "";
         }
         String localidade = jtfCidade.getText();
         String logradouro = jtfLogradouro.getText();
         String nomeCompletoPai = jtfNomePai.getText();
         String numero = jtfNumero.getText();
-        //Boolean podeBuscar = jcbPodeBuscar.getSelectedObjects();
+        Boolean podeBuscar;
+        if (jcbPodeBuscar.isSelected() == true) {
+            podeBuscar = true;
+        } else {
+            podeBuscar = false;
+        }
+        String telefonePai = RemoveMaskUtil.removeMask(jtfTelefonePai.getText());
+        Boolean paiWhatsapp;
+        if (jcbWhatsapp.isSelected() == true) {
+            paiWhatsapp = true;
+        } else {
+            paiWhatsapp = false;
+        }
+        String telefoneReserva = RemoveMaskUtil.removeMask(jtfTelefoneReserva.getText());
+        Boolean reservaWhatsapp;
+        if (jcbWhatsappReserva.isSelected() == true) {
+            reservaWhatsapp = true;
+        } else {
+            reservaWhatsapp = true;
+        }
+
+        String estado = jtfEstado.getText();
+
+        if (idMom != null) {
+            mae = maeService.getMaeById(idMom);
+        }
+
+        pai.setAtivo(ativo);
+        pai.setBairro(bairro);
+        pai.setCep(cep);
+        pai.setComplemento(complemento);
+        pai.setContatoReserva(contatoReserva);
+        pai.setCpfPai(cpfPai);
+        pai.setIbge(ibgeRequest);
+        pai.setLocalidade(localidade);
+        pai.setLogradouro(logradouro);
+        pai.setNomeCompletoPai(nomeCompletoPai);
+        pai.setNumero(numero);
+        pai.setPodeBuscar(podeBuscar);
+        pai.setTelefonePai(telefonePai);
+        pai.setTelefonePaiWhatsapp(paiWhatsapp);
+        pai.setTelefoneReserva(telefoneReserva);
+        pai.setTelefoneReservaWhatsapp(reservaWhatsapp);
+        pai.setUf(estado);
+        if (mae != null) {
+            pai.setMae(mae);
+        }
+        int responseCode = paiService.postPai(pai);
+
+        if (responseCode == 201) {
+            cleanDataForNewRegister();
+        }
     }
-    
+
     //FIM MÉTODOS
     //INÍCIO MÉTODOS AUTOMÁTICOS
     @SuppressWarnings("unchecked")
@@ -391,7 +478,7 @@ public class CadastrarPai extends javax.swing.JPanel {
         jtfEstado = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jtfNumeroReserva = new TelefoneFormatter(log).createFormatterTelefone();
+        jtfTelefoneReserva = new TelefoneFormatter(log).createFormatterTelefone();
         iconBuscar = new javax.swing.JCheckBox();
         jcbWhatsapp = new javax.swing.JCheckBox();
         iconWhatsappReserva = new javax.swing.JCheckBox();
@@ -482,13 +569,15 @@ public class CadastrarPai extends javax.swing.JPanel {
         add(jLabel5);
         jLabel5.setBounds(30, 190, 100, 16);
 
-        jtfNumeroReserva.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        add(jtfNumeroReserva);
-        jtfNumeroReserva.setBounds(130, 190, 150, 24);
+        jtfTelefoneReserva.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        add(jtfTelefoneReserva);
+        jtfTelefoneReserva.setBounds(130, 190, 150, 24);
 
         iconBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/iconPodeBuscar.png"))); // NOI18N
         add(iconBuscar);
         iconBuscar.setBounds(300, 90, 20, 20);
+
+        jcbWhatsapp.setSelected(true);
         add(jcbWhatsapp);
         jcbWhatsapp.setBounds(320, 120, 20, 19);
 
@@ -505,6 +594,8 @@ public class CadastrarPai extends javax.swing.JPanel {
         iconWhatsapp2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/IconWhatsapp.png"))); // NOI18N
         add(iconWhatsapp2);
         iconWhatsapp2.setBounds(300, 120, 20, 20);
+
+        jcbWhatsappReserva.setSelected(true);
         add(jcbWhatsappReserva);
         jcbWhatsappReserva.setBounds(320, 190, 20, 19);
 
@@ -615,6 +706,7 @@ public class CadastrarPai extends javax.swing.JPanel {
         add(jtfCep);
         jtfCep.setBounds(540, 110, 150, 24);
 
+        jtfMomSelected.setEditable(false);
         jtfMomSelected.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         add(jtfMomSelected);
         jtfMomSelected.setBounds(460, 80, 190, 24);
@@ -790,7 +882,7 @@ public class CadastrarPai extends javax.swing.JPanel {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
-        
+        salvarRequestDad();
     }//GEN-LAST:event_btSalvarActionPerformed
     //FIM MÉTODOS AUTOMÁTICOS
     //INICIO VARIÁVEIS AUTOMÁTICAS
@@ -844,8 +936,8 @@ public class CadastrarPai extends javax.swing.JPanel {
     private javax.swing.JTextField jtfNomePai;
     private javax.swing.JTextField jtfNomeReserva;
     private javax.swing.JTextField jtfNumero;
-    private javax.swing.JTextField jtfNumeroReserva;
     private javax.swing.JTextField jtfTelefonePai;
+    private javax.swing.JTextField jtfTelefoneReserva;
     private javax.swing.JLabel lblQrCode;
     // End of variables declaration//GEN-END:variables
     //FIM VARIÁVEIS AUTOMÁTICAS

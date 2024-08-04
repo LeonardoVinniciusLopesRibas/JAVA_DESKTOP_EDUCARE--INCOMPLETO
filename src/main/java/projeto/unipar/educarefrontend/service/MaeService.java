@@ -9,21 +9,24 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import projeto.unipar.educarefrontend.dto.MaeResponse;
 import projeto.unipar.educarefrontend.enumerated.Ip;
+import projeto.unipar.educarefrontend.model.Mae;
+import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
 
 public class MaeService {
-    
+
     private static final Ip IP;
-    
+
     static {
         IP = Ip.IP;
     }
-    
-    private static final String SECURITY = "http://"+IP.getIpAddress()+":4848";
+
+    private static final String SECURITY = "http://" + IP.getIpAddress() + ":4848";
     private static final String BASE_URL = "/educare/mae";
     private static final String BUSCAR_MAE_POR_PARAMETRO = "/buscaMaePorParametros?query=";
     private static final String BUSCAR_MAE_POR_ID = "/buscaMaeById/";
+    private static final String GET_MAE_BY_ID = "/getMaeById/";
 
     private final Log log;
 
@@ -66,33 +69,65 @@ public class MaeService {
     }
 
     public MaeResponse buscarMaeById(Long id) {
-    String operacao = "BUSCANDO MÃE PELO ID NO BANCO DE DADOS";
-    try {
-        URL url = new URL(SECURITY + BASE_URL + BUSCAR_MAE_POR_ID + id);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-        connection.setRequestProperty("Accept", "application/json");
-        int responseCode = connection.getResponseCode();
+        String operacao = "BUSCANDO MÃE PELO ID NO BANCO DE DADOS";
+        try {
+            URL url = new URL(SECURITY + BASE_URL + BUSCAR_MAE_POR_ID + id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            int responseCode = connection.getResponseCode();
 
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                log.escreverLogHttp(operacao, responseCode);
+                return JsonUtils.jsonToObjeto(response.toString(), MaeResponse.class);
+            } else {
+                log.escreverLogHttp(operacao, responseCode);
+                JOptionPane.showMessageDialog(null, "Ocorreu um problema: " + responseCode);
             }
-            in.close();
-            log.escreverLogHttp(operacao, responseCode);
-            return JsonUtils.jsonToObjeto(response.toString(), MaeResponse.class);
-        } else {
-            log.escreverLogHttp(operacao, responseCode);
-            JOptionPane.showMessageDialog(null, "Ocorreu um problema: " + responseCode);
+        } catch (IOException ioe) {
+            log.escreverLogErroOperacaoException(ioe, ioe.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar mãe pelo ID: " + ioe.getMessage());
         }
-    } catch (IOException ioe) {
-        log.escreverLogErroOperacaoException(ioe, ioe.getMessage());
-        JOptionPane.showMessageDialog(null, "Erro ao buscar mãe pelo ID: " + ioe.getMessage());
+        return null;
     }
-    return null;
-}
+    
+    public Mae getMaeById(Long id){
+        String operacao = "mae recuperada pelo id";
+        try{
+            URL url = new URL(SECURITY+BASE_URL+GET_MAE_BY_ID+id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            
+            int responseCode = connection.getResponseCode();
+            
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String inputLine;
+                while((inputLine = in.readLine()) != null){
+                    response.append(inputLine);
+                }
+                in.close();
+                log.escreverLogHttp(operacao, responseCode);
+                return JsonUtils.jsonToObjeto(response.toString(), Mae.class);
+            }else{
+                BalloonNotification ballonNotification = new BalloonNotification("Ocorreu um erro");
+                ballonNotification.show("Ocorreu um erro");
+            }
+            
+        }catch(IOException e){
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+        return null;
+    }
 
 }

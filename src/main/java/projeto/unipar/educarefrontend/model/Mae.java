@@ -1,29 +1,26 @@
 package projeto.unipar.educarefrontend.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import projeto.unipar.educarefrontend.util.Log;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pai {
-    
+public class Mae {
+
     private Long id;
-    private String nomeCompletoPai;
-    private String cpfPai;
-    private String telefonePai;
-    private boolean telefonePaiWhatsapp;
+    private String nomeCompletoMae;
+    private String cpfMae;
+    private String telefoneMae;
+    private boolean telefoneMaeWhatsapp;
     private String contatoReserva;
     private boolean podeBuscar;
     private String telefoneReserva;
     private boolean telefoneReservaWhatsapp;
-    
+    private Pai pai;
     private String cep;
     private String logradouro;
     private String complemento;
@@ -36,11 +33,6 @@ public class Pai {
     private String ddd;
     private String numero;
     private String siafi;
-    
-    private Mae mae;
-    
     private boolean ativo;
-    
- 
     
 }

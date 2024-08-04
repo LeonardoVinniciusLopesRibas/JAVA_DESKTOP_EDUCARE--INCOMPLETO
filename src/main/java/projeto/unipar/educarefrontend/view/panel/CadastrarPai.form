@@ -152,7 +152,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfNumeroReserva">
+    <Component class="javax.swing.JTextField" name="jtfTelefoneReserva">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="12" style="1"/>
@@ -180,6 +180,9 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbWhatsapp">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="320" y="120" width="20" height="-1"/>
@@ -225,6 +228,9 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbWhatsappReserva">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="320" y="190" width="20" height="-1"/>
@@ -509,6 +515,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfMomSelected">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="12" style="1"/>
         </Property>
