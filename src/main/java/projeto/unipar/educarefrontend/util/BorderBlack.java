@@ -8,6 +8,7 @@ import javax.swing.border.Border;
 
 public class BorderBlack implements Border {
 
+    // <editor-fold defaultstate="collapsed" desc="Classe responsável por setar Borda preta">
     private final int radius;
 
     public BorderBlack(int radius) {
@@ -29,4 +30,6 @@ public class BorderBlack implements Border {
         g.setColor(Color.BLACK);
         g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
     }
+    //</editor-fold>
+    
 }

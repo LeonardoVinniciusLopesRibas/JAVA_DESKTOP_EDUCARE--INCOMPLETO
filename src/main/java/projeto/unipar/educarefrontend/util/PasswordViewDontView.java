@@ -9,6 +9,7 @@ public class PasswordViewDontView {
     private boolean isPasswordVisible = false;
     private static final Log log = new Log();
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por esconder e mostrar a senha ao clique">
     public void viewPassword(JButton bt, JPasswordField jpfSenha) {
         if (isPasswordVisible) {
             jpfSenha.setEchoChar('*');
@@ -21,5 +22,6 @@ public class PasswordViewDontView {
         }
         isPasswordVisible = !isPasswordVisible;
     }
+    //</editor-fold>
 
 }

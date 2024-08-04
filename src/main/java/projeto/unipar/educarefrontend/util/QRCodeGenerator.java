@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class QRCodeGenerator {
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por gerar um Qr Code e retornar um BufferedImage">
     public static BufferedImage generateQRCodeImage(String barcodeText, Log log) {
         try {
             QRCodeWriter barcodeWriter = new QRCodeWriter();
@@ -22,5 +23,6 @@ public class QRCodeGenerator {
         log.escreverLogInfoAvulso("NÃO FOI POSSÍVEL GERAR O QRCODE");
         return null;
     }
+    //</editor-fold>
 
 }

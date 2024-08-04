@@ -6,7 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class ReiniciarSystem {
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por reiniciar o sistema, ele busca o jar e reinicia">
     public static void reiniciar(JFrame pai, Log log) {
         try {
             String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
@@ -39,4 +40,6 @@ public class ReiniciarSystem {
             log.escreverLogErroOperacaoException(ex, errorMessage);
         }
     }
+    //</editor-fold>
+    
 }

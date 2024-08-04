@@ -16,6 +16,7 @@ public class TelefoneFormatter extends DocumentFilter {
         this.log = log;
     }    
     
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por adicionar máscara no telefone">
     public JFormattedTextField createFormatterTelefone() {
         JFormattedTextField formattedTextField = new JFormattedTextField();
         formattedTextField.setColumns(14);
@@ -92,5 +93,6 @@ public class TelefoneFormatter extends DocumentFilter {
         
         return formattedTextField;
     }
+    //</editor-fold>
     
 }

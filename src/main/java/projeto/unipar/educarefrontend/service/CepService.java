@@ -22,7 +22,7 @@ public class CepService {
     public CepService(Log log) {
         this.log = log;
     }
-    
+    // <editor-fold defaultstate="collapsed" desc="Buscar cep na api ViaCep, recebe CepRequest e retorna CepResponse">
     public CepResponse buscarCep(CepRequest cepRequest) {
         String operacao = "CEP CONSULTADO";
         try {
@@ -61,5 +61,6 @@ public class CepService {
 
         return null;
     }
+    //</editor-fold>
     
 }

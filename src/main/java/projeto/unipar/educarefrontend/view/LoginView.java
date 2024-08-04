@@ -1,10 +1,8 @@
 package projeto.unipar.educarefrontend.view;
 
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import javax.swing.GroupLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -45,6 +43,7 @@ public class LoginView extends javax.swing.JFrame {
     //FIM CONSTRUTOR
 
     //INÍCIO MÉTODOS
+    // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initiallyManuallyComponents() {
         log.escreverLogInfoAvulso("INICIANDO APLICAÇÃO");
         this.setPreferredSize(new Dimension(1366, 768));
@@ -57,8 +56,9 @@ public class LoginView extends javax.swing.JFrame {
         moveAndCheckSizeJLayeredPaneRight();
         organizeJLayeredPanelLeft();
     }
+    //</editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Organizador de bounds com resolução diferente">
+    // <editor-fold defaultstate="collapsed" desc="Organizando o JLayeredPanel da Esquerda, conforme o tamanho do monitor">
     private void organizeJLayeredPanelLeft() {
         Dimension dimension = adjustWindowSize.adjustWindowSize(this);
 
@@ -80,7 +80,9 @@ public class LoginView extends javax.swing.JFrame {
         jLabel1.setLocation(panelX, panelY);
         jLabel1.setBounds(panelX, panelY, panelWidth, panelHeight);
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Organizando o JLayeredPanel da Direita, conforme o tamanho do monitor">
     private void organizeJLayeredPanelRight() {
         Dimension dimension = adjustWindowSize.adjustWindowSize(this);
 
@@ -118,7 +120,9 @@ public class LoginView extends javax.swing.JFrame {
         jLabel2.repaint();
 
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento de organizar o JLayeredPaneRight e o JLayeredPaneLeft">
     private void moveAndCheckSizeJLayeredPaneRight() {
         this.addComponentListener(new ComponentAdapter() {
             @Override
@@ -137,6 +141,7 @@ public class LoginView extends javax.swing.JFrame {
     }
     //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por realizar o login no sistema">
     public void logar() {
         UsuarioRequest usuarioRequest = new UsuarioRequest();
         usuarioRequest.setUsuario(jtfEmail.getText());
@@ -156,7 +161,8 @@ public class LoginView extends javax.swing.JFrame {
             balloon.show("Usuário ou Senha Inválidos!");
         }
     }
-
+    //</editor-fold>
+    
     //FIM MÉTODOS
     //INÍCIO MÉTODOS AUTOMÁTICOS
     @SuppressWarnings("unchecked")
@@ -346,6 +352,8 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_jpfSenhaKeyPressed
     //FIM MÉTODOS AUTOMÁTICOS
     //MAIN
+    
+    // <editor-fold defaultstate="collapsed" desc="Método MAIN!">
     public static void main(String args[]) {
         Splash splash = new Splash();
         Log log = new Log();
@@ -410,6 +418,8 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
     }
+    //</editor-fold>
+    
     //FIM MAIN
     //ÁREA DE VARIÁVEIS AUTOMÁTICAS
     // Variables declaration - do not modify//GEN-BEGIN:variables

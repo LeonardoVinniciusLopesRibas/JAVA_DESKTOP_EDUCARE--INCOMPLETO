@@ -9,25 +9,27 @@ import projeto.unipar.educarefrontend.view.Retaguarda;
 public class VisualizarPai extends JPanel {
 
     //ÁREA DE INSTÂNCIAS E VARIÁVEIS
-        private Log log = new Log();
-        private Pai pai = new Pai();
-        private PaiService paiService = new PaiService(log);
-        private Retaguarda retaguarda;
+    private Log log = new Log();
+    private Pai pai = new Pai();
+    private PaiService paiService = new PaiService(log);
+    private Retaguarda retaguarda;
     //FIM DA ÁREA DE INSTÂNCIAS E VARIÁVEIS
     //CONSTRUTOR
-    
+
     public VisualizarPai(Retaguarda pai) {
         initComponents();
         this.retaguarda = pai;
         initManuallyComponents();
     }
+
     //FIM DO CONSTRUTOR
     //AREA DE MÉTODOS
-        private void initManuallyComponents() {
-            
-        }
-        
-    
+    // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
+    private void initManuallyComponents() {
+
+    }
+    //</editor-fold>
+
     //FIM DA ÁREA DE MÉTODOS
     //CÓDIGO AUTOMÁTICO
     @SuppressWarnings("unchecked")

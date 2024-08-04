@@ -10,7 +10,6 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 
@@ -26,6 +25,7 @@ public class CpfFormatter extends DocumentFilter {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Classe responsável por formatar o Cep no padrão ###.###.###-##">
     public JTextField createFormattedTextFieldCpf() {
 
         JFormattedTextField formattedTextField = new JFormattedTextField();
@@ -104,5 +104,6 @@ public class CpfFormatter extends DocumentFilter {
         return formattedTextField;
 
     }
+    //</editor-fold>
 
 }

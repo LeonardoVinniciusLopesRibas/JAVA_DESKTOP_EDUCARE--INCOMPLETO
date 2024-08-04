@@ -38,6 +38,7 @@ public class PaiService {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por cadastrar um pai no banco de dados">
     public int postPai(Pai pai) {
         String operacao = "Pai cadastrado com sucesso";
         try{
@@ -95,7 +96,7 @@ public class PaiService {
         }
         return -1;
     }
-    
+    //</editor-fold>
     
     
 }

@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 public class WindowsCloseHandler {
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por fechar um JFRAME">
     public static void addCloseHandler(JFrame frameSendoFechado, Log log) {
 
         frameSendoFechado.addWindowListener(new WindowAdapter() {
@@ -36,4 +37,5 @@ public class WindowsCloseHandler {
             }
         });
     }
+    //</editor-fold>
 }

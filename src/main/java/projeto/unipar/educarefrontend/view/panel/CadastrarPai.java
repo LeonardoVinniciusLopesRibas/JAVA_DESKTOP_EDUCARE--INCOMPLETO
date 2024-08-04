@@ -1,25 +1,18 @@
 package projeto.unipar.educarefrontend.view.panel;
 
-import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.SpinnerListModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
-import projeto.unipar.educarefrontend.dto.EstadoResponse;
 import projeto.unipar.educarefrontend.dto.MaeResponse;
 import projeto.unipar.educarefrontend.model.Estado;
 import projeto.unipar.educarefrontend.model.Mae;
@@ -35,12 +28,10 @@ import projeto.unipar.educarefrontend.util.CepFormatter;
 import projeto.unipar.educarefrontend.util.CpfFormatter;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.NumeroFormatter;
-import projeto.unipar.educarefrontend.util.OpenOrganizeInternalFrame;
 import projeto.unipar.educarefrontend.util.QRCodeGenerator;
 import projeto.unipar.educarefrontend.util.RemoveMaskUtil;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.util.ValidaCpf;
-import projeto.unipar.educarefrontend.view.Retaguarda;
 import projeto.unipar.educarefrontend.view.SelectEstado;
 import projeto.unipar.educarefrontend.view.SelectMunicipio;
 import projeto.unipar.educarefrontend.view.SelectedMomOnDad;
@@ -96,11 +87,14 @@ public class CadastrarPai extends javax.swing.JPanel {
     //FIM CONSTRUTOR
     //INÍCIO MÉTODOS
 
+    // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initManuallyComponents() {
         showAdressMom();
         cleanDataForNewRegister();
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por buscar o CEP">
     private void searchCep() {
         String cepComMascara = jtfCep.getText();
         String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
@@ -134,7 +128,9 @@ public class CadastrarPai extends javax.swing.JPanel {
             System.out.println("Cep não encontrado");
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por validar se a checkbox de mãe está marcada ou não">
     private void showAdressMom() {
         boolean selected = jcbSelectPaiMae.isSelected();
         jbLupaMom.setEnabled(selected);
@@ -143,7 +139,9 @@ public class CadastrarPai extends javax.swing.JPanel {
         jtfMomSelected.setVisible(selected);
         btCleanMomAndAdress.setVisible(selected);
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método por limpar todos os campos, chamado depois de clicar em salvar">
     private void cleanDataForNewRegister() {
         ibge = "";
         ibgeMom = "";
@@ -167,7 +165,9 @@ public class CadastrarPai extends javax.swing.JPanel {
         jtfEstado.setText("");
         jtfCidade.setText("");
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método para limpar o endereço e a mãe">
     private void cleanAdressAndMomSelected() {
         Object[] options = {"Sim", "Não"};
         int option = JOptionPane.showOptionDialog(
@@ -194,7 +194,9 @@ public class CadastrarPai extends javax.swing.JPanel {
             }
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por gerar o QrCode">
     private void generatedQrCode() {
         if (jtfCpfPai == null || jtfCpfPai.getText().trim().isBlank() || jtfCpfPai.getText().trim().isEmpty()) {
             BalloonNotification balloonNotification = new BalloonNotification("Informe o CPF primeiro");
@@ -219,13 +221,16 @@ public class CadastrarPai extends javax.swing.JPanel {
         BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
         ImageIcon icon = new ImageIcon(qrCodeImage);
         lblQrCode.setIcon(icon);
-
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por limpar o QrCode e remove-lo">
     private void cleanQrCode() {
         lblQrCode.setIcon(null);
     }
-
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método para download do QrCode">
     private void downloadQrCode() {
         if (lblQrCode.getIcon() == null) {
             BalloonNotification balloonNotification = new BalloonNotification("Nenhum QrCode para salvar");
@@ -267,7 +272,9 @@ public class CadastrarPai extends javax.swing.JPanel {
             }
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por carregar o JFrame de select estado">
     private void loadSelectEstado() {
         if (isSelectEstado) {
             selectEstadoInstance.toFront();
@@ -291,7 +298,9 @@ public class CadastrarPai extends javax.swing.JPanel {
             });
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por receber o estado selecionado">
     public void recebeEstadoSelected(Estado estado) {
         idEstado = estado.getId();
         siglaUfEstado = estado.getSiglaUf();
@@ -299,7 +308,9 @@ public class CadastrarPai extends javax.swing.JPanel {
 
         jtfEstado.setText(siglaUfEstado);
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por receber o municipio selecionado">
     public void recebeMunicipioSelected(Municipio municipio) {
         idMunicipio = municipio.getId();
         ibgeMunicipio = municipio.getIbge();
@@ -309,7 +320,9 @@ public class CadastrarPai extends javax.swing.JPanel {
         ibgeMom = "";
         jtfCidade.setText(nomeMunicipio);
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por receber a mãe selecionada">
     public void recebeMomSelected(MaeResponse maeResponse) {
         idMom = maeResponse.getId();
         nomeMom = maeResponse.getNomeCompletoMae();
@@ -334,7 +347,9 @@ public class CadastrarPai extends javax.swing.JPanel {
         jtfEstado.setText(ufMom);
         jtfCidade.setText(localidadeMom);
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por carregar o JFrame de select municipio">
     public void loadSelectMunicipio() {
         if (jtfEstado.getText().length() >= 1) {
             if (isSelectMunicipio) {
@@ -363,7 +378,9 @@ public class CadastrarPai extends javax.swing.JPanel {
             b.show("Informe um estado primeiro");
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por carregar o JFrame de select mae">
     public void loadSelectMom() {
         if (isSelectMom) {
             selectMomInstance.toFront();
@@ -387,7 +404,9 @@ public class CadastrarPai extends javax.swing.JPanel {
             });
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por pegar todas as informações e enviar a api, para salvar o pai">
     public void salvarRequestDad() {
         Boolean ativo = true;
         String bairro = jtfBairro.getText();
@@ -462,6 +481,7 @@ public class CadastrarPai extends javax.swing.JPanel {
             cleanDataForNewRegister();
         }
     }
+    //</editor-fold>
 
     //FIM MÉTODOS
     //INÍCIO MÉTODOS AUTOMÁTICOS

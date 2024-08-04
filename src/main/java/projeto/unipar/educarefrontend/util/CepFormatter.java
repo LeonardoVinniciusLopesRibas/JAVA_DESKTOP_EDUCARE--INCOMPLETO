@@ -23,9 +23,10 @@ public class CepFormatter extends PlainDocument{
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Classe responsável por formatar o Cep no padrão ##.###-###">
     public JFormattedTextField createFormatterCep() {
         JFormattedTextField formattedTextField = new JFormattedTextField();
-        formattedTextField.setColumns(9); // Formato xx.xxx-xxx
+        formattedTextField.setColumns(9);
         formattedTextField.setDocument(this);
         formattedTextField.addKeyListener(new KeyAdapter() {
             @Override
@@ -89,5 +90,6 @@ public class CepFormatter extends PlainDocument{
 
         return result.toString();
     }
+    //</editor-fold>
     
 }

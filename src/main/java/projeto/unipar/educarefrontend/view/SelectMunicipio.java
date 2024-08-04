@@ -10,15 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import projeto.unipar.educarefrontend.dto.EstadoResponse;
 import projeto.unipar.educarefrontend.dto.MunicipioResponse;
 import projeto.unipar.educarefrontend.model.Municipio;
-import projeto.unipar.educarefrontend.service.EstadoService;
 import projeto.unipar.educarefrontend.service.MunicipioService;
 import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.Log;
@@ -46,6 +43,7 @@ public class SelectMunicipio extends javax.swing.JFrame {
 
     //FIM CONSTRUTOR
     //INICIO MÉTODOS
+    // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initManuallyComponents() {
         this.setLocationRelativeTo(null);
         log.escreverLogInfoAvulso("tela de seleção de municipios aberta");
@@ -56,7 +54,9 @@ public class SelectMunicipio extends javax.swing.JFrame {
         clickComEnter();
         setupEscapeKey();
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método para buscar as informações de municipio e setar na tabela">
     private void searchTable() {
         municipios = municipioService.getMunicipio(ufEstado);
         model = (DefaultTableModel) jtbMunicipios.getModel();
@@ -72,7 +72,9 @@ public class SelectMunicipio extends javax.swing.JFrame {
             adjustColumnTable();
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento de clique com mouse para a tabela">
     private void clickComMouse() {
         jtbMunicipios.addMouseListener(new MouseAdapter() {
             @Override
@@ -91,7 +93,9 @@ public class SelectMunicipio extends javax.swing.JFrame {
             }
         });
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento de tecla do ESC para fechar JFrame">
     private void setupEscapeKey() {
         jPanel1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "closeWindow");
         jPanel1.getActionMap().put("closeWindow", new AbstractAction() {
@@ -101,7 +105,9 @@ public class SelectMunicipio extends javax.swing.JFrame {
             }
         });
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método por pegar a linha selecionada">
     private void selectRow() {
         int selectedRow = jtbMunicipios.getSelectedRow();
         if (selectedRow >= 0) {
@@ -115,7 +121,9 @@ public class SelectMunicipio extends javax.swing.JFrame {
 
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento de clique enter do teclado">
     private void clickComEnter() {
         jtbMunicipios.addKeyListener(new KeyAdapter() {
             @Override
@@ -134,10 +142,15 @@ public class SelectMunicipio extends javax.swing.JFrame {
             }
         });
     }
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar o tamanho da altura da linha">
     private void ajustaTamanhoLinhaTabela() {
         jtbMunicipios.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(20));
     }
-    
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar a largura da coluna da tabela">
     private void adjustColumnTable() {
         for (int column = 0; column < jtbMunicipios.getColumnCount(); column++) {
             TableColumn tableColumn = jtbMunicipios.getColumnModel().getColumn(column);
@@ -159,7 +172,7 @@ public class SelectMunicipio extends javax.swing.JFrame {
             tableColumn.setPreferredWidth(preferredWidth);
         }
     }
-    
+    //</editor-fold>
 
     //FIM METODOS
     //METODOS AUTOMATICOS

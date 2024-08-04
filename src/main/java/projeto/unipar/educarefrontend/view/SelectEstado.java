@@ -10,14 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import projeto.unipar.educarefrontend.dto.EstadoResponse;
-import projeto.unipar.educarefrontend.dto.MaeResponse;
 import projeto.unipar.educarefrontend.model.Estado;
 import projeto.unipar.educarefrontend.service.EstadoService;
 import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
@@ -45,6 +42,7 @@ public class SelectEstado extends javax.swing.JFrame {
     //FIM CONSTRUTOR
     //INICIO MÉTODOS
 
+    // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initManuallyComponents() {
         this.setLocationRelativeTo(null);
         log.escreverLogInfoAvulso("tela de seleção de estados aberta");
@@ -55,7 +53,9 @@ public class SelectEstado extends javax.swing.JFrame {
         clickComEnter();
         setupEscapeKey();
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método para buscar as informações de estado e setar na tabela">
     private void searchTable() {
         estados = estadoService.getEstados();
         model = (DefaultTableModel) jtbEstados.getModel();
@@ -70,7 +70,9 @@ public class SelectEstado extends javax.swing.JFrame {
             adjustColumnTable();
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento de clique com mouse para a tabela">
     private void clickComMouse() {
         jtbEstados.addMouseListener(new MouseAdapter() {
             @Override
@@ -89,7 +91,9 @@ public class SelectEstado extends javax.swing.JFrame {
             }
         });
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento de tecla do ESC para fechar JFrame">
     private void setupEscapeKey() {
         jPanel1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "closeWindow");
         jPanel1.getActionMap().put("closeWindow", new AbstractAction() {
@@ -99,7 +103,9 @@ public class SelectEstado extends javax.swing.JFrame {
             }
         });
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método por pegar a linha selecionada">
     private void selectRow() {
         int selectedRow = jtbEstados.getSelectedRow();
         if (selectedRow >= 0) {
@@ -109,10 +115,11 @@ public class SelectEstado extends javax.swing.JFrame {
             ajustaTamanhoLinhaTabela();
             adjustColumnTable();
             dispose();
-        } else {
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento de clique enter do teclado">
     private void clickComEnter() {
         jtbEstados.addKeyListener(new KeyAdapter() {
             @Override
@@ -131,11 +138,15 @@ public class SelectEstado extends javax.swing.JFrame {
             }
         });
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar o tamanho da altura da linha">
     private void ajustaTamanhoLinhaTabela() {
         jtbEstados.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(25));
     }
-    
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar a largura da coluna da tabela">
     private void adjustColumnTable() {
         for (int column = 0; column < jtbEstados.getColumnCount(); column++) {
             TableColumn tableColumn = jtbEstados.getColumnModel().getColumn(column);
@@ -157,6 +168,8 @@ public class SelectEstado extends javax.swing.JFrame {
             tableColumn.setPreferredWidth(preferredWidth);
         }
     }
+    //</editor-fold>
+
     //FIM METODOS
     //METODOS AUTOMATICOS
     @SuppressWarnings("unchecked")

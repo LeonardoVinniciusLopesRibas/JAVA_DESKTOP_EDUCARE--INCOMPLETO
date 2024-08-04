@@ -1,15 +1,13 @@
-
-
 package projeto.unipar.educarefrontend.util;
 
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
 
 public class OpenOrganizeInternalFrame {
     
     private static final Log log = new Log();
     
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por organizar o JInternalFrame no meio da tela">
     public void openOrganizeInternalFrame(JInternalFrame janela, JFrame frame){
         log.escreverLogInfoAvulso("jinternalframe sendo aberto");
         int lDesk = frame.getWidth();
@@ -21,5 +19,6 @@ public class OpenOrganizeInternalFrame {
         frame.add(janela);
         janela.setVisible(true);
     }
+    //</editor-fold>
 
 }

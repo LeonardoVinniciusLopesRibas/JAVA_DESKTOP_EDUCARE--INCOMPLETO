@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -44,6 +43,7 @@ public class EstadoService {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Método para cadastrar estados ao abrir o sistema, e retornar um boolean">
     public boolean cadastrarEstado() {
         String operacao = "ESTADO CADASTRADO";
         try {
@@ -96,7 +96,9 @@ public class EstadoService {
         }
         return false;
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método para resgatar os estados, e retornar uma lista de EstadoResponse">
     public List<EstadoResponse> getEstados() {
         String operacao = "estado buscados";
         List<EstadoResponse> estados = null;    
@@ -130,7 +132,9 @@ public class EstadoService {
         }
         return estados;
     }
-
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método para resgatar um estado, recebendo um id, e retornando um Estado">
     public Estado searchEstadoId(Long id) {
         String operacao = "ESTADO ENCONTRADO POR ID";
         try{
@@ -162,5 +166,6 @@ public class EstadoService {
         }
         return null;
     }
+    //</editor-fold>
 
 }

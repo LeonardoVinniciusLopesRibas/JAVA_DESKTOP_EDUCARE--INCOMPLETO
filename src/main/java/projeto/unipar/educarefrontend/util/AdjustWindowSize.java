@@ -5,13 +5,12 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class AdjustWindowSize {
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por receber um JFrame e por pegar o tamanho do monitor e retornar um Dimension">
     public Dimension adjustWindowSize(JFrame frame) {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice[] devices = ge.getScreenDevices();
@@ -28,7 +27,9 @@ public class AdjustWindowSize {
         // Retorna o tamanho da tela principal como padrão
         return ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds().getSize();
     }
+    //</editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por receber um JPanel e por pegar o tamanho do monitor e retornar um Dimension">
     public Dimension adjustWindowSize(JPanel panel) {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice[] devices = ge.getScreenDevices();
@@ -45,5 +46,6 @@ public class AdjustWindowSize {
         // Retorna o tamanho da tela principal como padrão
         return ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds().getSize();
     }
-
+    //</editor-fold>
+    
 }

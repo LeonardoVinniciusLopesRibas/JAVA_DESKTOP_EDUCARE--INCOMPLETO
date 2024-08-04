@@ -34,6 +34,7 @@ public class MaeService {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por resgatar uma mãe por parâmetros, e retornar uma lista de MaeResponse">
     public List<MaeResponse> buscarMae(String queryBusca) {
         String operacao = "CONSULTANDO MÃE";
 
@@ -67,7 +68,9 @@ public class MaeService {
 
         return null;
     }
-
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por resgatar uma mãe pelo id, e retornar uma MaeResponse">
     public MaeResponse buscarMaeById(Long id) {
         String operacao = "BUSCANDO MÃE PELO ID NO BANCO DE DADOS";
         try {
@@ -97,7 +100,9 @@ public class MaeService {
         }
         return null;
     }
+    //</editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por resgatar uma mãe pelo id, e retornar uma Mae">
     public Mae getMaeById(Long id){
         String operacao = "mae recuperada pelo id";
         try{
@@ -129,5 +134,5 @@ public class MaeService {
         }
         return null;
     }
-
+    //</editor-fold>
 }

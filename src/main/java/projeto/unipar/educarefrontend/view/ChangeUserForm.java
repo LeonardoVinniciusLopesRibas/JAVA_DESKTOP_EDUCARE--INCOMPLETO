@@ -29,6 +29,7 @@ public class ChangeUserForm extends javax.swing.JFrame {
 
     //FIM CONSTRUTOR
     //INICIO MÉTODOS
+    // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initManuallyComponents() {
         setLocationRelativeTo(null);
         setPreferredSize(new Dimension(400, 300));
@@ -36,7 +37,9 @@ public class ChangeUserForm extends javax.swing.JFrame {
         setMaximumSize(new Dimension(400, 300));
         setSize(new Dimension(400, 300));
     }
+    //</editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por trocar o usuário acessado">
     private Boolean trocarUsuario() {
         UsuarioRequest usuarioRequest = new UsuarioRequest();
         usuarioRequest.setUsuario(jtfUsuario.getText());
@@ -81,6 +84,8 @@ public class ChangeUserForm extends javax.swing.JFrame {
         }
         return true;
     }
+    //</editor-fold>
+    
     //FIM METODOS
     //INICIO MÉTODOS AUTOMATICOS
     @SuppressWarnings("unchecked")

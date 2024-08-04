@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AjustaTamanhoLinhaTabela  extends DefaultTableCellRenderer{
     
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar o tamanho da linha da tabela">
     private int alturaLinha;
 
     @Override
@@ -18,5 +19,6 @@ public class AjustaTamanhoLinhaTabela  extends DefaultTableCellRenderer{
         table.setRowHeight(row, alturaLinha); 
         return c;
     }
+    //</editor-fold>
     
 }

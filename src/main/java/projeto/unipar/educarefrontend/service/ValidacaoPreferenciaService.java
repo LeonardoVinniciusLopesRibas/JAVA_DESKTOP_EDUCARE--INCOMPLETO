@@ -38,6 +38,7 @@ public class ValidacaoPreferenciaService {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por setar true a primeira vez que abrir o sistema">
     public ValidacaoPreferencia setTrue(ValidacaoPreferencia validacaoPreferencia) {
         String operacao = "SQL REALIZADA";
         try {
@@ -90,7 +91,9 @@ public class ValidacaoPreferenciaService {
         }
         return null;
     }
-
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por validar se os endereços foram salvos">
     public Boolean checkSetTrue() {
         try {
             URL url = new URL(SECURITY + BASE_URL + CHECK_SET_TRUE);
@@ -127,5 +130,6 @@ public class ValidacaoPreferenciaService {
         }
         return false;
     }
+    //</editor-fold>
 
 }

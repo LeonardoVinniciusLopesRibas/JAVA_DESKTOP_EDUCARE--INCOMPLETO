@@ -7,6 +7,7 @@ import javax.swing.border.Border;
 
 public class RoundedBorder implements Border {
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por arredondar um JTextField">
     private int radius;
 
     public RoundedBorder(int radius) {
@@ -27,4 +28,6 @@ public class RoundedBorder implements Border {
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
     }
+    //</editor-fold>
+    
 }

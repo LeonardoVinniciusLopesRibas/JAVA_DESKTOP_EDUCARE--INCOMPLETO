@@ -22,7 +22,6 @@ import projeto.unipar.educarefrontend.enumerated.Ip;
 import projeto.unipar.educarefrontend.model.Usuario;
 import projeto.unipar.educarefrontend.util.JsonUtils;
 import projeto.unipar.educarefrontend.util.Log;
-import projeto.unipar.educarefrontend.view.CadastrarUsuarioView;
 
 public class UsuarioService {
 
@@ -43,6 +42,7 @@ public class UsuarioService {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por validar o Login de um usuário">
     public Usuario logar(UsuarioRequest usuarioRequest) {
         String operacao = "USUARIO LOGADO";
         try {
@@ -112,8 +112,11 @@ public class UsuarioService {
             return null;
         }
     }
+    //</editor-fold>
 
-    public void save(UsuarioRequestCadastro urc, CadastrarUsuarioView cadastrarUsuario) {
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por cadastrar usuário no banco de dados">
+    /*public void save(UsuarioRequestCadastro urc, CadastrarUsuarioView cadastrarUsuario) {
         String operacao = "USUÁRIO CADASTRADO";
         try{
             URL url = new URL(SECURITY + BASE_URL + CADASTRAR);
@@ -167,7 +170,8 @@ public class UsuarioService {
             log.escreverLogErroOperacaoException(e, e.getMessage());
         }
         
-    }
+    }*/
+    //</editor-fold>
 
     
 }

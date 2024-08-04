@@ -61,6 +61,7 @@ public class Retaguarda extends javax.swing.JFrame {
 
     //FIM DO CONSTRUTOR
     //AREA DE MÉTODOS
+    // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initManuallyComponents() {
         this.setPreferredSize(new Dimension(ReturnSize.getScreenSize()));
         this.setMinimumSize(new Dimension(ReturnSize.getScreenSize()));
@@ -92,14 +93,18 @@ public class Retaguarda extends javax.swing.JFrame {
         BalloonNotification balloonNotification = new BalloonNotification("sistema iniciado");
         balloonNotification.show("sistema iniciado");
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por assegurar a sessão do usuário">
     public void userSession(Usuario usuario) {
         Long id = usuario.getId();
         String nome = usuario.getNome();
         String email = usuario.getUsuario();
         String senha = usuario.getSenha();
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por reiniciar o sistema">
     private void reiniciar() {
         Object[] options = {"Sim", "Não"};
 
@@ -118,7 +123,9 @@ public class Retaguarda extends javax.swing.JFrame {
         }
 
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por matar o sistema">
     private void close() {
 
         Object[] options = {"Sim", "Não"};
@@ -134,12 +141,14 @@ public class Retaguarda extends javax.swing.JFrame {
                 options[0]
         );
         if (option == JOptionPane.YES_OPTION) {
+            //System.exit(0) -> Mata completamento o processo do sistema
             System.exit(0);
             this.dispose();
         }
-
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por abrir a interface de troca de usuário">
     public void trocarUsuario() {
 
         if (isChangeUser) {
@@ -165,8 +174,9 @@ public class Retaguarda extends javax.swing.JFrame {
         }
 
     }
+    //</editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Métodos para adicionar os botões no ToolBar"> 
+    // <editor-fold defaultstate="collapsed" desc="Métodos para adicionar os botões e os botões suspensos no ToolBar"> 
     private void addInfToolBar() {
 
         jToolBar.setBackground(Color.getHSBColor(204, 160, 238));
@@ -229,7 +239,7 @@ public class Retaguarda extends javax.swing.JFrame {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Método de evento dos botões do JToolBar"> 
+    // <editor-fold defaultstate="collapsed" desc="Evento do botão do JToolBar para sair"> 
     private void actionBtSair() {
         btSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,7 +251,9 @@ public class Retaguarda extends javax.swing.JFrame {
     private void btSairActionPerformed(ActionEvent evt) {
         close();
     }
-
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Evento do botão do JToolBar para VisualizarPai"> 
     private void actionBtVisualizarPai() {
         visualizarPai.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -253,7 +265,9 @@ public class Retaguarda extends javax.swing.JFrame {
     private void visualizarPaiPerformed(ActionEvent evt) {
         addSawPai();
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento do botão do JToolBar para CadastrarPai">     
     private void actionBtCadastrarPai() {
         cadastrarPai.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -265,9 +279,9 @@ public class Retaguarda extends javax.swing.JFrame {
     private void cadastrarPaiPerformed(ActionEvent evt) {
         addAddPai();
     }
-
     //</editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Métodos para trabalhar com as abas do sistema"> 
+
+    // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de visualizar pai"> 
     public void addSawPai() {
         boolean abaExistente = false;
         String title = "Visualizar pai";
@@ -287,7 +301,9 @@ public class Retaguarda extends javax.swing.JFrame {
 
         }
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de cadastrar pai"> 
     public void addAddPai() {
         boolean abaExistente = false;
         String title = "Cadastrar pai";
@@ -306,8 +322,11 @@ public class Retaguarda extends javax.swing.JFrame {
             abas.setSelectedComponent(tabAddPai);
         }
     }
+    //</editor-fold>
 
-    //MÉTODO SEMPRE PRECISA SER O ÚLTIMO, ACIMA APENAS INFORMAÇÃO DA ABA, E ABAIXO CRIAÇÃO DELA
+    //MÉTODO ABAIXO SEMPRE PRECISA SER O ÚLTIMO, OS ACIMA APENAS INFORMAÇÃO DA ABA, E ABAIXO CRIAÇÃO DELA
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por criar o título da aba, e o botão de x para fechar">
     private JPanel createTabTitle(String title, final JPanel panel) {
         JPanel titlePanel = new JPanel(new BorderLayout());
         titlePanel.setOpaque(false);
@@ -325,9 +344,9 @@ public class Retaguarda extends javax.swing.JFrame {
         titlePanel.add(closeButton, BorderLayout.EAST);
         return titlePanel;
     }
-
     //</editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Métodos para fazer resizable nos componentes">
+    
+    // <editor-fold defaultstate="collapsed" desc="Evento para organizar o JPanel">
     private void moveAndCheckSizeJPanel() {
         this.addComponentListener(new ComponentAdapter() {
             @Override
@@ -342,7 +361,9 @@ public class Retaguarda extends javax.swing.JFrame {
         });
 
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método que organiza a localização do JPanel">
     private void organizeJPanel() {
         Dimension dimension = adjustWindowSize.adjustWindowSize(this);
 
@@ -398,8 +419,8 @@ public class Retaguarda extends javax.swing.JFrame {
         jToolBar.revalidate();
         jToolBar.repaint();
     }
-
     //</editor-fold>
+    
     //FIM DA ÁREA DE MÉTODOS
     //CÓDIGO AUTOMÁTICO
     @SuppressWarnings("unchecked")

@@ -19,8 +19,9 @@ public class BalloonNotification {
     private final JLabel label;
     private final JButton closeButton;
     private static BalloonNotification currentNotification = null;
-    private String currentMessage = ""; // Armazenar a mensagem atual
+    private String currentMessage = "";
 
+    // <editor-fold defaultstate="collapsed" desc="Construtor de BalloonNotification">
     public BalloonNotification(String message) {
         window = new JWindow();
         window.setLayout(new BorderLayout());
@@ -56,18 +57,17 @@ public class BalloonNotification {
 
         setupTimer();
     }
-
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por mostrar o balloon no JFrame">
     public void show(String newMessage) {
         if (currentNotification != null && currentNotification.window.isVisible()) {
-            // Verificar se a nova mensagem é diferente da atual
             if (newMessage.equals(currentNotification.currentMessage)) {
                 return;
             }
-            // Caso a mensagem seja diferente, ocultar a notificação atual
             currentNotification.window.setVisible(false);
         }
 
-        // Atualizar a mensagem atual
         if (currentNotification == null || !newMessage.equals(currentNotification.currentMessage)) {
             currentNotification = new BalloonNotification(newMessage);
         }
@@ -77,11 +77,15 @@ public class BalloonNotification {
         currentNotification.timer.setRepeats(false);
         currentNotification.timer.start();
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por resetar a notificação atual">
     private void resetNotification() {
         currentNotification = null;
     }
+    //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por setar um tempo padrão na notificação">
     private void setupTimer() {
         timer = new Timer(5000, new ActionListener() {
             @Override
@@ -91,4 +95,5 @@ public class BalloonNotification {
             }
         });
     }
+    //</editor-fold>
 }

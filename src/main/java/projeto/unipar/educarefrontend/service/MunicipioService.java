@@ -17,7 +17,6 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import projeto.unipar.educarefrontend.dto.EstadoResponse;
 import projeto.unipar.educarefrontend.dto.MunicipioResponse;
 import projeto.unipar.educarefrontend.enumerated.Ip;
 import projeto.unipar.educarefrontend.model.Municipio;
@@ -43,6 +42,7 @@ public class MunicipioService {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Método para cadastrar municipio ao abrir o sistema, e retornar um boolean ">
     public boolean cadastrarMunicipio() {
         String operacao = "MUNICIPIO CADASTRADO";
         try {
@@ -95,7 +95,9 @@ public class MunicipioService {
         }
         return false;
     }
-
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método para resgatar os municipios, e retornar uma lista de MunicipioResponse">
     public List<MunicipioResponse> getMunicipio(String uf) {
         String operacao = "municipios buscados";
         List<MunicipioResponse> municipios = null;
@@ -128,7 +130,9 @@ public class MunicipioService {
         }
         return municipios;
     }
-
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método para resgatar um municipio, recebendo um id, e retornando um Municipio">
     public Municipio searchMunicipioById(Long id) {
         String operacao = "Municipio encontrado pelo id";
         try {
@@ -159,5 +163,6 @@ public class MunicipioService {
         }
         return null;
     }
-
+    //</editor-fold>
+    
 }

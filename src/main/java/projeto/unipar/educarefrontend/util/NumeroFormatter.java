@@ -16,6 +16,7 @@ public class NumeroFormatter extends DocumentFilter {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Classe responsável por formatar o número e só receber números">
     public JTextField createFormatterNumero() {
         JTextField textField = new JTextField();
         ((PlainDocument) textField.getDocument()).setDocumentFilter(new DocumentFilter() {
@@ -46,5 +47,6 @@ public class NumeroFormatter extends DocumentFilter {
 
         return textField;
     }
+    //</editor-fold>
     
 }

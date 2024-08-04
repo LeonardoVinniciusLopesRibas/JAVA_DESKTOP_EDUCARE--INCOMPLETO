@@ -37,6 +37,7 @@ public class RegiaoService {
         this.log = log;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Método para cadastrar região ao abrir o sistema, e retornar um boolean ">
     public boolean cadastrarRegiao() {
         String operacao = "REGIAO CADASTRADA";
         try {
@@ -89,4 +90,5 @@ public class RegiaoService {
         }
         return false;
     }
+    //</editor-fold>
 }
