@@ -5,14 +5,13 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\LoginView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\ReiniciarSystem.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\SelectMunicipio.java
-C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\RetaguardaView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\PasswordViewDontView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\MaeResponse.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\ReturnSize.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\RoundedBorder.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\SetIcon.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\UsuarioRequestCadastro.java
-C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\CadastrarUsuarioView.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\ReativarPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\VisualizarPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\MunicipioResponse.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\ChangeUserForm.java
@@ -25,10 +24,9 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\ValidacaoPreferenciaService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\AjustaTamanhoLinhaTabela.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\UsuarioRequest.java
-C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\CadastrarPaiView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\CepResponse.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\PaiDtoResponse.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\Splash.java
-C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\SelecionaMaeNoCadastroDoPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\OpenOrganizeInternalFrame.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\BorderBlack.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\model\Municipio.java
@@ -36,7 +34,6 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\EstadoResponse.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\ValidaCpf.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\MunicipioService.java
-C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\TrocarUsuarioView.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\EstadoService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\PaiDtoRequest.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\model\Pai.java

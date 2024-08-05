@@ -28,6 +28,7 @@ import projeto.unipar.educarefrontend.util.ReturnSize;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
+import projeto.unipar.educarefrontend.view.panel.ReativarPai;
 import projeto.unipar.educarefrontend.view.panel.VisualizarPai;
 
 public class Retaguarda extends javax.swing.JFrame {
@@ -299,6 +300,27 @@ public class Retaguarda extends javax.swing.JFrame {
             abas.setTabComponentAt(index, createTabTitle(title, tabSawPai));
             abas.setSelectedComponent(tabSawPai);
 
+        }
+    }
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de reativar pai">
+    public void addReativePai(){
+        boolean abaExistente = false;
+        String title = "Reativar pai";
+        for(int i = 0; i < abas.getTabCount(); i++){
+            if(abas.getTitleAt(i).equals(title)){
+                abaExistente = true;
+                abas.setSelectedIndex(i);
+                break;
+            }
+        }
+        if(!abaExistente){
+            ReativarPai tabReativePai = new ReativarPai(this);
+            abas.addTab(title, tabReativePai);
+            int index = abas.indexOfComponent(tabReativePai);
+            abas.setTabComponentAt(index, createTabTitle(title, tabReativePai));
+            abas.setSelectedComponent(tabReativePai);
         }
     }
     //</editor-fold>
@@ -588,6 +610,11 @@ public class Retaguarda extends javax.swing.JFrame {
 
         jMenuItemReativarPai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/JMenuItemPai16x16.png"))); // NOI18N
         jMenuItemReativarPai.setText("Pai");
+        jMenuItemReativarPai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReativarPaiActionPerformed(evt);
+            }
+        });
         jMenuReativar.add(jMenuItemReativarPai);
 
         jMenuItemReativarResponsavel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/JMenuItemResponsavel16x16.png"))); // NOI18N
@@ -679,6 +706,11 @@ public class Retaguarda extends javax.swing.JFrame {
         // TODO add your handling code here:
         addSawPai();
     }//GEN-LAST:event_jMenuItemCadastrarEditarPaiActionPerformed
+
+    private void jMenuItemReativarPaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReativarPaiActionPerformed
+        // TODO add your handling code here:
+        addReativePai();
+    }//GEN-LAST:event_jMenuItemReativarPaiActionPerformed
     //FIM DOS CÓDIGOS AUTOMÁTICOS
     //ÁREA DE VARIÁVEIS AUTOMÁTICAS
     // Variables declaration - do not modify//GEN-BEGIN:variables
