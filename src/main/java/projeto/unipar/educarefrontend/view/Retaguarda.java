@@ -28,6 +28,7 @@ import projeto.unipar.educarefrontend.util.ReturnSize;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
+import projeto.unipar.educarefrontend.view.panel.EditarPai;
 import projeto.unipar.educarefrontend.view.panel.ReativarPai;
 import projeto.unipar.educarefrontend.view.panel.VisualizarPai;
 
@@ -39,6 +40,7 @@ public class Retaguarda extends javax.swing.JFrame {
     private static final SetIcon setIcon = new SetIcon();
     private static final OpenOrganizeInternalFrame openOrganizeInternalFrame = new OpenOrganizeInternalFrame();
     private AdjustWindowSize adjustWindowSize = new AdjustWindowSize();
+    EditarPai tabEditPai = new EditarPai();
 
     private boolean isChangeUser;
     private ChangeUserForm changeUserInstance;
@@ -253,7 +255,7 @@ public class Retaguarda extends javax.swing.JFrame {
         close();
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Evento do botão do JToolBar para VisualizarPai"> 
     private void actionBtVisualizarPai() {
         visualizarPai.addActionListener(new ActionListener() {
@@ -294,7 +296,7 @@ public class Retaguarda extends javax.swing.JFrame {
             }
         }
         if (!abaExistente) {
-            VisualizarPai tabSawPai = new VisualizarPai(this);
+            VisualizarPai tabSawPai = new VisualizarPai(this, tabEditPai);
             abas.addTab(title, tabSawPai);
             int index = abas.indexOfComponent(tabSawPai);
             abas.setTabComponentAt(index, createTabTitle(title, tabSawPai));
@@ -303,19 +305,19 @@ public class Retaguarda extends javax.swing.JFrame {
         }
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de reativar pai">
-    public void addReativePai(){
+    public void addReativePai() {
         boolean abaExistente = false;
         String title = "Reativar pai";
-        for(int i = 0; i < abas.getTabCount(); i++){
-            if(abas.getTitleAt(i).equals(title)){
+        for (int i = 0; i < abas.getTabCount(); i++) {
+            if (abas.getTitleAt(i).equals(title)) {
                 abaExistente = true;
                 abas.setSelectedIndex(i);
                 break;
             }
         }
-        if(!abaExistente){
+        if (!abaExistente) {
             ReativarPai tabReativePai = new ReativarPai(this);
             abas.addTab(title, tabReativePai);
             int index = abas.indexOfComponent(tabReativePai);
@@ -346,6 +348,26 @@ public class Retaguarda extends javax.swing.JFrame {
     }
     //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de editar pai"> 
+    public void addEditPai() {
+        boolean abaExistente = false;
+        String title = "Editar pai";
+        for (int i = 0; i < abas.getTabCount(); i++) {
+            if (abas.getTitleAt(i).equals(title)) {
+                abaExistente = true;
+                abas.setSelectedIndex(i);
+                break;
+            }
+        }
+        if (!abaExistente) {
+            abas.addTab(title, tabEditPai);
+            int index = abas.indexOfComponent(tabEditPai);
+            abas.setTabComponentAt(index, createTabTitle(title, tabEditPai));
+            abas.setSelectedComponent(tabEditPai);
+        }
+    }
+    //</editor-fold>
+
     //MÉTODO ABAIXO SEMPRE PRECISA SER O ÚLTIMO, OS ACIMA APENAS INFORMAÇÃO DA ABA, E ABAIXO CRIAÇÃO DELA
     
     // <editor-fold defaultstate="collapsed" desc="Método responsável por criar o título da aba, e o botão de x para fechar">
@@ -367,7 +389,7 @@ public class Retaguarda extends javax.swing.JFrame {
         return titlePanel;
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Evento para organizar o JPanel">
     private void moveAndCheckSizeJPanel() {
         this.addComponentListener(new ComponentAdapter() {
@@ -442,7 +464,7 @@ public class Retaguarda extends javax.swing.JFrame {
         jToolBar.repaint();
     }
     //</editor-fold>
-    
+
     //FIM DA ÁREA DE MÉTODOS
     //CÓDIGO AUTOMÁTICO
     @SuppressWarnings("unchecked")

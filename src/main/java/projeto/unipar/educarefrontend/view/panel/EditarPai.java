@@ -1,23 +1,315 @@
 package projeto.unipar.educarefrontend.view.panel;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import projeto.unipar.educarefrontend.dto.CepRequest;
+import projeto.unipar.educarefrontend.dto.CepResponse;
+import projeto.unipar.educarefrontend.dto.MaeResponse;
+import projeto.unipar.educarefrontend.model.Estado;
+import projeto.unipar.educarefrontend.model.Municipio;
+import projeto.unipar.educarefrontend.model.Pai;
+import projeto.unipar.educarefrontend.service.CepService;
+import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.CepFormatter;
 import projeto.unipar.educarefrontend.util.CpfFormatter;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.NumeroFormatter;
+import projeto.unipar.educarefrontend.util.QRCodeGenerator;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
+import projeto.unipar.educarefrontend.util.ValidaCpf;
+import projeto.unipar.educarefrontend.view.SelectEstado;
+import projeto.unipar.educarefrontend.view.SelectMunicipio;
+import projeto.unipar.educarefrontend.view.SelectedMomOnDad;
 
 public class EditarPai extends javax.swing.JPanel {
 
     //VARIAVEIS E INSTANCIAS
     private Log log = new Log();
+    private ValidaCpf validaCpf = new ValidaCpf();
+
+    private boolean isSelectEstado;
+    private SelectEstado selectEstadoInstance;
+    private boolean isSelectMunicipio;
+    private SelectMunicipio selectMunicipioInstance;
+    private boolean isSelectMom;
+    private SelectedMomOnDad selectMomInstance;
+
+    private String ibge;
+    private String ibgeSave;
+
+    private Long idEstado;
+    private String siglaUfEstado;
+    private String nomeEstado;
+
+    private Long idMunicipio;
+    private String ibgeMunicipio;
+    private String nomeMunicipio;
+    private String ufToMunicipio;
+
+    private Long idMom;
+    private String nomeMom;
+    private String cpfMom;
+    private String cepMom;
+    private String logradouroMom;
+    private String numeroMom;
+    private String bairroMom;
+    private String complementoMom;
+    private String localidadeMom;
+    private String ufMom;
+    private String ibgeMom;
+
     //FIM VARIAVEIS E INSTANCIAS
     //CONSTRUTOR
     public EditarPai() {
         initComponents();
+        initManuallyComponents();
     }
     //FIM CONSTRUTOR
     //INICIO MÉTODOS
+
+    // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
+    private void initManuallyComponents() {
+        generatedQrCode();
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por buscar o CEP">
+    private void searchCep() {
+        String cepComMascara = jtfCep.getText();
+        String cepSemMascara = cepComMascara.replaceAll("[^\\d]", "");
+        if (cepSemMascara == null || cepSemMascara.trim().isBlank() || cepSemMascara.trim().isEmpty()) {
+            BalloonNotification balloonNotification = new BalloonNotification("O CEP está inválido");
+            balloonNotification.show("O CEP está inválido");
+            return;
+        }
+
+        if (cepSemMascara.length() != 8) {
+            BalloonNotification balloonNotification = new BalloonNotification("O CEP deve conter 8 dígitos");
+            balloonNotification.show("O CEP deve conter 8 dígitos");
+            return;
+        }
+        CepService cepService = new CepService(log);
+
+        CepRequest cepRequest = new CepRequest();
+        cepRequest.setCep(cepSemMascara);
+        CepResponse cepResponse = cepService.buscarCep(cepRequest);
+
+        if (cepResponse != null) {
+            jtfLogradouro.setText(cepResponse.getLogradouro());
+            jtfBairro.setText(cepResponse.getBairro());
+            jtfComplemento.setText(cepResponse.getComplemento());
+            jtfCidade.setText(cepResponse.getLocalidade());
+            jtfEstado.setText(cepResponse.getUf());
+            ibge = cepResponse.getIbge();
+            ibgeMom = "";
+            ibgeMunicipio = "";
+        } else {
+            System.out.println("Cep não encontrado");
+        }
+    }
+    //</editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Método que recebe um pai selecionado para edição">
+    public void enviaPaiForEdit(Pai pai) {
+        Long id = pai.getId();
+        jtfNomePai.setText(pai.getNomeCompletoPai());
+        jtfCpfPai.setText(pai.getCpfPai());
+        jtfTelefonePai.setText(pai.getTelefonePai());
+        jcbPodeBuscar.setSelected(pai.isPodeBuscar());
+        jcbWhatsapp.setSelected(pai.isTelefonePaiWhatsapp());
+
+        jtfNomeReserva.setText(pai.getContatoReserva());
+        jtfTelefoneReserva.setText(pai.getTelefoneReserva());
+        if (pai.getMae().getNomeCompletoMae() != null) {
+            jcbSelectPaiMae.setSelected(true);
+            jtfMomSelected.setText(pai.getMae().getNomeCompletoMae());
+            jtfCep.setText(pai.getMae().getCep());
+            jtfLogradouro.setText(pai.getMae().getLogradouro());
+            jtfNumero.setText(pai.getMae().getNumero());
+            jtfBairro.setText(pai.getMae().getBairro());
+            jtfComplemento.setText(pai.getMae().getComplemento());
+            jtfEstado.setText(pai.getMae().getUf());
+            jtfCidade.setText(pai.getMae().getLocalidade());
+            
+        } else {
+            jcbSelectPaiMae.setSelected(false);
+            jtfCep.setText(pai.getCep());
+            jtfLogradouro.setText(pai.getLogradouro());
+            jtfNumero.setText(pai.getNumero());
+            jtfBairro.setText(pai.getBairro());
+            jtfComplemento.setText(pai.getComplemento());
+            jtfEstado.setText(pai.getUf());
+            jtfCidade.setText(pai.getLocalidade());
+            ibgeSave = pai.getIbge();
+        }
+        jcbWhatsappReserva.setSelected(pai.isTelefoneReservaWhatsapp());
+
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por gerar o QrCode">
+    private void generatedQrCode() {
+        if (jtfCpfPai == null || jtfCpfPai.getText().trim().isBlank() || jtfCpfPai.getText().trim().isEmpty()) {
+            BalloonNotification balloonNotification = new BalloonNotification("Informe o CPF primeiro");
+            balloonNotification.show("Informe o CPF primeiro");
+
+            return;
+        }
+        String cpfPai = jtfCpfPai.getText().replaceAll("[^\\d]", "");
+
+        if (cpfPai.length() != 11) {
+            BalloonNotification balloonNotification = new BalloonNotification("CPF deve conter 11 dígitos");
+            balloonNotification.show("CPF deve conter 11 dígitos");
+            return;
+        }
+
+        if (!validaCpf.isValidCPF(cpfPai)) {
+            BalloonNotification balloonNotification = new BalloonNotification("CPF inválido");
+            balloonNotification.show("CPF inválido");
+            return;
+        }
+
+        BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
+        ImageIcon icon = new ImageIcon(qrCodeImage);
+        lblQrCode.setIcon(icon);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por carregar o JFrame de select estado">
+    private void loadSelectEstado() {
+        if (isSelectEstado) {
+            selectEstadoInstance.toFront();
+            selectEstadoInstance.repaint();
+        } else {
+            isSelectEstado = true;
+            selectEstadoInstance = new SelectEstado(null, this);
+            selectEstadoInstance.setVisible(true);
+            selectEstadoInstance.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    isSelectEstado = false;
+                    selectEstadoInstance = null;
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    isSelectEstado = false;
+                    selectEstadoInstance = null;
+                }
+            });
+        }
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por receber o estado selecionado">
+    public void recebeEstadoSelected(Estado estado) {
+        idEstado = estado.getId();
+        siglaUfEstado = estado.getSiglaUf();
+        nomeEstado = estado.getNomeUf();
+
+        jtfEstado.setText(siglaUfEstado);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por carregar o JFrame de select municipio">
+    public void loadSelectMunicipio() {
+        if (jtfEstado.getText().length() >= 1) {
+            if (isSelectMunicipio) {
+                selectMunicipioInstance.toFront();
+                selectMunicipioInstance.repaint();
+            } else {
+                isSelectMunicipio = true;
+                selectMunicipioInstance = new SelectMunicipio(null, siglaUfEstado, this);
+                selectMunicipioInstance.setVisible(true);
+                selectMunicipioInstance.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        isSelectMunicipio = false;
+                        selectMunicipioInstance = null;
+                    }
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        isSelectMunicipio = false;
+                        selectMunicipioInstance = null;
+                    }
+                });
+            }
+        } else {
+            BalloonNotification b = new BalloonNotification("Informe um estado primeiro");
+            b.show("Informe um estado primeiro");
+        }
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por carregar o JFrame de select mae">
+    public void loadSelectMom() {
+        if (isSelectMom) {
+            selectMomInstance.toFront();
+            selectMomInstance.repaint();
+        } else {
+            isSelectMom = true;
+            selectMomInstance = new SelectedMomOnDad(null, this);
+            selectMomInstance.setVisible(true);
+            selectMomInstance.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    isSelectMom = false;
+                    selectMomInstance = null;
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    isSelectMom = false;
+                    selectMomInstance = null;
+                }
+            });
+        }
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por receber o municipio selecionado">
+    public void recebeMunicipioSelected(Municipio municipio) {
+        idMunicipio = municipio.getId();
+        ibgeMunicipio = municipio.getIbge();
+        nomeMunicipio = municipio.getNome();
+        ufToMunicipio = municipio.getUf();
+        ibge = "";
+        ibgeMom = "";
+        jtfCidade.setText(nomeMunicipio);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por receber a mãe selecionada">
+    public void recebeMomSelected(MaeResponse maeResponse) {
+        idMom = maeResponse.getId();
+        nomeMom = maeResponse.getNomeCompletoMae();
+        cepMom = maeResponse.getCep();
+        cpfMom = maeResponse.getCpfMae();
+        logradouroMom = maeResponse.getLogradouro();
+        numeroMom = maeResponse.getNumero();
+        bairroMom = maeResponse.getBairro();
+        complementoMom = maeResponse.getComplemento();
+        localidadeMom = maeResponse.getLocalidade();
+        ufMom = maeResponse.getUf();
+        ibgeMom = maeResponse.getIbge();
+        ibge = "";
+        ibgeMunicipio = "";
+
+        jtfMomSelected.setText(idMom + " - " + nomeMom);
+        jtfCep.setText(cepMom);
+        jtfLogradouro.setText(logradouroMom);
+        jtfNumero.setText(numeroMom);
+        jtfBairro.setText(bairroMom);
+        jtfComplemento.setText(complementoMom);
+        jtfEstado.setText(ufMom);
+        jtfCidade.setText(localidadeMom);
+    }
+    //</editor-fold>
+
     //FIM MÉTODOS
     //INICIO MÉTODOS AUTOMÁTICOS
     @SuppressWarnings("unchecked")
@@ -246,6 +538,11 @@ public class EditarPai extends javax.swing.JPanel {
         btBuscarCep.setBackground(new java.awt.Color(85, 6, 124));
         btBuscarCep.setForeground(new java.awt.Color(255, 255, 255));
         btBuscarCep.setText("Buscar");
+        btBuscarCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarCepActionPerformed(evt);
+            }
+        });
         add(btBuscarCep);
         btBuscarCep.setBounds(700, 110, 70, 23);
 
@@ -292,6 +589,11 @@ public class EditarPai extends javax.swing.JPanel {
 
         jbLupaMom.setBackground(new java.awt.Color(85, 6, 124));
         jbLupaMom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIconWhite.png"))); // NOI18N
+        jbLupaMom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLupaMomActionPerformed(evt);
+            }
+        });
         add(jbLupaMom);
         jbLupaMom.setBounds(660, 80, 30, 23);
         add(lblQrCode);
@@ -324,12 +626,22 @@ public class EditarPai extends javax.swing.JPanel {
         btSelectMunicipio.setBackground(new java.awt.Color(85, 6, 124));
         btSelectMunicipio.setForeground(new java.awt.Color(255, 255, 255));
         btSelectMunicipio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIconWhite.png"))); // NOI18N
+        btSelectMunicipio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSelectMunicipioActionPerformed(evt);
+            }
+        });
         add(btSelectMunicipio);
         btSelectMunicipio.setBounds(740, 290, 30, 23);
 
         btSelectEstado.setBackground(new java.awt.Color(85, 6, 124));
         btSelectEstado.setForeground(new java.awt.Color(255, 255, 255));
         btSelectEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/lupaIconWhite.png"))); // NOI18N
+        btSelectEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSelectEstadoActionPerformed(evt);
+            }
+        });
         add(btSelectEstado);
         btSelectEstado.setBounds(740, 260, 30, 23);
 
@@ -341,6 +653,26 @@ public class EditarPai extends javax.swing.JPanel {
         add(btSalvar);
         btSalvar.setBounds(20, 410, 100, 50);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btSelectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelectEstadoActionPerformed
+        // TODO add your handling code here:
+        loadSelectEstado();
+    }//GEN-LAST:event_btSelectEstadoActionPerformed
+
+    private void jbLupaMomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLupaMomActionPerformed
+        // TODO add your handling code here:
+        loadSelectMom();
+    }//GEN-LAST:event_jbLupaMomActionPerformed
+
+    private void btBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarCepActionPerformed
+        // TODO add your handling code here:
+        searchCep();
+    }//GEN-LAST:event_btBuscarCepActionPerformed
+
+    private void btSelectMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelectMunicipioActionPerformed
+        // TODO add your handling code here:
+        loadSelectMunicipio();
+    }//GEN-LAST:event_btSelectMunicipioActionPerformed
     //FIM MÉTODOS AUTOMÁTICOS
     //INICIO VARIAVEIS AUTOMATICAS
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -396,5 +728,6 @@ public class EditarPai extends javax.swing.JPanel {
     private javax.swing.JTextField jtfTelefoneReserva;
     private javax.swing.JLabel lblQrCode;
     // End of variables declaration//GEN-END:variables
+
     //FIM VARIAVEIS AUTOMATICAS
 }

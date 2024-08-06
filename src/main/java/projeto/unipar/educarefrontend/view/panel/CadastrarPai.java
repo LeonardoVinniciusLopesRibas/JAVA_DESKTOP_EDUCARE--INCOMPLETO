@@ -281,7 +281,7 @@ public class CadastrarPai extends javax.swing.JPanel {
             selectEstadoInstance.repaint();
         } else {
             isSelectEstado = true;
-            selectEstadoInstance = new SelectEstado(this);
+            selectEstadoInstance = new SelectEstado(this, null);
             selectEstadoInstance.setVisible(true);
             selectEstadoInstance.addWindowListener(new WindowAdapter() {
                 @Override
@@ -357,7 +357,7 @@ public class CadastrarPai extends javax.swing.JPanel {
                 selectMunicipioInstance.repaint();
             } else {
                 isSelectMunicipio = true;
-                selectMunicipioInstance = new SelectMunicipio(this, siglaUfEstado);
+                selectMunicipioInstance = new SelectMunicipio(this, siglaUfEstado, null);
                 selectMunicipioInstance.setVisible(true);
                 selectMunicipioInstance.addWindowListener(new WindowAdapter() {
                     @Override
@@ -387,7 +387,7 @@ public class CadastrarPai extends javax.swing.JPanel {
             selectMomInstance.repaint();
         } else {
             isSelectMom = true;
-            selectMomInstance = new SelectedMomOnDad(this);
+            selectMomInstance = new SelectedMomOnDad(this, null);
             selectMomInstance.setVisible(true);
             selectMomInstance.addWindowListener(new WindowAdapter() {
                 @Override

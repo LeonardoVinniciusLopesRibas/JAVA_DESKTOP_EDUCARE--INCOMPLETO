@@ -36,13 +36,46 @@ public class PaiService {
     private static final String DESATIVAR_PAI = "/put/desativar/";
     private static final String GET_PAI_DESATIVADOS_COM_PARAMETROS = "/get/pai/desativados";
     private static final String REATIVAR_PAI = "/put/reativar/";
-
+    private static final String GET_PAI = "/get/";
+    
     private final Log log;
 
     public PaiService(Log log) {
         this.log = log;
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Método para buscar um pai por id">
+    public Pai getId(Long id){
+        String operacao = "pai buscado pelo id";
+        try{
+            URL url = new URL(SECURITY+BASE_URL+GET_PAI+id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            int responseCode = connection.getResponseCode();
+            
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String inputLine;
+                
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                
+                log.escreverLogHttp(operacao, responseCode);
+                return JsonUtils.jsonToObjeto(response.toString(), Pai.class);
+            }else{
+                BalloonNotification b = new BalloonNotification("Erro ao buscar por ID");
+                b.show("Erro ao buscar por ID");
+            }
+        }catch(IOException e){
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+        return null;
+    }
+    //</editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Método responsável por cadastrar um pai no banco de dados">
     public int postPai(Pai pai) {
         String operacao = "Pai cadastrado com sucesso";

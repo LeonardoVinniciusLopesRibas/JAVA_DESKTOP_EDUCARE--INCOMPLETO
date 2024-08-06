@@ -20,7 +20,8 @@ import projeto.unipar.educarefrontend.service.EstadoService;
 import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
-
+import projeto.unipar.educarefrontend.view.panel.EditarPai;
+    
 public class SelectEstado extends javax.swing.JFrame {
 
     //ÁREA DE INSTÂNCIAS DE VARIÁVEIS
@@ -31,11 +32,13 @@ public class SelectEstado extends javax.swing.JFrame {
     private List<EstadoResponse> estados = new ArrayList<>();
     private DefaultTableModel model;
     private CadastrarPai pai = new CadastrarPai();
+    private EditarPai editPai = new EditarPai();
     //FIM ÁREA DE INSTÂNCIAS DE VARIÁVEIS
 
     //CONSTRUTOR
-    public SelectEstado(CadastrarPai pai) {
+    public SelectEstado(CadastrarPai pai, EditarPai editPai) {
         this.pai = pai;
+        this.editPai = editPai;
         initComponents();
         initManuallyComponents();
     }

@@ -20,6 +20,7 @@ import projeto.unipar.educarefrontend.service.MunicipioService;
 import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
+import projeto.unipar.educarefrontend.view.panel.EditarPai;
 
 public class SelectMunicipio extends javax.swing.JFrame {
 
@@ -28,17 +29,19 @@ public class SelectMunicipio extends javax.swing.JFrame {
     private MunicipioService municipioService = new MunicipioService(log);
     private Municipio municipio = new Municipio();
     private CadastrarPai pai = new CadastrarPai();
+    private EditarPai editPai = new EditarPai();
     private String ufEstado;
     private List<MunicipioResponse> municipios = new ArrayList<>();
     private DefaultTableModel model;
 
     //FIM ÁREA DE INSTÂNCIAS DE VARIÁVEIS
     //CONSTRUTOR
-    public SelectMunicipio(CadastrarPai pai, String ufEstado) {
+    public SelectMunicipio(CadastrarPai pai, String ufEstado, EditarPai editPai) {
         this.ufEstado = ufEstado;
         initComponents();
         initManuallyComponents();
         this.pai = pai;
+        this.editPai = editPai;
     }
 
     //FIM CONSTRUTOR

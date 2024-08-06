@@ -31,15 +31,17 @@ public class VisualizarPai extends JPanel {
     private Pai pai = new Pai();
     private PaiService paiService = new PaiService(log);
     private Retaguarda retaguarda;
+    private EditarPai editPai;
     private List<PaiDtoResponse> paisResponse = new ArrayList<>();
     private DefaultTableModel model;
     private TableRowSorter<DefaultTableModel> sorter;
     //FIM DA ÁREA DE INSTÂNCIAS E VARIÁVEIS
     //CONSTRUTOR
 
-    public VisualizarPai(Retaguarda pai) {
+    public VisualizarPai(Retaguarda pai, EditarPai tabEditPai) {
         initComponents();
         this.retaguarda = pai;
+        this.editPai = tabEditPai;
         initManuallyComponents();
     }
 
@@ -51,6 +53,7 @@ public class VisualizarPai extends JPanel {
         sorter = new TableRowSorter<>(model);
         jtbPaiResponse.setRowSorter(sorter);
         clickLeftEvent();
+        clickComMouse();
     }
     //</editor-fold>
 
@@ -87,6 +90,7 @@ public class VisualizarPai extends JPanel {
     }
 
     //</editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Módulo responsável por ajustar o tamanho da altura da linha">
     private void ajustaTamanhoLinhaTabela() {
         jtbPaiResponse.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(20));
@@ -170,6 +174,26 @@ public class VisualizarPai extends JPanel {
         });
     }
     //</editor-fold>
+   
+    // <editor-fold defaultstate="collapsed" desc="Evento de clique com mouse para selecionar edição de pai">
+    private void clickComMouse() {
+        jtbPaiResponse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int row = jtbPaiResponse.rowAtPoint(evt.getPoint());
+                    if (row >= 0) {
+                        Long id = (Long) jtbPaiResponse.getValueAt(row, 0);
+                        pai = paiService.getId(id);
+                        retaguarda.addEditPai();
+                        editPai.enviaPaiForEdit(pai);
+                        
+                    }
+                }
+            }
+        });
+    }
+    // </editor-fold>
 
     //FIM DA ÁREA DE MÉTODOS
     //CÓDIGO AUTOMÁTICO

@@ -19,6 +19,7 @@ import projeto.unipar.educarefrontend.service.MaeService;
 import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
+import projeto.unipar.educarefrontend.view.panel.EditarPai;
 
 public class SelectedMomOnDad extends javax.swing.JFrame {
 
@@ -29,12 +30,14 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
     private DefaultTableModel model;
     private MaeResponse maeResponse = new MaeResponse();
     private CadastrarPai pai = new CadastrarPai();
+    private EditarPai editPai = new EditarPai();
     //FIM VARIAVEIS E INSTANCIAS
     //CONSTRUTOR
-    public SelectedMomOnDad(CadastrarPai pai) {
+    public SelectedMomOnDad(CadastrarPai pai, EditarPai editPai) {
         initComponents();
         initManuallyComponents();
         this.pai = pai;
+        this.editPai = editPai;
     }
     //FIM CONSTRUTOR
     //INICIO METODOS
