@@ -19,6 +19,7 @@ import projeto.unipar.educarefrontend.service.PaiService;
 import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.CpfFormatter;
 import projeto.unipar.educarefrontend.util.Log;
+import projeto.unipar.educarefrontend.util.MaskFormatterUtil;
 import projeto.unipar.educarefrontend.util.RemoveMaskUtil;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.view.Retaguarda;
@@ -70,8 +71,8 @@ public class ReativarPai extends javax.swing.JPanel {
             Object[] row = {
                 pai.getId(),
                 pai.getNome(),
-                pai.getCpf(),
-                pai.getTelefone(),
+                MaskFormatterUtil.applyCpfMask(pai.getCpf()),
+                MaskFormatterUtil.applyTelefoneMask(pai.getTelefone()),
                 pai.getLogradouro(),
                 pai.getNomeCidade(),
                 pai.getNomeEstado()

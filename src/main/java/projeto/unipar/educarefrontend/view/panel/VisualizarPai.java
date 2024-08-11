@@ -20,6 +20,7 @@ import projeto.unipar.educarefrontend.service.PaiService;
 import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.CpfFormatter;
 import projeto.unipar.educarefrontend.util.Log;
+import projeto.unipar.educarefrontend.util.MaskFormatterUtil;
 import projeto.unipar.educarefrontend.util.RemoveMaskUtil;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.view.Retaguarda;
@@ -76,8 +77,8 @@ public class VisualizarPai extends JPanel {
             Object[] row = {
                 pai.getId(),
                 pai.getNome(),
-                pai.getCpf(),
-                pai.getTelefone(),
+                MaskFormatterUtil.applyCpfMask(pai.getCpf()),
+                MaskFormatterUtil.applyTelefoneMask(pai.getTelefone()),
                 pai.getLogradouro(),
                 pai.getNomeCidade(),
                 pai.getNomeEstado()
@@ -90,7 +91,6 @@ public class VisualizarPai extends JPanel {
     }
 
     //</editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="Módulo responsável por ajustar o tamanho da altura da linha">
     private void ajustaTamanhoLinhaTabela() {
         jtbPaiResponse.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(20));
@@ -187,7 +187,7 @@ public class VisualizarPai extends JPanel {
                         pai = paiService.getId(id);
                         retaguarda.addEditPai();
                         editPai.enviaPaiForEdit(pai);
-                        
+
                     }
                 }
             }

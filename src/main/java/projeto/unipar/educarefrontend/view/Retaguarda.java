@@ -104,6 +104,7 @@ public class Retaguarda extends javax.swing.JFrame {
         actionBtSair();
         actionBtVisualizarPai();
         actionBtCadastrarPai();
+        actionBtVisualizarMae();
         BalloonNotification balloonNotification = new BalloonNotification("sistema iniciado");
         balloonNotification.show("sistema iniciado");
     }

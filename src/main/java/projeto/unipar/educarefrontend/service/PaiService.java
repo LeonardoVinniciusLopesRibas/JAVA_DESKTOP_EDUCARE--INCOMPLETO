@@ -275,6 +275,7 @@ public class PaiService {
     }
     //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por atualizar um pai">
     public int putPai(Pai pai) {
         String operacao = "PAI ATUALIZADO";
 
@@ -334,5 +335,6 @@ public class PaiService {
         return -1;
 
     }
+    //</editor-fold>
 
 }

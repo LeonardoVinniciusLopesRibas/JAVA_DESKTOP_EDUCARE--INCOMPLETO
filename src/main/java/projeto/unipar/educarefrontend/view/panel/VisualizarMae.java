@@ -1,14 +1,19 @@
 package projeto.unipar.educarefrontend.view.panel;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 import projeto.unipar.educarefrontend.dto.MaeDtoResponse;
 import projeto.unipar.educarefrontend.model.Mae;
 import projeto.unipar.educarefrontend.service.MaeService;
+import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.CpfFormatter;
 import projeto.unipar.educarefrontend.util.Log;
+import projeto.unipar.educarefrontend.util.MaskFormatterUtil;
 import projeto.unipar.educarefrontend.util.RemoveMaskUtil;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.view.Retaguarda;
@@ -38,8 +43,8 @@ public class VisualizarMae extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initManuallyComponents() {
         setDataTable();
-//        sorter = new TableRowSorter<>(model);
-//        jtbPaiResponse.setRowSorter(sorter);
+        sorter = new TableRowSorter<>(model);
+        jtbMaesResponse.setRowSorter(sorter);
 //        clickLeftEvent();
 //        clickComMouse();
     }
@@ -53,7 +58,7 @@ public class VisualizarMae extends javax.swing.JPanel {
         String logradouro = jtfEndereço.getText();
         
         maesResponse = maeService.getListaMaesResponse(nome, cpf, telefone, logradouro);
-        if(maesResponse != null){
+        if(maesResponse == null){
             maesResponse = new ArrayList<>();
         }
         
@@ -64,18 +69,57 @@ public class VisualizarMae extends javax.swing.JPanel {
             Object[] row = {
                 mae.getId(),
                 mae.getNome(),
-                mae.getCpf(),
-                mae.getTelefone(),
+                MaskFormatterUtil.applyCpfMask(mae.getCpf()),
+                MaskFormatterUtil.applyTelefoneMask(mae.getTelefone()),
                 mae.getLogradouro(),
                 mae.getNomeCidade(),
                 mae.getNomeEstado()
             };
             model.addRow(row);
         }
-//        ajustaTamanhoLinhaTabela();
-//        adjustColumnTable();
+        ajustaTamanhoLinhaTabela();
+        adjustColumnTable();
     }
     //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Módulo responsável por ajustar o tamanho da altura da linha">
+    private void ajustaTamanhoLinhaTabela() {
+        jtbMaesResponse.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(20));
+    }
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar a largura da coluna da tabela">
+    private void adjustColumnTable() {
+        for (int column = 0; column < jtbMaesResponse.getColumnCount(); column++) {
+            TableColumn tableColumn = jtbMaesResponse.getColumnModel().getColumn(column);
+            int preferredWidth = tableColumn.getMinWidth();
+            int maxWidth = tableColumn.getMaxWidth();
+
+            for (int row = 0; row < jtbMaesResponse.getRowCount(); row++) {
+                TableCellRenderer cellRenderer = jtbMaesResponse.getCellRenderer(row, column);
+                Component c = jtbMaesResponse.prepareRenderer(cellRenderer, row, column);
+                int width = c.getPreferredSize().width + jtbMaesResponse.getIntercellSpacing().width;
+                preferredWidth = Math.max(preferredWidth, width);
+
+                if (preferredWidth >= maxWidth) {
+                    preferredWidth = maxWidth;
+                    break;
+                }
+            }
+
+            tableColumn.setPreferredWidth(preferredWidth);
+        }
+    }
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método para resetar o Sorter">
+    private void resetTableSorter() {
+        if (sorter != null) {
+            sorter.setSortKeys(null);
+        }
+    }
+    //</editor-fold>
+    
     //FIM METODOS
     //INICIO METODOS AUTOMATICOS
     @SuppressWarnings("unchecked")
@@ -183,19 +227,19 @@ public class VisualizarMae extends javax.swing.JPanel {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         // TODO add your handling code here:
-        //retaguarda.addAddPai();
+        //retaguarda.addAddMae();
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //resetTableSorter();
-        //setDataTable();
+        resetTableSorter();
+        setDataTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
         // TODO add your handling code here:
-        //resetTableSorter();
-        //setDataTable();
+        resetTableSorter();
+        setDataTable();
     }//GEN-LAST:event_btBuscarActionPerformed
     //FIM METODOS AUTOMATICOS
     // Variables declaration - do not modify//GEN-BEGIN:variables

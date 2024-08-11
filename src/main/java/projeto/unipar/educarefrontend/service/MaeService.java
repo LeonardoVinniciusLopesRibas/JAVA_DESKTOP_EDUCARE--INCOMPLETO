@@ -28,6 +28,7 @@ public class MaeService {
     private static final String BUSCAR_MAE_POR_PARAMETRO = "/buscaMaePorParametros?query=";
     private static final String BUSCAR_MAE_POR_ID = "/buscaMaeById/";
     private static final String GET_MAE_BY_ID = "/getMaeById/";
+    private static final String ENCONTRAR_MAES_POR_PARAMETROS = "/get/mae";
 
     private final Log log;
 
@@ -138,6 +139,37 @@ public class MaeService {
     //</editor-fold>
 
     public List<MaeDtoResponse> getListaMaesResponse(String nome, String cpf, String telefone, String logradouro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String operacao = "maes recuperadas";
+        
+        try{
+            URL url = new URL(SECURITY+BASE_URL+ENCONTRAR_MAES_POR_PARAMETROS+ "?nome=" + nome + "&cpf=" + cpf + "&telefone=" + telefone + "&endereco=" + logradouro);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            
+            int responseCode = connection.getResponseCode();
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String inputLine;
+                
+                while((inputLine = in.readLine()) != null){
+                    response.append(inputLine);
+                }
+                
+                log.escreverLogHttp(operacao, responseCode);
+                return JsonUtils.jsonToListUnique(response.toString(), MaeDtoResponse.class);
+            }else if (responseCode == HttpURLConnection.HTTP_NO_CONTENT) {
+                BalloonNotification bn = new BalloonNotification("Não existem mães ativas");
+                bn.show("Não existem mães ativas");
+            } else {
+                BalloonNotification b = new BalloonNotification("Ocorreu algum erro ao recuperar as mães");
+                b.show("Ocorreu algum erro ao recuperar as mães");
+            }        
+        }catch(IOException e){
+            log.escreverLogErroOperacaoException(e, e.getMessage());
+        }
+        return null;
+        
     }
 }

@@ -12,6 +12,7 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\SetIcon.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\EditarPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\UsuarioRequestCadastro.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\MaeDtoResponse.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\ReativarPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\VisualizarPai.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\MunicipioResponse.java
@@ -25,7 +26,9 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\ValidacaoPreferenciaService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\AjustaTamanhoLinhaTabela.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\UsuarioRequest.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\VisualizarMae.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\CepResponse.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\MaskFormatterUtil.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\dto\PaiDtoResponse.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\Splash.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\OpenOrganizeInternalFrame.java
@@ -43,6 +46,7 @@ C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educare
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\UsuarioService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\PaiService.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\enumerated\Ip.java
+C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\panel\EditarMae.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\util\NumeroFormatter.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\view\Retaguarda.java
 C:\EduCare\Front-End\EduCareFrontEndDesktop\src\main\java\projeto\unipar\educarefrontend\service\MaeService.java
