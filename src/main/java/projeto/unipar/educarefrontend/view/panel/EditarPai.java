@@ -51,32 +51,6 @@ public class EditarPai extends javax.swing.JPanel {
     private boolean isSelectMom;
     private SelectedMomOnDad selectMomInstance;
 
-    private Long id;
-
-    private String ibge;
-    private String ibgeSave;
-
-    private Long idEstado;
-    private String siglaUfEstado;
-    private String nomeEstado;
-
-    private Long idMunicipio;
-    private String ibgeMunicipio;
-    private String nomeMunicipio;
-    private String ufToMunicipio;
-
-    private Long idMom;
-    private String nomeMom;
-    private String cpfMom;
-    private String cepMom;
-    private String logradouroMom;
-    private String numeroMom;
-    private String bairroMom;
-    private String complementoMom;
-    private String localidadeMom;
-    private String ufMom;
-    private String ibgeMom;
-
     //FIM VARIAVEIS E INSTANCIAS
     //CONSTRUTOR
     public EditarPai() {
@@ -88,7 +62,9 @@ public class EditarPai extends javax.swing.JPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initManuallyComponents() {
-
+        jtfIbge.setVisible(false);
+        jtfIdMom.setVisible(false);
+        jtfIdPai.setVisible(false);
     }
     //</editor-fold>
 
@@ -119,9 +95,6 @@ public class EditarPai extends javax.swing.JPanel {
             jtfComplemento.setText(cepResponse.getComplemento());
             jtfCidade.setText(cepResponse.getLocalidade());
             jtfEstado.setText(cepResponse.getUf());
-            ibge = cepResponse.getIbge();
-            ibgeMom = "";
-            ibgeMunicipio = "";
         } else {
             System.out.println("Cep não encontrado");
         }
@@ -130,9 +103,6 @@ public class EditarPai extends javax.swing.JPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Método por limpar todos os campos, chamado depois de clicar em salvar">
     private void cleanDataForNewRegister() {
-        ibge = "";
-        ibgeMom = "";
-        ibgeMunicipio = "";
 
         jtfNomePai.setText("");
         jtfCpfPai.setText("");
@@ -158,7 +128,7 @@ public class EditarPai extends javax.swing.JPanel {
     public void enviaPaiForEdit(Pai pai) {
         cleanDataForNewRegister();
 
-        id = pai.getId();
+        jtfIdPai.setText(pai.getId().toString());
         jtfNomePai.setText(pai.getNomeCompletoPai());
         jtfCpfPai.setText(pai.getCpfPai());
         jtfTelefonePai.setText(pai.getTelefonePai());
@@ -169,6 +139,7 @@ public class EditarPai extends javax.swing.JPanel {
         jtfTelefoneReserva.setText(pai.getTelefoneReserva());
         jcbWhatsappReserva.setSelected(pai.isTelefoneReservaWhatsapp());
         if (pai.getMae() != null) {
+            jtfIdMom.setText(pai.getMae().getId().toString());
             jcbSelectPaiMae.setSelected(true);
             showAdressMom();
             jtfMomSelected.setText(pai.getMae().getNomeCompletoMae());
@@ -179,7 +150,7 @@ public class EditarPai extends javax.swing.JPanel {
             jtfComplemento.setText(pai.getMae().getComplemento());
             jtfEstado.setText(pai.getMae().getUf());
             jtfCidade.setText(pai.getMae().getLocalidade());
-
+            jtfIbge.setText(pai.getMae().getIbge());
         } else {
             jcbSelectPaiMae.setSelected(false);
             showAdressMom();
@@ -190,7 +161,7 @@ public class EditarPai extends javax.swing.JPanel {
             jtfComplemento.setText(pai.getComplemento());
             jtfEstado.setText(pai.getUf());
             jtfCidade.setText(pai.getLocalidade());
-            ibgeSave = pai.getIbge();
+            jtfIbge.setText(pai.getIbge());
         }
 
     }
@@ -313,9 +284,9 @@ public class EditarPai extends javax.swing.JPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Método responsável por receber o estado selecionado">
     public void recebeEstadoSelected(Estado estado) {
-        idEstado = estado.getId();
-        siglaUfEstado = estado.getSiglaUf();
-        nomeEstado = estado.getNomeUf();
+        Long idEstado = estado.getId();
+        String siglaUfEstado = estado.getSiglaUf();
+        String nomeEstado = estado.getNomeUf();
 
         jtfEstado.setText(siglaUfEstado);
     }
@@ -324,7 +295,7 @@ public class EditarPai extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Método responsável por carregar o JFrame de select municipio">
     public void loadSelectMunicipio() {
         if (jtfEstado.getText().length() >= 1) {
-            siglaUfEstado = jtfEstado.getText();
+            String siglaUfEstado = jtfEstado.getText();
             if (isSelectMunicipio) {
                 selectMunicipioInstance.toFront();
                 selectMunicipioInstance.repaint();
@@ -381,40 +352,25 @@ public class EditarPai extends javax.swing.JPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Método responsável por receber o municipio selecionado">
     public void recebeMunicipioSelected(Municipio municipio) {
-        idMunicipio = municipio.getId();
-        ibgeMunicipio = municipio.getIbge();
-        nomeMunicipio = municipio.getNome();
-        ufToMunicipio = municipio.getUf();
-        ibge = "";
-        ibgeMom = "";
-        jtfCidade.setText(nomeMunicipio);
+        Long idMunicipio = municipio.getId();
+        jtfIbge.setText(municipio.getIbge());
+        jtfCidade.setText(municipio.getNome());
     }
     //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Método responsável por receber a mãe selecionada">
     public void recebeMomSelected(MaeResponse maeResponse) {
-        idMom = maeResponse.getId();
-        nomeMom = maeResponse.getNomeCompletoMae();
-        cepMom = maeResponse.getCep();
-        cpfMom = maeResponse.getCpfMae();
-        logradouroMom = maeResponse.getLogradouro();
-        numeroMom = maeResponse.getNumero();
-        bairroMom = maeResponse.getBairro();
-        complementoMom = maeResponse.getComplemento();
-        localidadeMom = maeResponse.getLocalidade();
-        ufMom = maeResponse.getUf();
-        ibgeMom = maeResponse.getIbge();
-        ibge = "";
-        ibgeMunicipio = "";
+        jtfIdMom.setText(maeResponse.getId().toString());
+        jtfMomSelected.setText(maeResponse.getNomeCompletoMae());
+        jtfCep.setText(maeResponse.getCep());
+        jtfLogradouro.setText(maeResponse.getLogradouro());
+        jtfNumero.setText(maeResponse.getNumero());
+        jtfBairro.setText(maeResponse.getBairro());
+        jtfComplemento.setText(maeResponse.getComplemento());
+        jtfEstado.setText(maeResponse.getUf());
+        jtfCidade.setText(maeResponse.getLocalidade());
+        jtfIbge.setText(maeResponse.getIbge());
 
-        jtfMomSelected.setText(idMom + " - " + nomeMom);
-        jtfCep.setText(cepMom);
-        jtfLogradouro.setText(logradouroMom);
-        jtfNumero.setText(numeroMom);
-        jtfBairro.setText(bairroMom);
-        jtfComplemento.setText(complementoMom);
-        jtfEstado.setText(ufMom);
-        jtfCidade.setText(localidadeMom);
     }
     //</editor-fold>
 
@@ -441,88 +397,65 @@ public class EditarPai extends javax.swing.JPanel {
                 jtfComplemento.setText("");
                 jtfCidade.setText("");
                 jtfEstado.setText("");
-                ibge = "";
             }
         }
     }
     //</editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="Método responsável por pegar todas as informações e enviar a api, para salvar o pai">
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por pegar todas as informações e enviar a api, para editar o pai">
     public void atualizarRequestDad() {
-        
-        pai.setId(id);
-        
-        Boolean ativo = true;
-        String bairro = jtfBairro.getText();
-        String cep = RemoveMaskUtil.removeMask(jtfCep.getText());
-        String complemento = jtfComplemento.getText();
-        String contatoReserva = jtfNomeReserva.getText();
-        String cpfPai = RemoveMaskUtil.removeMask(jtfCpfPai.getText());
-        String ibgeRequest;
-        if (ibge != null && ibge.length() >= 1) {
-            ibgeRequest = ibge;
-        } else if (ibgeMunicipio != null && ibgeMunicipio.length() >= 1) {
-            ibgeRequest = ibgeMunicipio;
-        } else if (ibgeMom != null) {
-            ibgeRequest = ibgeMom;
+        pai.setAtivo(true);
+        pai.setBairro(jtfBairro.getText());
+        pai.setCep(RemoveMaskUtil.removeMask(jtfCep.getText()));
+        pai.setComplemento(jtfComplemento.getText());
+        pai.setContatoReserva(jtfNomeReserva.getText());
+        pai.setCpfPai(RemoveMaskUtil.removeMask(jtfCpfPai.getText()));
+        pai.setIbge(jtfIbge.getText());
+        if (!jtfIdPai.getText().isEmpty()) {
+            pai.setId(Long.parseLong(jtfIdPai.getText()));
         } else {
-            ibgeRequest = "";
+            System.out.println("O campo ID está vazio.");
         }
-        String localidade = jtfCidade.getText();
-        String logradouro = jtfLogradouro.getText();
-        String nomeCompletoPai = jtfNomePai.getText();
-        String numero = jtfNumero.getText();
-        Boolean podeBuscar;
+        pai.setLocalidade(jtfCidade.getText());
+        pai.setLogradouro(jtfLogradouro.getText());
+        if (jtfMomSelected != null) {
+            if (!jtfIdMom.getText().isEmpty()) {
+                Long idMom = Long.parseLong(jtfIdMom.getText());
+                Mae maeRetornada = maeService.getMaeById(idMom);
+                pai.setMae(maeRetornada);
+            } else {
+                System.out.println("O campo id mae está vazio");
+            }
+
+        }
+        pai.setNomeCompletoPai(jtfNomePai.getText());
+        pai.setNumero(jtfNumero.getText());
         if (jcbPodeBuscar.isSelected() == true) {
-            podeBuscar = true;
+            pai.setPodeBuscar(true);
         } else {
-            podeBuscar = false;
+            pai.setPodeBuscar(false);
         }
-        String telefonePai = RemoveMaskUtil.removeMask(jtfTelefonePai.getText());
-        Boolean paiWhatsapp;
+
+        pai.setTelefonePai(RemoveMaskUtil.removeMask(jtfTelefonePai.getText()));
         if (jcbWhatsapp.isSelected() == true) {
-            paiWhatsapp = true;
+            pai.setTelefonePaiWhatsapp(true);
         } else {
-            paiWhatsapp = false;
+            pai.setTelefonePaiWhatsapp(false);
         }
-        String telefoneReserva = RemoveMaskUtil.removeMask(jtfTelefoneReserva.getText());
-        Boolean reservaWhatsapp;
+
+        pai.setTelefoneReserva(RemoveMaskUtil.removeMask(jtfTelefoneReserva.getText()));
         if (jcbWhatsappReserva.isSelected() == true) {
-            reservaWhatsapp = true;
+            pai.setTelefoneReservaWhatsapp(true);
         } else {
-            reservaWhatsapp = true;
+            pai.setTelefoneReservaWhatsapp(false);
         }
 
-        String estado = jtfEstado.getText();
+        pai.setUf(jtfEstado.getText());
 
-        if (idMom != null) {
-            mae = maeService.getMaeById(idMom);
-        }
-
-        pai.setAtivo(ativo);
-        pai.setBairro(bairro);
-        pai.setCep(cep);
-        pai.setComplemento(complemento);
-        pai.setContatoReserva(contatoReserva);
-        pai.setCpfPai(cpfPai);
-        pai.setIbge(ibgeRequest);
-        pai.setLocalidade(localidade);
-        pai.setLogradouro(logradouro);
-        pai.setNomeCompletoPai(nomeCompletoPai);
-        pai.setNumero(numero);
-        pai.setPodeBuscar(podeBuscar);
-        pai.setTelefonePai(telefonePai);
-        pai.setTelefonePaiWhatsapp(paiWhatsapp);
-        pai.setTelefoneReserva(telefoneReserva);
-        pai.setTelefoneReservaWhatsapp(reservaWhatsapp);
-        pai.setUf(estado);
-        if (mae != null) {
-            pai.setMae(mae);
-        }
         int responseCode = paiService.putPai(pai);
-
         if (responseCode == 200) {
-            cleanDataForNewRegister();
+            BalloonNotification bn = new BalloonNotification("Pai atualizado com sucesso");
+            bn.show("Pai atualizado com sucesso");
         }
 
     }
@@ -585,6 +518,9 @@ public class EditarPai extends javax.swing.JPanel {
         btSelectMunicipio = new javax.swing.JButton();
         btSelectEstado = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
+        jtfIbge = new javax.swing.JTextField();
+        jtfIdMom = new javax.swing.JTextField();
+        jtfIdPai = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 160, 238));
         setMaximumSize(new java.awt.Dimension(1366, 678));
@@ -900,6 +836,18 @@ public class EditarPai extends javax.swing.JPanel {
         });
         add(btSalvar);
         btSalvar.setBounds(20, 410, 100, 50);
+
+        jtfIbge.setEditable(false);
+        add(jtfIbge);
+        jtfIbge.setBounds(460, 330, 50, 22);
+
+        jtfIdMom.setEditable(false);
+        add(jtfIdMom);
+        jtfIdMom.setBounds(460, 360, 50, 22);
+
+        jtfIdPai.setEditable(false);
+        add(jtfIdPai);
+        jtfIdPai.setBounds(460, 390, 50, 22);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSelectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelectEstadoActionPerformed
@@ -997,6 +945,9 @@ public class EditarPai extends javax.swing.JPanel {
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfCpfPai;
     private javax.swing.JTextField jtfEstado;
+    private javax.swing.JTextField jtfIbge;
+    private javax.swing.JTextField jtfIdMom;
+    private javax.swing.JTextField jtfIdPai;
     private javax.swing.JTextField jtfLogradouro;
     private javax.swing.JTextField jtfMomSelected;
     private javax.swing.JTextField jtfNomePai;

@@ -36,8 +36,10 @@ import projeto.unipar.educarefrontend.util.ReturnSize;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
+import projeto.unipar.educarefrontend.view.panel.EditarMae;
 import projeto.unipar.educarefrontend.view.panel.EditarPai;
 import projeto.unipar.educarefrontend.view.panel.ReativarPai;
+import projeto.unipar.educarefrontend.view.panel.VisualizarMae;
 import projeto.unipar.educarefrontend.view.panel.VisualizarPai;
 
 public class Retaguarda extends javax.swing.JFrame {
@@ -49,6 +51,7 @@ public class Retaguarda extends javax.swing.JFrame {
     private static final OpenOrganizeInternalFrame openOrganizeInternalFrame = new OpenOrganizeInternalFrame();
     private AdjustWindowSize adjustWindowSize = new AdjustWindowSize();
     EditarPai tabEditPai = new EditarPai();
+    EditarMae tabEditMae = new EditarMae();
 
     private boolean isChangeUser;
     private ChangeUserForm changeUserInstance;
@@ -291,6 +294,20 @@ public class Retaguarda extends javax.swing.JFrame {
         addAddPai();
     }
     //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Evento do botão do JToolBar para VisualizarMae"> 
+    private void actionBtVisualizarMae() {
+        visualizarMae.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                VisualizarMaePerformed(evt);
+            }
+        });
+    }
+
+    private void VisualizarMaePerformed(ActionEvent evt) {
+        addSawMae();
+    }
+    //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de visualizar pai"> 
     public void addSawPai() {
@@ -372,6 +389,28 @@ public class Retaguarda extends javax.swing.JFrame {
             int index = abas.indexOfComponent(tabEditPai);
             abas.setTabComponentAt(index, createTabTitle(title, tabEditPai));
             abas.setSelectedComponent(tabEditPai);
+        }
+    }
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de visualizar mae"> 
+    public void addSawMae() {
+        boolean abaExistente = false;
+        String title = "Visualizar mãe";
+        for (int i = 0; i < abas.getTabCount(); i++) {
+            if (abas.getTitleAt(i).equals(title)) {
+                abaExistente = true;
+                abas.setSelectedIndex(i);
+                break;
+            }
+        }
+        if (!abaExistente) {
+            VisualizarMae tabSawMae = new VisualizarMae(this, tabEditMae);
+            abas.addTab(title, tabSawMae);
+            int index = abas.indexOfComponent(tabSawMae);
+            abas.setTabComponentAt(index, createTabTitle(title, tabSawMae));
+            abas.setSelectedComponent(tabSawMae);
+
         }
     }
     //</editor-fold>
@@ -605,6 +644,11 @@ public class Retaguarda extends javax.swing.JFrame {
 
         jMenuItemCadastrarEditarMae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/JMenuItemMae16x16.png"))); // NOI18N
         jMenuItemCadastrarEditarMae.setText("Mãe");
+        jMenuItemCadastrarEditarMae.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastrarEditarMaeActionPerformed(evt);
+            }
+        });
         jMenuCadastrarEditar.add(jMenuItemCadastrarEditarMae);
 
         jMenuItemCadastrarEditarPai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/JMenuItemPai16x16.png"))); // NOI18N
@@ -758,6 +802,11 @@ public class Retaguarda extends javax.swing.JFrame {
         // TODO add your handling code here:
         addReativePai();
     }//GEN-LAST:event_jMenuItemReativarPaiActionPerformed
+
+    private void jMenuItemCadastrarEditarMaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarEditarMaeActionPerformed
+        // TODO add your handling code here:
+        addSawMae();
+    }//GEN-LAST:event_jMenuItemCadastrarEditarMaeActionPerformed
     //FIM DOS CÓDIGOS AUTOMÁTICOS
     //ÁREA DE VARIÁVEIS AUTOMÁTICAS
     // Variables declaration - do not modify//GEN-BEGIN:variables

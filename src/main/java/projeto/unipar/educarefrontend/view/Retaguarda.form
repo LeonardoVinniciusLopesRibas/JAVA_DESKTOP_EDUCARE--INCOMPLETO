@@ -78,6 +78,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="M&#xe3;e"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCadastrarEditarMaeActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCadastrarEditarPai">
                   <Properties>

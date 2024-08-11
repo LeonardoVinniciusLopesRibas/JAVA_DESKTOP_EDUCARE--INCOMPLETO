@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import javax.swing.JOptionPane;
+import projeto.unipar.educarefrontend.dto.MaeDtoResponse;
 import projeto.unipar.educarefrontend.dto.MaeResponse;
 import projeto.unipar.educarefrontend.enumerated.Ip;
 import projeto.unipar.educarefrontend.model.Mae;
@@ -135,4 +136,8 @@ public class MaeService {
         return null;
     }
     //</editor-fold>
+
+    public List<MaeDtoResponse> getListaMaesResponse(String nome, String cpf, String telefone, String logradouro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
