@@ -227,7 +227,7 @@ public class VisualizarMae extends javax.swing.JPanel {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         // TODO add your handling code here:
-        //retaguarda.addAddMae();
+        retaguarda.addAddMae();
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

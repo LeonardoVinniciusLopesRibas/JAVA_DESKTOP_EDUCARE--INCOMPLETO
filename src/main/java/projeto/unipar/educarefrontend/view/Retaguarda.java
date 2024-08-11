@@ -35,6 +35,7 @@ import projeto.unipar.educarefrontend.util.ReiniciarSystem;
 import projeto.unipar.educarefrontend.util.ReturnSize;
 import projeto.unipar.educarefrontend.util.SetIcon;
 import projeto.unipar.educarefrontend.util.WindowsCloseHandler;
+import projeto.unipar.educarefrontend.view.panel.CadastrarMae;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
 import projeto.unipar.educarefrontend.view.panel.EditarMae;
 import projeto.unipar.educarefrontend.view.panel.EditarPai;
@@ -105,6 +106,7 @@ public class Retaguarda extends javax.swing.JFrame {
         actionBtVisualizarPai();
         actionBtCadastrarPai();
         actionBtVisualizarMae();
+        actionBtCadastrarMae();
         BalloonNotification balloonNotification = new BalloonNotification("sistema iniciado");
         balloonNotification.show("sistema iniciado");
     }
@@ -310,6 +312,20 @@ public class Retaguarda extends javax.swing.JFrame {
     }
     //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Evento do botão do JToolBar para CadastrarMae">     
+    private void actionBtCadastrarMae() {
+        cadastrarPai.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                cadastrarMaePerformed(evt);
+            }
+        });
+    }
+
+    private void cadastrarMaePerformed(ActionEvent evt) {
+        addAddMae();
+    }
+    //</editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de visualizar pai"> 
     public void addSawPai() {
         boolean abaExistente = false;
@@ -416,6 +432,27 @@ public class Retaguarda extends javax.swing.JFrame {
     }
     //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Método para abrir a aba de cadastrar pai"> 
+    public void addAddMae() {
+        boolean abaExistente = false;
+        String title = "Cadastrar mãe";
+        for (int i = 0; i < abas.getTabCount(); i++) {
+            if (abas.getTitleAt(i).equals(title)) {
+                abaExistente = true;
+                abas.setSelectedIndex(i);
+                break;
+            }
+        }
+        if (!abaExistente) {
+            CadastrarMae tabAddMae = new CadastrarMae();
+            abas.addTab(title, tabAddMae);
+            int index = abas.indexOfComponent(tabAddMae);
+            abas.setTabComponentAt(index, createTabTitle(title, tabAddMae));
+            abas.setSelectedComponent(tabAddMae);
+        }
+    }
+    //</editor-fold>
+    
     //MÉTODO ABAIXO SEMPRE PRECISA SER O ÚLTIMO, OS ACIMA APENAS INFORMAÇÃO DA ABA, E ABAIXO CRIAÇÃO DELA
     
     // <editor-fold defaultstate="collapsed" desc="Método responsável por criar o título da aba, e o botão de x para fechar">
