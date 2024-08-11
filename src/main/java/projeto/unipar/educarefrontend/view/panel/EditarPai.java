@@ -1,23 +1,33 @@
 package projeto.unipar.educarefrontend.view.panel;
 
+import java.awt.Graphics2D;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import projeto.unipar.educarefrontend.dto.CepRequest;
 import projeto.unipar.educarefrontend.dto.CepResponse;
 import projeto.unipar.educarefrontend.dto.MaeResponse;
 import projeto.unipar.educarefrontend.model.Estado;
+import projeto.unipar.educarefrontend.model.Mae;
 import projeto.unipar.educarefrontend.model.Municipio;
 import projeto.unipar.educarefrontend.model.Pai;
 import projeto.unipar.educarefrontend.service.CepService;
+import projeto.unipar.educarefrontend.service.MaeService;
+import projeto.unipar.educarefrontend.service.PaiService;
 import projeto.unipar.educarefrontend.util.BalloonNotification;
 import projeto.unipar.educarefrontend.util.CepFormatter;
 import projeto.unipar.educarefrontend.util.CpfFormatter;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.util.NumeroFormatter;
 import projeto.unipar.educarefrontend.util.QRCodeGenerator;
+import projeto.unipar.educarefrontend.util.RemoveMaskUtil;
 import projeto.unipar.educarefrontend.util.TelefoneFormatter;
 import projeto.unipar.educarefrontend.util.ValidaCpf;
 import projeto.unipar.educarefrontend.view.SelectEstado;
@@ -29,6 +39,10 @@ public class EditarPai extends javax.swing.JPanel {
     //VARIAVEIS E INSTANCIAS
     private Log log = new Log();
     private ValidaCpf validaCpf = new ValidaCpf();
+    private Mae mae = new Mae();
+    private Pai pai = new Pai();
+    private MaeService maeService = new MaeService(log);
+    private PaiService paiService = new PaiService(log);
 
     private boolean isSelectEstado;
     private SelectEstado selectEstadoInstance;
@@ -36,6 +50,8 @@ public class EditarPai extends javax.swing.JPanel {
     private SelectMunicipio selectMunicipioInstance;
     private boolean isSelectMom;
     private SelectedMomOnDad selectMomInstance;
+
+    private Long id;
 
     private String ibge;
     private String ibgeSave;
@@ -72,7 +88,7 @@ public class EditarPai extends javax.swing.JPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
     private void initManuallyComponents() {
-        generatedQrCode();
+
     }
     //</editor-fold>
 
@@ -111,10 +127,38 @@ public class EditarPai extends javax.swing.JPanel {
         }
     }
     //</editor-fold>
-    
+
+    // <editor-fold defaultstate="collapsed" desc="Método por limpar todos os campos, chamado depois de clicar em salvar">
+    private void cleanDataForNewRegister() {
+        ibge = "";
+        ibgeMom = "";
+        ibgeMunicipio = "";
+
+        jtfNomePai.setText("");
+        jtfCpfPai.setText("");
+        jtfTelefonePai.setText("");
+        jtfNomeReserva.setText("");
+        jtfTelefoneReserva.setText("");
+        jcbSelectPaiMae.setSelected(false);
+        jcbPodeBuscar.setSelected(true);
+        jcbWhatsapp.setSelected(true);
+        jcbWhatsappReserva.setSelected(true);
+        jtfMomSelected.setText("");
+        jtfCep.setText("");
+        jtfLogradouro.setText("");
+        jtfNumero.setText("");
+        jtfBairro.setText("");
+        jtfComplemento.setText("");
+        jtfEstado.setText("");
+        jtfCidade.setText("");
+    }
+    //</editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="Método que recebe um pai selecionado para edição">
     public void enviaPaiForEdit(Pai pai) {
-        Long id = pai.getId();
+        cleanDataForNewRegister();
+
+        id = pai.getId();
         jtfNomePai.setText(pai.getNomeCompletoPai());
         jtfCpfPai.setText(pai.getCpfPai());
         jtfTelefonePai.setText(pai.getTelefonePai());
@@ -123,8 +167,10 @@ public class EditarPai extends javax.swing.JPanel {
 
         jtfNomeReserva.setText(pai.getContatoReserva());
         jtfTelefoneReserva.setText(pai.getTelefoneReserva());
-        if (pai.getMae().getNomeCompletoMae() != null) {
+        jcbWhatsappReserva.setSelected(pai.isTelefoneReservaWhatsapp());
+        if (pai.getMae() != null) {
             jcbSelectPaiMae.setSelected(true);
+            showAdressMom();
             jtfMomSelected.setText(pai.getMae().getNomeCompletoMae());
             jtfCep.setText(pai.getMae().getCep());
             jtfLogradouro.setText(pai.getMae().getLogradouro());
@@ -133,9 +179,10 @@ public class EditarPai extends javax.swing.JPanel {
             jtfComplemento.setText(pai.getMae().getComplemento());
             jtfEstado.setText(pai.getMae().getUf());
             jtfCidade.setText(pai.getMae().getLocalidade());
-            
+
         } else {
             jcbSelectPaiMae.setSelected(false);
+            showAdressMom();
             jtfCep.setText(pai.getCep());
             jtfLogradouro.setText(pai.getLogradouro());
             jtfNumero.setText(pai.getNumero());
@@ -145,8 +192,18 @@ public class EditarPai extends javax.swing.JPanel {
             jtfCidade.setText(pai.getLocalidade());
             ibgeSave = pai.getIbge();
         }
-        jcbWhatsappReserva.setSelected(pai.isTelefoneReservaWhatsapp());
 
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por validar se a checkbox de mãe está marcada ou não">
+    private void showAdressMom() {
+        boolean selected = jcbSelectPaiMae.isSelected();
+        jbLupaMom.setEnabled(selected);
+        jtfMomSelected.setEnabled(selected);
+        jbLupaMom.setVisible(selected);
+        jtfMomSelected.setVisible(selected);
+        btCleanMomAndAdress.setVisible(selected);
     }
     //</editor-fold>
 
@@ -175,6 +232,56 @@ public class EditarPai extends javax.swing.JPanel {
         BufferedImage qrCodeImage = QRCodeGenerator.generateQRCodeImage(cpfPai, log);
         ImageIcon icon = new ImageIcon(qrCodeImage);
         lblQrCode.setIcon(icon);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por limpar o QrCode e remove-lo">
+    private void cleanQrCode() {
+        lblQrCode.setIcon(null);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método para download do QrCode">
+    private void downloadQrCode() {
+        if (lblQrCode.getIcon() == null) {
+            BalloonNotification balloonNotification = new BalloonNotification("Nenhum QrCode para salvar");
+            balloonNotification.show("Nenhum QrCode para salvar");
+            return;
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Salvar QR code");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Imagem PNG", "png"));
+
+        fileChooser.setSelectedFile(new File("qrCode-EduCare-" + jtfCpfPai.getText() + ".png"));
+        int userSelection = fileChooser.showSaveDialog(null);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            if (!fileToSave.getAbsolutePath().endsWith(".png")) {
+                fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
+            }
+
+            try {
+                ImageIcon icon = (ImageIcon) lblQrCode.getIcon();
+                BufferedImage qrCodeImage = new BufferedImage(
+                        icon.getIconWidth(),
+                        icon.getIconHeight(),
+                        BufferedImage.TYPE_INT_ARGB
+                );
+                Graphics2D g2d = qrCodeImage.createGraphics();
+                icon.paintIcon(null, g2d, 0, 0);
+                g2d.dispose();
+
+                ImageIO.write(qrCodeImage, "png", fileToSave);
+                BalloonNotification balloonNotification = new BalloonNotification("QrCode salvo com sucesso");
+                balloonNotification.show("QrCode salvo com sucesso");
+            } catch (IOException e) {
+                BalloonNotification balloonNotification = new BalloonNotification("Erro ao salvar QrCode");
+                balloonNotification.show("Erro ao salvar QrCode");
+                log.escreverLogErroOperacaoException(e, e.getMessage());
+            }
+        }
     }
     //</editor-fold>
 
@@ -217,6 +324,7 @@ public class EditarPai extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Método responsável por carregar o JFrame de select municipio">
     public void loadSelectMunicipio() {
         if (jtfEstado.getText().length() >= 1) {
+            siglaUfEstado = jtfEstado.getText();
             if (isSelectMunicipio) {
                 selectMunicipioInstance.toFront();
                 selectMunicipioInstance.repaint();
@@ -307,6 +415,116 @@ public class EditarPai extends javax.swing.JPanel {
         jtfComplemento.setText(complementoMom);
         jtfEstado.setText(ufMom);
         jtfCidade.setText(localidadeMom);
+    }
+    //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Método para limpar o endereço e a mãe">
+    private void cleanAdressAndMomSelected() {
+        Object[] options = {"Sim", "Não"};
+        int option = JOptionPane.showOptionDialog(
+                null,
+                "Deseja realmente remover a mãe",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+        if (jtfMomSelected != null && jtfMomSelected.getText().length() != 0) {
+            if (option == JOptionPane.YES_OPTION) {
+                jtfMomSelected.setText("");
+                jtfCep.setText("");
+                jtfLogradouro.setText("");
+                jtfNumero.setText("");
+                jtfBairro.setText("");
+                jtfComplemento.setText("");
+                jtfCidade.setText("");
+                jtfEstado.setText("");
+                ibge = "";
+            }
+        }
+    }
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Método responsável por pegar todas as informações e enviar a api, para salvar o pai">
+    public void atualizarRequestDad() {
+        
+        pai.setId(id);
+        
+        Boolean ativo = true;
+        String bairro = jtfBairro.getText();
+        String cep = RemoveMaskUtil.removeMask(jtfCep.getText());
+        String complemento = jtfComplemento.getText();
+        String contatoReserva = jtfNomeReserva.getText();
+        String cpfPai = RemoveMaskUtil.removeMask(jtfCpfPai.getText());
+        String ibgeRequest;
+        if (ibge != null && ibge.length() >= 1) {
+            ibgeRequest = ibge;
+        } else if (ibgeMunicipio != null && ibgeMunicipio.length() >= 1) {
+            ibgeRequest = ibgeMunicipio;
+        } else if (ibgeMom != null) {
+            ibgeRequest = ibgeMom;
+        } else {
+            ibgeRequest = "";
+        }
+        String localidade = jtfCidade.getText();
+        String logradouro = jtfLogradouro.getText();
+        String nomeCompletoPai = jtfNomePai.getText();
+        String numero = jtfNumero.getText();
+        Boolean podeBuscar;
+        if (jcbPodeBuscar.isSelected() == true) {
+            podeBuscar = true;
+        } else {
+            podeBuscar = false;
+        }
+        String telefonePai = RemoveMaskUtil.removeMask(jtfTelefonePai.getText());
+        Boolean paiWhatsapp;
+        if (jcbWhatsapp.isSelected() == true) {
+            paiWhatsapp = true;
+        } else {
+            paiWhatsapp = false;
+        }
+        String telefoneReserva = RemoveMaskUtil.removeMask(jtfTelefoneReserva.getText());
+        Boolean reservaWhatsapp;
+        if (jcbWhatsappReserva.isSelected() == true) {
+            reservaWhatsapp = true;
+        } else {
+            reservaWhatsapp = true;
+        }
+
+        String estado = jtfEstado.getText();
+
+        if (idMom != null) {
+            mae = maeService.getMaeById(idMom);
+        }
+
+        pai.setAtivo(ativo);
+        pai.setBairro(bairro);
+        pai.setCep(cep);
+        pai.setComplemento(complemento);
+        pai.setContatoReserva(contatoReserva);
+        pai.setCpfPai(cpfPai);
+        pai.setIbge(ibgeRequest);
+        pai.setLocalidade(localidade);
+        pai.setLogradouro(logradouro);
+        pai.setNomeCompletoPai(nomeCompletoPai);
+        pai.setNumero(numero);
+        pai.setPodeBuscar(podeBuscar);
+        pai.setTelefonePai(telefonePai);
+        pai.setTelefonePaiWhatsapp(paiWhatsapp);
+        pai.setTelefoneReserva(telefoneReserva);
+        pai.setTelefoneReservaWhatsapp(reservaWhatsapp);
+        pai.setUf(estado);
+        if (mae != null) {
+            pai.setMae(mae);
+        }
+        int responseCode = paiService.putPai(pai);
+
+        if (responseCode == 200) {
+            cleanDataForNewRegister();
+        }
+
     }
     //</editor-fold>
 
@@ -481,6 +699,11 @@ public class EditarPai extends javax.swing.JPanel {
 
         jcbSelectPaiMae.setForeground(new java.awt.Color(0, 0, 0));
         jcbSelectPaiMae.setText("Mãe mora  no mesmo endereço?");
+        jcbSelectPaiMae.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSelectPaiMaeActionPerformed(evt);
+            }
+        });
         add(jcbSelectPaiMae);
         jcbSelectPaiMae.setBounds(460, 50, 270, 20);
 
@@ -584,6 +807,11 @@ public class EditarPai extends javax.swing.JPanel {
 
         btCleanMomAndAdress.setBackground(new java.awt.Color(85, 6, 124));
         btCleanMomAndAdress.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/iconVassoura24x24.png"))); // NOI18N
+        btCleanMomAndAdress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCleanMomAndAdressActionPerformed(evt);
+            }
+        });
         add(btCleanMomAndAdress);
         btCleanMomAndAdress.setBounds(740, 50, 32, 32);
 
@@ -602,18 +830,33 @@ public class EditarPai extends javax.swing.JPanel {
         btGeneratedQrCode.setBackground(new java.awt.Color(85, 6, 124));
         btGeneratedQrCode.setForeground(new java.awt.Color(255, 255, 255));
         btGeneratedQrCode.setText("Gerar QrCode");
+        btGeneratedQrCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGeneratedQrCodeActionPerformed(evt);
+            }
+        });
         add(btGeneratedQrCode);
         btGeneratedQrCode.setBounds(130, 230, 150, 23);
 
         btCleanQrCode.setBackground(new java.awt.Color(85, 6, 124));
         btCleanQrCode.setForeground(new java.awt.Color(255, 255, 255));
         btCleanQrCode.setText("Limpar QrCode");
+        btCleanQrCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCleanQrCodeActionPerformed(evt);
+            }
+        });
         add(btCleanQrCode);
         btCleanQrCode.setBounds(130, 260, 150, 23);
 
         btDownload.setBackground(new java.awt.Color(85, 6, 124));
         btDownload.setForeground(new java.awt.Color(255, 255, 255));
         btDownload.setText("Download");
+        btDownload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDownloadActionPerformed(evt);
+            }
+        });
         add(btDownload);
         btDownload.setBounds(130, 290, 150, 23);
 
@@ -650,6 +893,11 @@ public class EditarPai extends javax.swing.JPanel {
         btSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/IconSave32x32.png"))); // NOI18N
         btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
         add(btSalvar);
         btSalvar.setBounds(20, 410, 100, 50);
     }// </editor-fold>//GEN-END:initComponents
@@ -673,6 +921,36 @@ public class EditarPai extends javax.swing.JPanel {
         // TODO add your handling code here:
         loadSelectMunicipio();
     }//GEN-LAST:event_btSelectMunicipioActionPerformed
+
+    private void jcbSelectPaiMaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelectPaiMaeActionPerformed
+        // TODO add your handling code here:
+        showAdressMom();
+    }//GEN-LAST:event_jcbSelectPaiMaeActionPerformed
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        // TODO add your handling code here:
+        atualizarRequestDad();
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void btGeneratedQrCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGeneratedQrCodeActionPerformed
+        // TODO add your handling code here:
+        generatedQrCode();
+    }//GEN-LAST:event_btGeneratedQrCodeActionPerformed
+
+    private void btCleanQrCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCleanQrCodeActionPerformed
+        // TODO add your handling code here:
+        cleanQrCode();
+    }//GEN-LAST:event_btCleanQrCodeActionPerformed
+
+    private void btDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDownloadActionPerformed
+        // TODO add your handling code here:
+        downloadQrCode();
+    }//GEN-LAST:event_btDownloadActionPerformed
+
+    private void btCleanMomAndAdressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCleanMomAndAdressActionPerformed
+        // TODO add your handling code here:
+        cleanAdressAndMomSelected();
+    }//GEN-LAST:event_btCleanMomAndAdressActionPerformed
     //FIM MÉTODOS AUTOMÁTICOS
     //INICIO VARIAVEIS AUTOMATICAS
     // Variables declaration - do not modify//GEN-BEGIN:variables

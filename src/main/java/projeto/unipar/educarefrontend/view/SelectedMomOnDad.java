@@ -31,6 +31,7 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
     private MaeResponse maeResponse = new MaeResponse();
     private CadastrarPai pai = new CadastrarPai();
     private EditarPai editPai = new EditarPai();
+
     //FIM VARIAVEIS E INSTANCIAS
     //CONSTRUTOR
     public SelectedMomOnDad(CadastrarPai pai, EditarPai editPai) {
@@ -39,6 +40,7 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
         this.pai = pai;
         this.editPai = editPai;
     }
+
     //FIM CONSTRUTOR
     //INICIO METODOS
     // <editor-fold defaultstate="collapsed" desc="Assistente do construtor manual">
@@ -50,19 +52,19 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
         clickComMouse();
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Método por buscar as mães pela query">
-    private void searchMom(){
+    private void searchMom() {
         String queryBusca = jtfQuery.getText();
         if (queryBusca.trim().isBlank() || queryBusca.trim().isEmpty() || queryBusca.trim().length() < 1) {
             System.out.println("");
         }
         maes = maeService.buscarMae(queryBusca);
         searchTable(maes);
-        
+
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Método por setar a lista de mães na tabela">
     private void searchTable(List<MaeResponse> maes) {
 
@@ -82,7 +84,7 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
 
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Evento de tecla do ESC para fechar JFrame">
     private void setupEscapeKey() {
         jPanel1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "closeWindow");
@@ -94,13 +96,13 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
         });
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar o tamanho da altura da linha">    
     private void ajustaTamanhoLinhaTabela() {
         jtbMae.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(25));
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar a largura da coluna da tabela">
     private void adjustColumnTable() {
         for (int column = 0; column < jtbMae.getColumnCount(); column++) {
@@ -124,7 +126,7 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
         }
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Evento de clique com mouse para a tabela">
     private void clickComMouse() {
         jtbMae.addMouseListener(new MouseAdapter() {
@@ -135,7 +137,12 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
                     if (row >= 0) {
                         Long id = (Long) jtbMae.getValueAt(row, 0);
                         maeResponse = maeService.buscarMaeById(id);
-                        pai.recebeMomSelected(maeResponse);
+                        if (pai != null) {
+                            pai.recebeMomSelected(maeResponse);
+                        }
+                        if (editPai != null) {
+                            editPai.recebeMomSelected(maeResponse);
+                        }
                         dispose();
                     }
                 }
@@ -143,7 +150,7 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
         });
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Evento de clique enter do teclado">
     private void clickComEnter() {
         jtbMae.addKeyListener(new KeyAdapter() {
@@ -154,7 +161,12 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
                     if (row >= 0) {
                         Long id = (Long) jtbMae.getValueAt(row, 0);
                         maeResponse = maeService.buscarMaeById(id);
-                        pai.recebeMomSelected(maeResponse);
+                        if (pai != null) {
+                            pai.recebeMomSelected(maeResponse);
+                        }
+                        if (editPai != null) {
+                            editPai.recebeMomSelected(maeResponse);
+                        }
                         dispose();
                     }
                 }
@@ -162,14 +174,19 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
         });
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Método por pegar a linha selecionada">
     private void selectRow() {
         int selectedRow = jtbMae.getSelectedRow();
         if (selectedRow >= 0) {
             Long id = (Long) jtbMae.getValueAt(selectedRow, 0);
             maeResponse = maeService.buscarMaeById(id);
-            pai.recebeMomSelected(maeResponse);
+            if (pai != null) {
+                pai.recebeMomSelected(maeResponse);
+            }
+            if (editPai != null) {
+                editPai.recebeMomSelected(maeResponse);
+            }
             ajustaTamanhoLinhaTabela();
             adjustColumnTable();
             dispose();
@@ -178,7 +195,7 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
         }
     }
     //</editor-fold>
-    
+
     //FIM METODOS
     //METODOS AUTOMATICOS
     @SuppressWarnings("unchecked")
@@ -304,7 +321,7 @@ public class SelectedMomOnDad extends javax.swing.JFrame {
         selectRow();
     }//GEN-LAST:event_btSelectActionPerformed
     //FIM METODOS AUTOMATICOS
-    
+
     //VARIAVEIS AUTOMATICAS
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;

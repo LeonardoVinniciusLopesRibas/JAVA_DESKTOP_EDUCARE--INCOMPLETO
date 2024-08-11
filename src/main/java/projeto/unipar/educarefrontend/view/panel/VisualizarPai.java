@@ -90,7 +90,7 @@ public class VisualizarPai extends JPanel {
     }
 
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Módulo responsável por ajustar o tamanho da altura da linha">
     private void ajustaTamanhoLinhaTabela() {
         jtbPaiResponse.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(20));
@@ -174,7 +174,7 @@ public class VisualizarPai extends JPanel {
         });
     }
     //</editor-fold>
-   
+
     // <editor-fold defaultstate="collapsed" desc="Evento de clique com mouse para selecionar edição de pai">
     private void clickComMouse() {
         jtbPaiResponse.addMouseListener(new MouseAdapter() {

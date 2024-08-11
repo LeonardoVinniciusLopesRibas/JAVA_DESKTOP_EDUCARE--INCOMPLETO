@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -87,7 +88,12 @@ public class SelectMunicipio extends javax.swing.JFrame {
                     if (row >= 0) {
                         Long id = (Long) jtbMunicipios.getValueAt(row, 0);
                         municipio = municipioService.searchMunicipioById(id);
-                        pai.recebeMunicipioSelected(municipio);
+                        if (pai != null) {
+                            pai.recebeMunicipioSelected(municipio);
+                        }
+                        if (editPai != null) {
+                            editPai.recebeMunicipioSelected(municipio);
+                        }
                         ajustaTamanhoLinhaTabela();
                         adjustColumnTable();
                         dispose();
@@ -116,7 +122,12 @@ public class SelectMunicipio extends javax.swing.JFrame {
         if (selectedRow >= 0) {
             Long id = (Long) jtbMunicipios.getValueAt(selectedRow, 0);
             municipio = municipioService.searchMunicipioById(id);
-            pai.recebeMunicipioSelected(municipio);
+            if (pai != null) {
+                pai.recebeMunicipioSelected(municipio);
+            }
+            if (editPai != null) {
+                editPai.recebeMunicipioSelected(municipio);
+            }
             ajustaTamanhoLinhaTabela();
             adjustColumnTable();
             dispose();
@@ -136,7 +147,12 @@ public class SelectMunicipio extends javax.swing.JFrame {
                     if (row >= 0) {
                         Long id = (Long) jtbMunicipios.getValueAt(row, 0);
                         municipio = municipioService.searchMunicipioById(id);
-                        pai.recebeMunicipioSelected(municipio);
+                        if (pai != null) {
+                            pai.recebeMunicipioSelected(municipio);
+                        }
+                        if (editPai != null) {
+                            editPai.recebeMunicipioSelected(municipio);
+                        }
                         ajustaTamanhoLinhaTabela();
                         adjustColumnTable();
                         dispose();
@@ -146,7 +162,7 @@ public class SelectMunicipio extends javax.swing.JFrame {
         });
     }
     //</editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Método responsável por ajustar o tamanho da altura da linha">
     private void ajustaTamanhoLinhaTabela() {
         jtbMunicipios.setDefaultRenderer(Object.class, new AjustaTamanhoLinhaTabela(20));

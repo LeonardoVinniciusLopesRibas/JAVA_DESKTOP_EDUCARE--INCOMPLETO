@@ -21,7 +21,7 @@ import projeto.unipar.educarefrontend.util.AjustaTamanhoLinhaTabela;
 import projeto.unipar.educarefrontend.util.Log;
 import projeto.unipar.educarefrontend.view.panel.CadastrarPai;
 import projeto.unipar.educarefrontend.view.panel.EditarPai;
-    
+
 public class SelectEstado extends javax.swing.JFrame {
 
     //ÁREA DE INSTÂNCIAS DE VARIÁVEIS
@@ -85,7 +85,12 @@ public class SelectEstado extends javax.swing.JFrame {
                     if (row >= 0) {
                         Long id = (Long) jtbEstados.getValueAt(row, 0);
                         estado = estadoService.searchEstadoId(id);
-                        pai.recebeEstadoSelected(estado);
+                        if (pai != null) {
+                            pai.recebeEstadoSelected(estado);
+                        }
+                        if (editPai != null) {
+                            editPai.recebeEstadoSelected(estado);
+                        }
                         ajustaTamanhoLinhaTabela();
                         adjustColumnTable();
                         dispose();
@@ -114,7 +119,12 @@ public class SelectEstado extends javax.swing.JFrame {
         if (selectedRow >= 0) {
             Long id = (Long) jtbEstados.getValueAt(selectedRow, 0);
             estado = estadoService.searchEstadoId(id);
-            pai.recebeEstadoSelected(estado);
+            if (pai != null) {
+                pai.recebeEstadoSelected(estado);
+            }
+            if (editPai != null) {
+                editPai.recebeEstadoSelected(estado);
+            }
             ajustaTamanhoLinhaTabela();
             adjustColumnTable();
             dispose();
@@ -132,7 +142,12 @@ public class SelectEstado extends javax.swing.JFrame {
                     if (row >= 0) {
                         Long id = (Long) jtbEstados.getValueAt(row, 0);
                         estado = estadoService.searchEstadoId(id);
-                        pai.recebeEstadoSelected(estado);
+                        if (pai != null) {
+                            pai.recebeEstadoSelected(estado);
+                        }
+                        if (editPai != null) {
+                            editPai.recebeEstadoSelected(estado);
+                        }
                         ajustaTamanhoLinhaTabela();
                         adjustColumnTable();
                         dispose();
